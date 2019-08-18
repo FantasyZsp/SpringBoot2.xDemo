@@ -1,0 +1,102 @@
+{
+  "init_pools": [
+    {
+      "pool_name": "lane",
+      "pool_mode": "PublicMode",
+      "queue_sort_column": "create_time",
+      "queues": [
+        {
+          "key": "CN-XIAMEN-XHCT-L01",
+          "value": {
+            "laneCode": "CN-XIAMEN-XHCT-L01",
+            "laneName": "车道1",
+            "direction": "进闸",
+            "laneStatus": false,
+            "laneType": "行政车道",
+            "hasVehicle": true,
+            "kioskLedDisplay": "请刷卡",
+            "topLedDisplay": "行政车进闸",
+            "barrierStatus": "down",
+            "devices": [
+            ],
+            "updateTime": "2018-05-01 10:00:00"
+          }
+        },
+        {
+          "key": "CN-XIAMEN-XHCT-L02",
+          "value": {
+            "laneCode": "CN-XIAMEN-XHCT-L02",
+            "laneName": "车道2",
+            "direction": "进闸",
+            "laneStatus": false,
+            "laneType": "集装箱车道",
+            "hasVehicle": true,
+            "kioskLedDisplay": "请刷卡",
+            "topLedDisplay": "集装箱进闸",
+            "barrierStatus": "down",
+            "devices": [
+            ],
+            "updateTime": "2018-05-01 10:00:00"
+          }
+        },
+        {
+          "key": "CN-XIAMEN-XHCT-L03",
+          "value": {
+            "laneCode": "CN-XIAMEN-XHCT-L03",
+            "laneName": "车道3",
+            "direction": "进闸",
+            "laneStatus": false,
+            "laneType": "集装箱车道",
+            "hasVehicle": true,
+            "kioskLedDisplay": "请刷卡",
+            "topLedDisplay": "集装箱进闸",
+            "barrierStatus": "down",
+            "devices": [
+            ],
+            "updateTime": "2018-05-01 10:00:00"
+          }
+        },
+        {
+          "key": "CN-XIAMEN-XHCT-L19",
+          "value": {
+            "laneCode": "CN-XIAMEN-XHCT-L19",
+            "laneName": "车道19",
+            "direction": "出闸",
+            "laneStatus": false,
+            "laneType": "集装箱车道",
+            "hasVehicle": true,
+            "kioskLedDisplay": "请刷卡",
+            "topLedDisplay": "集装箱出闸",
+            "barrierStatus": "down",
+            "devices": [
+            ],
+            "updateTime": "2018-05-01 10:00:00"
+          }
+        },
+        {
+          "key": "CN-XIAMEN-XHCT-L20",
+          "value": {
+            "laneCode": "CN-XIAMEN-XHCT-L20",
+            "laneName": "车道20",
+            "direction": "出闸",
+            "laneStatus": false,
+            "laneType": "集装箱车道",
+            "hasVehicle": true,
+            "kioskLedDisplay": "请刷卡",
+            "topLedDisplay": "集装箱出闸",
+            "barrierStatus": "down",
+            "devices": [
+            ],
+            "updateTime": "2018-05-01 10:00:00"
+          }
+        }
+      ]
+    },
+    {
+      "pool_name": "jobQueue",
+      "pool_mode": "PublicMode",
+      "queue_sort_column": "create_time",
+      "queues": []
+    }
+  ]
+}

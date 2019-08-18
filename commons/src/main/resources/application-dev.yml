@@ -1,0 +1,29 @@
+#dev env
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/dbgirl?useUnicode=true&characterEncoding=utf8&useSSL=false
+#    username: root
+#    password:
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        show_sql: true
+
+girl:
+  cupSize: B
+  age: 18
+
+person:
+  test: test
+  name: 王小明
+  age: 18
+  address: 广州
+
+local:
+  server:
+    port: 8080

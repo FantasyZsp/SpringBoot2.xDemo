@@ -1,0 +1,99 @@
+{
+  "businessType": "string",
+  "containerQuantity": 0,
+  "containers": [
+    {
+      "containerNumber": "string",
+      "createdBy": "string",
+      "createdTime": "2018-09-08T06:25:00.888Z",
+      "damages": [
+        {
+          "damageCode": "string",
+          "damageGrade": "string",
+          "damagePart": "string",
+          "remark": "string",
+          "side": "string"
+        }
+      ],
+      "id": 0,
+      "isOcrContainerNumberSucceeded": true,
+      "isoCode": "string",
+      "jobQueueCode": "string",
+      "jobQueueId": 0,
+      "lastModifiedBy": "string",
+      "lastModifiedTime": "1536387900.613",
+      "ocrContainerNumber": "string",
+      "sealNumber": "string"
+    }
+  ],
+  "createdBy": "string",
+  "createdTime": 1536387900613,
+  "customsLockNumber": "string",
+  "direction": "string",
+  "endTime": "2018-09-08T06:25:02.222Z",
+  "extras": {
+    "isOcrContainerNumberActivated": true,
+    "isOcrLicensePlateNumberActivated": true,
+    "reservations": [
+      {
+        "reservationJobNumber": "string",
+        "reservationJobType": "string"
+      }
+    ]
+  },
+  "icCardNumber": "string",
+  "id": 0,
+  "isOcrLicensePlateNumberSucceeded": true,
+  "jobQueueCode": "string",
+  "laneCode": "string",
+  "laneName": "string",
+  "laneType": "string",
+  "lastModifiedBy": "string",
+  "lastModifiedTime": "2018-09-08T06:25:00.333Z",
+  "licensePlateNumber": "string",
+  "ocrLicensePlateNumber": "string",
+  "pictures": {
+    "backTopPictureUrl": "string",
+    "frontTopPictureUrl": "string",
+    "leftBackDamagePictureUrl": "string",
+    "leftBackPictureUrl": "string",
+    "leftFrontDamagePictureUrl": "string",
+    "leftFrontPictureUrl": "string",
+    "leftMiddlePictureUrl": "string",
+    "leftMosaicPictureUrl": "string",
+    "licencePlatePictureUrl": "string",
+    "rightBackDamagePictureUrl": "string",
+    "rightBackPictureUrl": "string",
+    "rightFrontDamagePictureUrl": "string",
+    "rightFrontPictureUrl": "string",
+    "rightMiddlePictureUrl": "string",
+    "rightMosaicPictureUrl": "string",
+    "topMosaicPictureUrl": "string",
+    "vehicleBottomPictureUrl": "string",
+    "vehiclePictureUrl": "string"
+  },
+  "processes": [
+    {
+      "step": "string",
+      "updateTime": "2018-09-08T06:25:00.444Z"
+    }
+  ],
+  "releaseRuleResults": [
+    {
+      "id": 0,
+      "jobQueueCode": "string",
+      "jobQueueId": 0,
+      "releaseResultMessage": "string",
+      "releaseRuleName": "string",
+      "sequence": 0,
+      "updateTime": "2018-09-08T06:25:00.555Z"
+    }
+  ],
+  "releasedBy": "string",
+  "releasedTime": "2018-09-08T06:25:00.666Z",
+  "releasedType": "string",
+  "rfidCardNumber": "string",
+  "rfidLicensePlateNumber": "string",
+  "startTime": "2018-09-08T06:25:00.777",
+  "totalWeight": 0
+}
