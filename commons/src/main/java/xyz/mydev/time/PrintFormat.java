@@ -16,8 +16,8 @@ import java.util.Date;
 
 /**
  * @author  zhao
- * @date  2018/09/07 19:34
- * @description
+ * @date 2018/09/07 19:34
+ *  * @description
  */
 public class PrintFormat {
   public static void main(String[] args) throws IOException {
