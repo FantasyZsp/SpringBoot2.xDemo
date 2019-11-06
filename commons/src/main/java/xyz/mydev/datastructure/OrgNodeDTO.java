@@ -1,6 +1,7 @@
 package xyz.mydev.datastructure;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,10 +31,10 @@ public class OrgNodeDTO implements Serializable {
 
 
   public static void main(String[] args) {
-    MyOrgNodeDTO myOrgNodeDTO = new MyOrgNodeDTO("00");
-    MyOrgNodeDTO myOrgNodeDTO1 = new MyOrgNodeDTO("0001");
-    MyOrgNodeDTO myOrgNodeDTO2 = new MyOrgNodeDTO("0002");
-    MyOrgNodeDTO myOrgNodeDTO3 = new MyOrgNodeDTO("000101");
+    MyOrgNodeDTO myOrgNodeDTO = new MyOrgNodeDTO("00", "xxx");
+    MyOrgNodeDTO myOrgNodeDTO1 = new MyOrgNodeDTO("0001", "222");
+    MyOrgNodeDTO myOrgNodeDTO2 = new MyOrgNodeDTO("0002", "333");
+    MyOrgNodeDTO myOrgNodeDTO3 = new MyOrgNodeDTO("000101", "444");
 
     ArrayList<MyOrgNodeDTO> objects = new ArrayList<>();
     objects.add(myOrgNodeDTO);
@@ -76,9 +77,19 @@ class OrgNode2TreeUtils {
   }
 }
 
+@Data
+@ToString(callSuper = true)
 class MyOrgNodeDTO extends OrgNodeDTO {
+  private String mark;
+
   public MyOrgNodeDTO(String orgNum) {
     super(orgNum);
+  }
+
+
+  public MyOrgNodeDTO(String orgNum, String mark) {
+    super(orgNum);
+    this.mark = mark;
   }
 }
 
