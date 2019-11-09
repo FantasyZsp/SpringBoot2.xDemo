@@ -2,18 +2,16 @@ package xyz.mydev.vo;
 
 /**
  * @author ZSP
- * @description 和现有ApiUtils的map结构一致
- * TODO 后续统一返回结构！！！！！！
  */
 public class ResultVO<T> {
   private int statusCode;
   private String message;
   private T data;
 
-  public ResultVO() {
+  private ResultVO() {
   }
 
-  public ResultVO(int statusCode, String message, T data) {
+  private ResultVO(int statusCode, String message, T data) {
     this.statusCode = statusCode;
     this.message = message;
     this.data = data;

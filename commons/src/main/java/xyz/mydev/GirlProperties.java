@@ -3,6 +3,9 @@ package xyz.mydev;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zsp
+ */
 @Component
 @ConfigurationProperties(prefix = "girl")
 public class GirlProperties {

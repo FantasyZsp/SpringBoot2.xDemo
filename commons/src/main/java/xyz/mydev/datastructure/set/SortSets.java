@@ -43,7 +43,7 @@ public class SortSets {
       System.out.println(userx);
     }
 
-    Collections.sort(list, MyComparator.sortByIdASC());
+    list.sort(MyComparator.sortByIdASC());
     System.out.println(list);
     for (User userx : list) {
       System.out.println(userx);
