@@ -10,6 +10,7 @@
         <module>thread-demo</module>
         <module>commons</module>
         <module>guava-demo</module>
+        <module>proxy-demo</module>
     </modules>
     <packaging>pom</packaging>
 
