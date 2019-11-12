@@ -1,4 +1,4 @@
-package xyz.mydev;
+package xyz.mydev.lock;
 
 
 import lombok.extern.slf4j.Slf4j;

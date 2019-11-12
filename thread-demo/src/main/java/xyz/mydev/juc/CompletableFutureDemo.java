@@ -1,4 +1,4 @@
-package xyz.mydev.thread;
+package xyz.mydev.juc;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
