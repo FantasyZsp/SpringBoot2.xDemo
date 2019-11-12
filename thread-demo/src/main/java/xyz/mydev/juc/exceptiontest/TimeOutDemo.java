@@ -1,17 +1,13 @@
-package xyz.mydev.juc.extest;
+package xyz.mydev.juc.exceptiontest;
 
 import lombok.extern.slf4j.Slf4j;
 import xyz.mydev.util.ThreadUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author ZSP
@@ -24,51 +20,15 @@ public class TimeOutDemo {
 //    testTimeoutAndInterrupt();
     print("***********main start***********");
 
-//    testExecutorThrowException();
-    testThreadThrowException();
+    testExecutorThrowException();
     executorService.shutdown();
     print("***********main end***********");
   }
 
-  private static void testTimeoutAndInterrupt() throws ExecutionException, InterruptedException {
-    List<Thread> callableThread = new ArrayList<>(1);
 
-    Callable<String> callable = () -> {
-      try {
-        callableThread.add(Thread.currentThread());
-        TimeUnit.SECONDS.sleep(2);
-        log.info("I am wake up naturally...");
-        return "WAKE_UP_NATURALLY";
-      } catch (InterruptedException e) {
-        log.info("I am wake up interrupted...");
-        return "WAKE_UP_INTERRUPTED";
-      }
-    };
-
-    Future<String> future = executorService.submit(callable);
-
-    executorService.submit(() -> {
-      try {
-        TimeUnit.MILLISECONDS.sleep(1500);
-        callableThread.get(0).interrupt();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    });
-
-    String msg;
-    try {
-      msg = future.get(1, TimeUnit.SECONDS);
-    } catch (TimeoutException e) {
-      log.info("获取超时了，转为无限时获取");
-      msg = future.get();
-    }
-    log.info(msg);
-
-    executorService.shutdown();
-  }
-
-
+  /**
+   * 任务本身异常
+   */
   private static void testExecutorThrowException() throws InterruptedException {
     print("test start...");
     Future<String> future = executorService.submit(() -> {
@@ -109,6 +69,7 @@ public class TimeOutDemo {
 
 
     thread.start();
+    thread.join();
 
     ThreadUtils.sleep(1);
 
@@ -116,7 +77,7 @@ public class TimeOutDemo {
 
     print("thread status==>" + thread.getState());
 
-    Thread.currentThread().join();
+//    Thread.currentThread().join();
 
   }
 
