@@ -198,7 +198,7 @@ public class CompletionServiceDemo {
   }
 
 
-  static class MyThreadFactory implements ThreadFactory {
+  public static class MyThreadFactory implements ThreadFactory {
 
     AtomicLong atomicLong = new AtomicLong(0);
 

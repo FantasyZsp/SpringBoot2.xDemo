@@ -26,7 +26,7 @@ public class WaterTask implements Callable<String> {
     TimeUnit.SECONDS.sleep(1);
 
     log.info("T1: 烧开水...");
-    TimeUnit.SECONDS.sleep(15);
+    TimeUnit.SECONDS.sleep(3);
 
     log.info("T1: 等待茶叶...");
     String tf = futureTask.get();
