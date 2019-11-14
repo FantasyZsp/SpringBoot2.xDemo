@@ -18,9 +18,6 @@ public class SimpleDemo {
     mergeSort();
   }
 
-  /**
-   * Ryzen 1700 8核16线程 3.0 GHz
-   */
   private static void mergeSort() {
     Random random = new Random();
     StopWatch stopWatch = new StopWatch();
