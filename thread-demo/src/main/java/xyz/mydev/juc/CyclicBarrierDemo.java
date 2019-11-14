@@ -36,6 +36,7 @@ public class CyclicBarrierDemo {
     log.info("finish");
 
     FIXED_THREAD_POOL.awaitTermination(20, TimeUnit.SECONDS);
+    FIXED_THREAD_POOL.shutdown();
 
   }
 
