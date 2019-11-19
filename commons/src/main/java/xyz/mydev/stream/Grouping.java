@@ -3,6 +3,7 @@ package xyz.mydev.stream;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import xyz.mydev.stream.bean.VesselContainer;
+import xyz.mydev.util.StreamUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +61,10 @@ public class Grouping {
     Map<String, Long> collect1 = containers.stream().collect(Collectors.groupingBy(VesselContainer::getContainerNumber, Collectors.counting()));
     System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(collect1));
 
+
+    System.out.println("去重");
+    List<VesselContainer> collect = containers.stream().filter(StreamUtil.distinctByKey(VesselContainer::getVesselNumber)).collect(Collectors.toList());
+    System.out.println(collect);
 
   }
 }
