@@ -1,5 +1,4 @@
-#common env
-
+#transaction env
 spring:
   profiles:
     active: dev
@@ -19,16 +18,10 @@ spring:
     database: mysql
 server:
   port: 8080
-
-#logging:
-#  level: debug
-#  xyz.mydev.transaction.config: classpath:logback.xml
-
-#security:
-#  user:
-#    name: user
-#    password: user
 management:
   endpoint:
     env:
       enabled: true
+#logging:
+#  level:
+#    root: debug
