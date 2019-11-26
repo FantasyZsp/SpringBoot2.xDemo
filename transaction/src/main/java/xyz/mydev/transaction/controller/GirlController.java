@@ -33,7 +33,9 @@ public class GirlController {
     Girl girl = new Girl();
     girl.setAge(age);
     girl.setCupSize(cupSize);
-    return girlService.save(girl);
+    girlService.save(girl);
+    System.out.println(girl.getId());
+    return girl;
   }
 
   @GetMapping(value = "/girls/{id}")

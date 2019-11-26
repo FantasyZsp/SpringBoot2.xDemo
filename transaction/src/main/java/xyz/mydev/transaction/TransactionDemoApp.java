@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author ZSP
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "xyz.mydev")
 public class TransactionDemoApp {
   public static void main(String[] args) {
     SpringApplication.run(TransactionDemoApp.class, args);
