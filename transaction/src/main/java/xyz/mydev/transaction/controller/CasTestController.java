@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.mydev.transaction.service.CasService;
 
@@ -22,10 +21,9 @@ public class CasTestController {
 
 
   @PutMapping(value = "/girl/{id}")
-  public void girlUpdate(@PathVariable(value = "id") Integer id,
-                         @RequestParam(value = "age") Integer age) {
+  public void addOneAge(@PathVariable(value = "id") Integer id) {
 
-    casService.compareAndAddAge(id, 1, age);
+    casService.compareAndAddAge(id, 1);
   }
 
 }
