@@ -1,11 +1,13 @@
 package xyz.mydev.transaction.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import xyz.mydev.transaction.domain.Girl;
 import xyz.mydev.transaction.repository.GirlRepository;
 
@@ -16,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * @author ZSP
  */
 @Service
+@Slf4j
 public class GirlService {
   @Autowired
   private GirlRepository girlRepository;
@@ -25,6 +28,8 @@ public class GirlService {
   @SuppressWarnings("all")
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.NESTED, rollbackFor = Exception.class)
   public List<Girl> findAllRcNested() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
     System.out.println(girlRepository.selectList(null).size());
     System.out.println(girlRepository.selectList(null).size());
     new Thread(() -> girlRepository.insert(DataUtil.generate())).start();
@@ -70,6 +75,9 @@ public class GirlService {
   @SuppressWarnings("all")
   @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.NESTED, rollbackFor = Exception.class)
   public List<Girl> findAllWhenInsertAsynError() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
+
     Girl generate = DataUtil.generate();
     generate.setId(1);
     Thread thread = new Thread(() -> {
@@ -95,6 +103,9 @@ public class GirlService {
   @SuppressWarnings("all")
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.NESTED, rollbackFor = Exception.class)
   public List<Girl> operateWhenInsertAsynError2() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
+
     jdbcTemplate.execute("insert girl( age, cup_size) value (1,1)");
     Thread thread2 = new Thread(() -> {
       jdbcTemplate.execute("insert girl(id, age, cup_size) value (1,1,1)");
@@ -113,6 +124,9 @@ public class GirlService {
   @SuppressWarnings("all")
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.NESTED, rollbackFor = Exception.class)
   public List<Girl> operateWhenInsertAsynError3() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
+
     jdbcTemplate.execute("insert girl( age, cup_size) value (1,1)");
 
     CompletableFuture<Object> threadCompletableFuture = CompletableFuture.supplyAsync(() -> {

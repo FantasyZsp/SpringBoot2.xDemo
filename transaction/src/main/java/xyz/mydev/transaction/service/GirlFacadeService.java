@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import xyz.mydev.transaction.domain.Girl;
 import xyz.mydev.transaction.repository.GirlRepository;
 
@@ -34,6 +35,9 @@ public class GirlFacadeService {
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> findAll() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
+
     List<Object> results = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       List<Girl> allRcNested = girlService.findAllRcNested();
@@ -46,6 +50,8 @@ public class GirlFacadeService {
 
   @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> findAllAsynInsertError() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
     List<Object> results = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       List<Girl> allRcNested = girlService.findAllWhenInsertAsynError();
@@ -58,12 +64,16 @@ public class GirlFacadeService {
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> operateWhenInsertAsynError2() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
     List<Girl> allRcNested = girlService.operateWhenInsertAsynError2();
     return allRcNested;
   }
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> operateWhenInsertAsynError3() {
+    String txName = TransactionSynchronizationManager.getCurrentTransactionName();
+    log.info("\n  ############## main transaction name is: {}.", txName);
     List<Girl> allRcNested = girlService.operateWhenInsertAsynError3();
     return allRcNested;
   }
