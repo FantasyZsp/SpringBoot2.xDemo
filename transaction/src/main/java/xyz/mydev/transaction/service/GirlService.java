@@ -18,12 +18,15 @@ public class GirlService {
   @Autowired
   private GirlRepository girlRepository;
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-  public List<Girl> findAll() {
-    System.out.println(girlRepository.selectList(null));
-    System.out.println(girlRepository.selectList(null));
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public List<Girl> findAllRcNested() {
+    System.out.println(girlRepository.selectList(null).size());
+    System.out.println(girlRepository.selectList(null).size());
+    System.out.println(girlRepository.selectList(null).size());
     return girlRepository.selectList(null);
   }
+
+
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public void save(Girl girl) {

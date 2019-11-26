@@ -13,14 +13,21 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("test")
+@SuppressWarnings("all")
 public class GirlFacadeController {
 
   @Autowired
   private GirlFacadeService girlFacadeService;
 
+
   @GetMapping(value = "/girls")
-  public List<?> girlList() {
+  public List<?> findAll() {
     return girlFacadeService.findAll();
+  }
+
+  @GetMapping(value = "/girls-no-tx")
+  public List<?> findAllNoTx() {
+    return girlFacadeService.findAllNoTx();
   }
 
 

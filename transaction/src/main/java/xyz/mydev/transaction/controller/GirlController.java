@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.mydev.transaction.domain.Girl;
 import xyz.mydev.transaction.service.GirlService;
 
-import java.util.List;
-
 /**
  * @author ZSP
  */
@@ -21,11 +19,6 @@ public class GirlController {
 
   @Autowired
   private GirlService girlService;
-
-  @GetMapping(value = "/girls")
-  public List<Girl> girlList() {
-    return girlService.findAll();
-  }
 
   @PostMapping(value = "/girls")
   public Girl girlAdd(@RequestParam(value = "age") Integer age,
