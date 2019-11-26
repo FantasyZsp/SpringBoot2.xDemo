@@ -21,7 +21,7 @@ public class CasService {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  @Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+  @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
   public void compareAndAddAge(Integer id, Integer toAdd) {
     boolean success = false;
 
@@ -30,6 +30,7 @@ public class CasService {
 
       Girl girl = girlRepository.selectById(id);
       log.info("读取到的当前年龄: {}", girl.getAge());
+      log.info("{}", girl);
       int currentAge = girl.getAge();
       int newAge = currentAge + toAdd;
       int affectCount = jdbcTemplate.update("update girl set age = " + newAge + " where id = " + id + " and age = " + currentAge);

@@ -4,6 +4,6 @@
     <select id="selectByIdInLockMode" resultType="xyz.mydev.transaction.domain.Girl">
         select *
         from girl
-        where id = #{id} lock in share mode
+        where id = #{id} for update
     </select>
 </mapper>
