@@ -42,3 +42,14 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+#日志级别
+logging:
+  level:
+    root: info
+    #    org.springframework.boot.actuate: info
+    org.zalando.logbook: TRACE
+    xyz.mydev: debug
+    org.springframework.jdbc: debug
+logbook:
+  format:
+    style: curl
