@@ -11,4 +11,5 @@ import xyz.mydev.transaction.domain.Girl;
 @Repository
 @Mapper
 public interface GirlRepository extends BaseMapper<Girl> {
+
 }

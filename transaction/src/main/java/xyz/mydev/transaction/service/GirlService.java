@@ -27,7 +27,7 @@ public class GirlService {
   }
 
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public Girl findByIdNonNull(Integer id) {
     System.out.println(girlRepository.selectById(id));
     System.out.println(girlRepository.selectById(id));
@@ -36,19 +36,19 @@ public class GirlService {
   }
 
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  @Transactional(rollbackFor = Exception.class)
   public void save(Girl girl) {
     girlRepository.insert(girl);
   }
 
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  @Transactional(rollbackFor = Exception.class)
   public Girl update(Girl girl) {
     girlRepository.updateById(girl);
     return girl;
   }
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  @Transactional(rollbackFor = Exception.class)
   public void deleteById(Integer id) {
     girlRepository.deleteById(id);
   }
