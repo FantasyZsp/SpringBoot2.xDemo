@@ -18,11 +18,16 @@ public class GirlService {
   @Autowired
   private GirlRepository girlRepository;
 
-  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  @SuppressWarnings("all")
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.NESTED, rollbackFor = Exception.class)
   public List<Girl> findAllRcNested() {
     System.out.println(girlRepository.selectList(null).size());
     System.out.println(girlRepository.selectList(null).size());
+    new Thread(() -> girlRepository.insert(DataUtil.generate())).start();
     System.out.println(girlRepository.selectList(null).size());
+    ;
+
+
     return girlRepository.selectList(null);
   }
 

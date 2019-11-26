@@ -11,6 +11,8 @@ import xyz.mydev.transaction.domain.Girl;
 import xyz.mydev.transaction.repository.GirlRepository;
 
 /**
+ * 用于研究CAS与读已提交
+ *
  * @author ZSP
  */
 @Service

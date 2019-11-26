@@ -34,17 +34,25 @@ public class GirlFacadeService {
 
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> findAll() {
-
-    System.out.println("update ...");
     List<Object> results = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
-      int update = jdbcTemplate.update("update girl set age = age + 1 where id = 1");
       List<Girl> allRcNested = girlService.findAllRcNested();
       int size = allRcNested.size();
       System.out.println(size);
       results.add(size);
     }
+    return results;
+  }
 
+  @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public List<?> findAllRR() {
+    List<Object> results = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      List<Girl> allRcNested = girlService.findAllRcNested();
+      int size = allRcNested.size();
+      System.out.println(size);
+      results.add(size);
+    }
     return results;
   }
 
