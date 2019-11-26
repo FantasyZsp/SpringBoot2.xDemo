@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.mydev.transaction.domain.Girl;
+import xyz.mydev.transaction.repository.GirlRepository;
 import xyz.mydev.transaction.service.GirlService;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class GirlController {
 
   @Autowired
   private GirlService girlService;
+  @Autowired
+  private GirlRepository girlRepository;
 
   @PostMapping(value = "/girls")
   public Girl girlAdd(@RequestParam(value = "age") Integer age,
@@ -62,6 +65,6 @@ public class GirlController {
 
   @GetMapping(value = "/girls")
   public List<?> findAll() {
-    return girlService.findAllRcNested();
+    return girlRepository.selectList(null);
   }
 }
