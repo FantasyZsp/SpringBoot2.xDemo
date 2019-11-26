@@ -45,6 +45,31 @@ public class GirlFacadeService {
   }
 
   @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public List<?> findAllAsynInsertError() {
+    List<Object> results = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      List<Girl> allRcNested = girlService.findAllWhenInsertAsynError();
+      int size = allRcNested.size();
+      System.out.println(size);
+      results.add(size);
+    }
+    return results;
+  }
+
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public List<?> operateWhenInsertAsynError2() {
+    List<Girl> allRcNested = girlService.operateWhenInsertAsynError2();
+    return allRcNested;
+  }
+
+  @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public List<?> operateWhenInsertAsynError3() {
+    List<Girl> allRcNested = girlService.operateWhenInsertAsynError3();
+    return allRcNested;
+  }
+
+
+  @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public List<?> findAllRR() {
     List<Object> results = new ArrayList<>();
     for (int i = 0; i < 5; i++) {

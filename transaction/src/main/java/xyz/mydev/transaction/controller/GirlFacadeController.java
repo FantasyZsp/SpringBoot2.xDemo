@@ -45,5 +45,20 @@ public class GirlFacadeController {
     return girlFacadeService.findById(id);
   }
 
+  @GetMapping(value = "/girl/findAllAsynInsertError")
+  public List<?> findAllAsynInsertError() {
+    return girlFacadeService.findAllAsynInsertError();
+  }
+
+  @GetMapping(value = "/girl/operateWhenInsertAsynError2")
+  public List<?> operateWhenInsertAsynError2() {
+    return girlFacadeService.operateWhenInsertAsynError2();
+  }
+
+  @GetMapping(value = "/girl/operateWhenInsertAsynError3")
+  public List<?> operateWhenInsertAsynError3() {
+    return girlFacadeService.operateWhenInsertAsynError3();
+  }
+
 
 }
