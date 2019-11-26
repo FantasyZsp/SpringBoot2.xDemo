@@ -30,5 +30,10 @@ public class GirlFacadeController {
     return girlFacadeService.findAllNoTx();
   }
 
+  @GetMapping(value = "/girl/id")
+  public List<?> findById(Integer id) {
+    return girlFacadeService.findById(id);
+  }
+
 
 }
