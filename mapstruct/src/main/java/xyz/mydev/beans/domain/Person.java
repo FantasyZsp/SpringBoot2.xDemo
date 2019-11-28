@@ -1,4 +1,4 @@
-package xyz.mydev.mapstruct.domain;
+package xyz.mydev.beans.domain;
 
 import lombok.Getter;
 import lombok.Setter;

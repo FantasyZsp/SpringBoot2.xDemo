@@ -1,10 +1,10 @@
-package xyz.mydev.mapstruct.mapper;
+package xyz.mydev.beans.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import xyz.mydev.mapstruct.domain.Person;
-import xyz.mydev.mapstruct.dto.PersonDTO;
+import xyz.mydev.beans.domain.Person;
+import xyz.mydev.beans.dto.PersonDTO;
 
 /**
  * @author zhao

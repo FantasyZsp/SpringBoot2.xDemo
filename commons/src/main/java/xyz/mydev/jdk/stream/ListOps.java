@@ -1,6 +1,6 @@
 package xyz.mydev.jdk.stream;
 
-import xyz.mydev.mapstruct.domain.Person;
+import xyz.mydev.beans.domain.Person;
 
 import java.time.Instant;
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package xyz.mydev.mapstruct;
+package xyz.mydev.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import xyz.mydev.mapstruct.dto.AddressDTO;
-import xyz.mydev.mapstruct.dto.PersonDTO;
+import xyz.mydev.beans.dto.AddressDTO;
+import xyz.mydev.beans.dto.PersonDTO;
 
 import java.io.IOException;
 import java.time.Instant;

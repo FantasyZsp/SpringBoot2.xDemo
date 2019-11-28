@@ -1,4 +1,4 @@
-package xyz.mydev.mapstruct.controller;
+package xyz.mydev.beans.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.mydev.mapstruct.dto.PersonDTO;
-import xyz.mydev.mapstruct.service.PersonService;
+import xyz.mydev.beans.dto.PersonDTO;
+import xyz.mydev.beans.service.PersonService;
 
 import java.util.List;
 

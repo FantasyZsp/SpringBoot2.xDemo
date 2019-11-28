@@ -9,8 +9,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @SpringBootApplication
 @EnableSwagger2
-public class StartUpApplication {
+public class CommonsApplication {
   public static void main(String[] args) {
-    SpringApplication.run(StartUpApplication.class, args);
+    SpringApplication.run(CommonsApplication.class, args);
   }
 }

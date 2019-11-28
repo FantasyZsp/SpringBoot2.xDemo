@@ -1,4 +1,4 @@
-package xyz.mydev.mapstruct.dto;
+package xyz.mydev.beans.dto;
 
 import java.io.Serializable;
 import java.time.Instant;

@@ -1,9 +1,9 @@
-package xyz.mydev.mapstruct.mapper;
+package xyz.mydev.beans.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-import xyz.mydev.mapstruct.dto.AddressDTO;
+import xyz.mydev.beans.dto.AddressDTO;
 
 import java.io.IOException;
 

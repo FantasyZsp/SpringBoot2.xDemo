@@ -1,12 +1,12 @@
-package xyz.mydev.mapstruct.service;
+package xyz.mydev.beans.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.mydev.mapstruct.domain.Person;
-import xyz.mydev.mapstruct.dto.PersonDTO;
-import xyz.mydev.mapstruct.mapper.PersonMapper;
-import xyz.mydev.mapstruct.repository.PersonRepository;
+import xyz.mydev.beans.domain.Person;
+import xyz.mydev.beans.dto.PersonDTO;
+import xyz.mydev.beans.mapper.PersonMapper;
+import xyz.mydev.beans.repository.PersonRepository;
 
 import java.util.ArrayList;
 import java.util.List;

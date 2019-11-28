@@ -1,4 +1,4 @@
-package xyz.mydev.mapstruct.dto;
+package xyz.mydev.beans.dto;
 
 import java.time.Instant;
 import java.util.HashMap;
