@@ -12,6 +12,7 @@
         <module>guava-demo</module>
         <module>proxy-demo</module>
         <module>transaction</module>
+        <module>mapstruct</module>
     </modules>
     <packaging>pom</packaging>
 
