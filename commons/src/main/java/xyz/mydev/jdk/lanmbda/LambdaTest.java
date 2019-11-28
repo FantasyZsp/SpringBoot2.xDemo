@@ -1,4 +1,4 @@
-package xyz.mydev.lanmbda;
+package xyz.mydev.jdk.lanmbda;
 
 import java.util.ArrayList;
 import java.util.Arrays;

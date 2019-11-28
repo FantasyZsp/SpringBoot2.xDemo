@@ -1,4 +1,4 @@
-package xyz.mydev.stream;
+package xyz.mydev.jdk.stream;
 
 import java.util.HashMap;
 import java.util.Map;

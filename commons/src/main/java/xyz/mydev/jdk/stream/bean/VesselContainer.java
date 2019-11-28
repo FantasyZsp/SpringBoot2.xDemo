@@ -1,4 +1,4 @@
-package xyz.mydev.stream.bean;
+package xyz.mydev.jdk.stream.bean;
 
 import lombok.Getter;
 import lombok.Setter;

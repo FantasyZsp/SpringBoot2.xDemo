@@ -1,4 +1,4 @@
-package xyz.mydev.numberic;
+package xyz.mydev.jdk.numberic;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

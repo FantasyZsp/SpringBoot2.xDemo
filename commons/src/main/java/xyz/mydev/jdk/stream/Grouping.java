@@ -1,8 +1,8 @@
-package xyz.mydev.stream;
+package xyz.mydev.jdk.stream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import xyz.mydev.stream.bean.VesselContainer;
+import xyz.mydev.jdk.stream.bean.VesselContainer;
 import xyz.mydev.util.StreamUtil;
 
 import java.util.ArrayList;

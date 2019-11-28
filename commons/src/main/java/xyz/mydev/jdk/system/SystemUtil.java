@@ -1,4 +1,4 @@
-package xyz.mydev.system;
+package xyz.mydev.jdk.system;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

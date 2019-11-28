@@ -1,4 +1,4 @@
-package xyz.mydev.numberic;
+package xyz.mydev.jdk.numberic;
 
 /**
  * @author ZSP

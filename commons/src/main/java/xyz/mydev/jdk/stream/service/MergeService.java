@@ -1,6 +1,6 @@
-package xyz.mydev.stream.service;
+package xyz.mydev.jdk.stream.service;
 
-import xyz.mydev.stream.bean.VesselContainer;
+import xyz.mydev.jdk.stream.bean.VesselContainer;
 
 import java.util.Arrays;
 import java.util.List;
