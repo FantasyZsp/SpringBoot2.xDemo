@@ -1,4 +1,4 @@
-package xyz.mydev.time;
+package xyz.mydev.jdk.time;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import xyz.mydev.util.JsonUtil;

@@ -1,4 +1,4 @@
-package xyz.mydev.getclass;
+package xyz.mydev.jdk.getclass;
 
 /**
  * @author  zhao

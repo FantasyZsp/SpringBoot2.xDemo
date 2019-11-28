@@ -1,4 +1,4 @@
-package xyz.mydev.time.enumeration;
+package xyz.mydev.jdk.time.enumeration;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package xyz.mydev.time;
+package xyz.mydev.jdk.time;
 
 import java.time.Instant;
 import java.time.LocalDate;
