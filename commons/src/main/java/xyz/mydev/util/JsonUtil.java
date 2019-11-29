@@ -57,7 +57,7 @@ public class JsonUtil {
 
   /**
    * @description  Object2String
-   * @auther: ZSP
+   * @author  ZSP
    * @date  2018/8/1
    * @param: [obj]
    * @return: java.lang.String
@@ -88,7 +88,7 @@ public class JsonUtil {
 
   /**
    * @description  简单对象反序列化
-   * @auther: ZSP
+   * @author  ZSP
    * @date  2018/8/1
    * @param: [str, clazz]
    * @return: T
@@ -109,7 +109,7 @@ public class JsonUtil {
 
   /**
    * @description  字符串反序列化为组合对象。传入类型和返回类型一致为T。
-   * @auther: ZSP
+   * @author  ZSP
    * @date  2018/8/1
    * @param: [str, typeReference]
    * @return: T

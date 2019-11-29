@@ -1,7 +1,7 @@
 package xyz.mydev.beans.dto;
 
 /**
- * @Auther: zhao
+ * @author  zhao
  * @date  2018/07/24:09/27
  * @description
  */

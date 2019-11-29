@@ -3,7 +3,7 @@ package xyz.mydev.jackson.relationship.one2one_bid;
 import javax.persistence.Embeddable;
 
 /**
- * @Auther: zhao
+ * @author  zhao
  * @date  2018/07/24:09/27
  * @description
  */
