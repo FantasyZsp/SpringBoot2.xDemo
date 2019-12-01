@@ -1,5 +1,6 @@
 package xyz.mydev.jdk.nio;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +14,13 @@ import java.nio.channels.FileChannel;
 /**
  * @author ZSP
  */
+@Slf4j
 public class BufferTest {
   private final String modulePath = System.getProperty("user.dir");
 
   public static void main(String[] args) throws Exception {
-    System.out.println(System.getProperty("user.dir"));
-    System.out.println(System.getProperty("user.home"));
+    log.info(System.getProperty("user.dir"));
+    log.info(System.getProperty("user.home"));
   }
 
   @Before
@@ -64,5 +66,13 @@ public class BufferTest {
     channel.write(byteBuffer);
 
     System.out.println(FileUtils.readFileToString(new File(filePath)));
+  }
+
+
+  @Test
+  public void testPlus() {
+    int i = 0;
+    i++;
+    System.out.println(i);
   }
 }
