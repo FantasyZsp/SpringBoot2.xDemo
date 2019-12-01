@@ -53,7 +53,14 @@ public class BufferTest {
     for (byte b : content) {
       byteBuffer.put(b);
     }
+
+    System.out.println(byteBuffer.limit());
+    System.out.println(byteBuffer.position());
+    System.out.println(byteBuffer.capacity());
     byteBuffer.flip();
+    System.out.println(byteBuffer.limit());
+    System.out.println(byteBuffer.position());
+    System.out.println(byteBuffer.capacity());
     channel.write(byteBuffer);
 
     System.out.println(FileUtils.readFileToString(new File(filePath)));
