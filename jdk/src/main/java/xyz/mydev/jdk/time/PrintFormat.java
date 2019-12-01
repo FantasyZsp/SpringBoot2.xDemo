@@ -15,11 +15,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
- * @author  zhao
+ * @author zhao
  * @date 2018/09/07 19:34
- *  * @description
+ * 时间打印格式
  */
 public class PrintFormat {
+
   public static void main(String[] args) throws IOException {
     ObjectMapper objectMapper = JsonUtil.objectMapper;
 

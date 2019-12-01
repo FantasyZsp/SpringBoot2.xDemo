@@ -1,6 +1,5 @@
 package xyz.mydev.util;
 
-import xyz.mydev.jdk.time.enumeration.TimesCrossStatus;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhaosp
+ */
 public class DateUtil {
 
   /**
@@ -44,7 +46,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 根据"yyyy-MM-dd"获取中文星期几
+   * @description 根据"yyyy-MM-dd"获取中文星期几
    * @author ZSP
    * @date 2018/10/17
    */
@@ -53,7 +55,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 字符串日期"yyyy-MM-dd"转Localdate
+   * @description 字符串日期"yyyy-MM-dd"转Localdate
    * @author ZSP
    * @date 2018/10/19
    */
@@ -62,7 +64,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description Localdate转字符串日期"yyyy-MM-dd"
+   * @description Localdate转字符串日期"yyyy-MM-dd"
    * @author ZSP
    * @date 2018/10/19
    */
@@ -71,7 +73,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 字符串时间"HH:mm:ss"转LocalTime
+   * @description 字符串时间"HH:mm:ss"转LocalTime
    * @author ZSP
    * @date 2018/10/20
    */
@@ -80,7 +82,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 字符串时间"HH:mm:ss"转LocalTime
+   * @description 字符串时间"HH:mm:ss"转LocalTime
    * @author ZSP
    * @date 2018/10/20
    */
@@ -89,7 +91,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 根据开始时间和结束时间生成连续日期数组。
+   * @description 根据开始时间和结束时间生成连续日期数组。
    * @author ZSP
    * @date 2018/10/20
    */
@@ -107,7 +109,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 根据时间获取刻钟序号，以开始时间的算法为准，在计算结束序号时需要减1.
+   * @description 根据时间获取刻钟序号，以开始时间的算法为准，在计算结束序号时需要减1.
    * @author ZSP
    * @date 2018/10/20
    */
@@ -117,7 +119,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 23:59:59与23:59:59.999999999之间的时间都认为是当天结束时间。
+   * @description 23:59:59与23:59:59.999999999之间的时间都认为是当天结束时间。
    * @author ZSP
    * @date 2018/10/24
    */
@@ -127,7 +129,7 @@ public class DateUtil {
 
 
   /**
-   * @Description 判断是否有必要使用增量表。依据时间跨度
+   * @description 判断是否有必要使用增量表。依据时间跨度
    * @author ZSP
    * @date 2018/10/20
    */
@@ -140,7 +142,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 判断是否属于刻钟时间
+   * @description 判断是否属于刻钟时间
    * @author ZSP
    * @date 2018/10/20
    */
@@ -150,7 +152,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 整点与分钟00 15 30 45 时刻
+   * @description 整点与分钟00 15 30 45 时刻
    * @author ZSP
    * @date 2018/10/20
    */
@@ -159,7 +161,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 23:59:59 和 00:00:00
+   * @description 23:59:59 和 00:00:00
    * @author ZSP
    * @date 2018/10/20
    */
@@ -177,7 +179,7 @@ public class DateUtil {
 
 
   /**
-   * @Description 判断两组时间段跨度
+   * @description 判断两组时间段跨度
    * Status        变量                         枚举            区域图示
    * -2  左全跨     isAllBeforeMinDate          BEFORE_MIN      ()       -> MIN
    * -1  左跨       isCrossMinDate              CROSS_MIN       ([MIN])  -> MAX
@@ -226,7 +228,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 根据日期和刻钟序列号计算同步时间(以时段结束时间为准 。 如果是当天最后时刻 ， 按照次日零点计算)。
+   * @description 根据日期和刻钟序列号计算同步时间(以时段结束时间为准 。 如果是当天最后时刻 ， 按照次日零点计算)。
    * @author ZSP
    * @date 2018/10/22
    */
@@ -241,7 +243,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 获取两个日期间隔的天数。同一日期得到的结果为1
+   * @description 获取两个日期间隔的天数。同一日期得到的结果为1
    * @author ZSP
    * @date 2018/10/22
    */
@@ -256,7 +258,7 @@ public class DateUtil {
   }
 
   /**
-   * @Description 根据开始结束日期，得到连续的日期list
+   * @description 根据开始结束日期，得到连续的日期list
    * @author ZSP
    * @date 2018/10/23
    */

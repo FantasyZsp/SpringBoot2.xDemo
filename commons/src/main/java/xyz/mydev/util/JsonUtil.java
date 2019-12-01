@@ -21,9 +21,9 @@ import java.util.List;
 
 
 /**
- * @author  zhao
- * @date  2018/08/01 20:32
- * @description  JSON操作工具类
+ * @author zhao
+ * @date 2018/08/01 20:32
+ * @description JSON操作工具类
  */
 public class JsonUtil {
   private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
@@ -56,9 +56,9 @@ public class JsonUtil {
   }
 
   /**
-   * @description  Object2String
-   * @author  ZSP
-   * @date  2018/8/1
+   * @description Object2String
+   * @author ZSP
+   * @date 2018/8/1
    * @param: [obj]
    * @return: java.lang.String
    */
@@ -87,9 +87,9 @@ public class JsonUtil {
   }
 
   /**
-   * @description  简单对象反序列化
-   * @author  ZSP
-   * @date  2018/8/1
+   * @description 简单对象反序列化
+   * @author ZSP
+   * @date 2018/8/1
    * @param: [str, clazz]
    * @return: T
    */
@@ -108,18 +108,19 @@ public class JsonUtil {
   }
 
   /**
-   * @description  字符串反序列化为组合对象。传入类型和返回类型一致为T。
-   * @author  ZSP
-   * @date  2018/8/1
-   * @param: [str, typeReference]
-   * @return: T
+   * @param str           字符串
+   * @param typeReference 转换的类型
+   * @return T
+   * @description 字符串反序列化为组合对象。传入类型和返回类型一致为T。
+   * @author ZSP
+   * @date 2018/8/1
    */
   public static <T> T string2Obj(String str, TypeReference<T> typeReference) {
     if (StringUtils.isEmpty(str) || typeReference == null) {
       return null;
     }
     try {
-      return (T) (typeReference.getType().equals(String.class) ? (T) str : objectMapper.readValue(str, typeReference));
+      return (typeReference.getType().equals(String.class) ? (T) str : objectMapper.readValue(str, typeReference));
     } catch (Exception e) {
       logger.warn("Parse String to objectT error", e);
       return null;
