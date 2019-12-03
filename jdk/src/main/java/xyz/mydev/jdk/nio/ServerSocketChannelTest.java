@@ -2,7 +2,6 @@ package xyz.mydev.jdk.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -49,35 +48,14 @@ public class ServerSocketChannelTest {
           System.out.println("获得客户端连接: " + socketChannel);
         } else if (selectionKey.isReadable()) {
           SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
-          int byteReads = receiveAndReturnMsg(socketChannel);
+          int byteReads = NioUtil.receiveAndReturnMsg(socketChannel);
         }
         iterator.remove();
       }
 
       selectionKeys.clear();
-
     }
   }
 
-  private static int receiveAndReturnMsg(SocketChannel socketChannel) throws IOException {
-    int byteReads = 0;
-    while (true) {
-      ByteBuffer byteBuffer = ByteBuffer.allocate(512);
-      byteBuffer.clear();
-      int read = socketChannel.read(byteBuffer);
-      byteReads += read;
-      if (read == -1) {
-        socketChannel.close();
-        break;
-      }
-      if (read == 0) {
-        break;
-      }
-      byteBuffer.flip();
-      socketChannel.write(byteBuffer);
-    }
-    System.out.println("收到客户端[" + socketChannel.socket().getLocalPort() + "]消息: ");
-    System.out.println("读取" + byteReads + "个字节");
-    return byteReads;
-  }
+
 }
