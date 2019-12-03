@@ -7,9 +7,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -54,7 +54,7 @@ public class NioServer {
         } else if (selectionKey.isReadable()) {
           SocketChannel client = (SocketChannel) selectionKey.channel();
           if (client.isConnected()) {
-            NioUtil.receiveAndBroadcast(client, CLIENT_MAP.get(client), List.copyOf(CLIENT_MAP.keySet()));
+            NioUtil.receiveAndBroadcast(client, CLIENT_MAP.get(client), new ArrayList<>(CLIENT_MAP.keySet()));
           }
         }
         iterator.remove();

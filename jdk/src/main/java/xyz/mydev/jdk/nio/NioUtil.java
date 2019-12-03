@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,9 @@ import java.util.List;
  */
 public class NioUtil {
   private static final Charset CHARSET;
+  private static final Charset CHARSET_UTF8 = StandardCharsets.UTF_8;
+  private static final String CLIENT_EXIT = "-1";
+
 
   static {
     String os = System.getProperty("os.name");
@@ -42,7 +46,7 @@ public class NioUtil {
       }
       if (read > 0) {
         byteBuffer.flip();
-        receivedMsg.append(String.valueOf(CHARSET.decode(byteBuffer).array()));
+        receivedMsg.append(String.valueOf(CHARSET_UTF8.decode(byteBuffer).array()));
       }
     }
 
@@ -50,7 +54,7 @@ public class NioUtil {
       String result = "\n收到客户端[" + clientKey + "]消息: " + receivedMsg.toString();
       System.out.println(result);
       System.out.println("读取" + byteReads + "个字节");
-      socketChannel.write(CHARSET.encode(result));
+      socketChannel.write(CHARSET_UTF8.encode(result));
     }
     return byteReads;
   }
@@ -58,26 +62,23 @@ public class NioUtil {
   public static String receiveMsg(SocketChannel socketChannel, String clientKey) {
     int byteReads = 0;
     StringBuilder receivedMsg = new StringBuilder();
-
-
+    boolean close = false;
     while (true) {
       ByteBuffer byteBuffer = ByteBuffer.allocate(512);
       byteBuffer.clear();
-      int read = 0;
+      int read;
       try {
         read = socketChannel.read(byteBuffer);
       } catch (IOException e) {
+        close = true;
+        read = -1;
+        byteReads += read;
         e.printStackTrace();
         break;
       }
       byteReads += read;
       if (read == -1) {
-        System.out.println("客户端[" + clientKey + "]已断开连接");
-        try {
-          socketChannel.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+        close = true;
         break;
       }
       if (read == 0) {
@@ -85,15 +86,20 @@ public class NioUtil {
       }
       if (read > 0) {
         byteBuffer.flip();
-        receivedMsg.append(String.valueOf(CHARSET.decode(byteBuffer).array()));
+        receivedMsg.append(String.valueOf(CHARSET_UTF8.decode(byteBuffer).array()));
       }
     }
     String result = "\n收到客户端[" + clientKey + "]消息: " + receivedMsg.toString();
-    if (socketChannel.isConnected()) {
+    if (!close) {
       System.out.println(result);
       System.out.println("读取" + byteReads + "个字节");
     } else {
-      result = "客户端[" + clientKey + "]已断开连接";
+      try {
+        socketChannel.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      result = CLIENT_EXIT;
     }
     return result;
   }
@@ -102,9 +108,14 @@ public class NioUtil {
     for (SocketChannel socketChannel : socketChannelList) {
       if (socketChannel.isConnected()) {
         try {
-          socketChannel.write(CHARSET.encode(msg));
+          socketChannel.write(CHARSET_UTF8.encode(msg));
         } catch (IOException e) {
           e.printStackTrace();
+          try {
+            socketChannel.close();
+          } catch (IOException ex) {
+            ex.printStackTrace();
+          }
         }
       }
     }
@@ -112,6 +123,11 @@ public class NioUtil {
 
   public static void receiveAndBroadcast(SocketChannel socketChannel, String clientKey, List<SocketChannel> socketChannelList) {
     String receiveMsg = receiveMsg(socketChannel, clientKey);
+    if (CLIENT_EXIT.equals(receiveMsg)) {
+      System.out.println("客户端[" + clientKey + "]已断开连接");
+    }
+    socketChannelList = new ArrayList<>(socketChannelList);
+    socketChannelList.remove(socketChannel);
     broadcast(socketChannelList, receiveMsg);
   }
 }
