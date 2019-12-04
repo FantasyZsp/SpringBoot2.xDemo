@@ -28,7 +28,17 @@ server:
 #  user:
 #    name: user
 #    password: user
+logging:
+  level:
+    root: info
+    org.mybatis: debug
+    java.sql: debug
+    org.springframework.web: trace
 management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
   endpoint:
-    env:
-      enabled: true
+    health:
+      show-details: ALWAYS

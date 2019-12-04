@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @author zhao
  */
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "person")
 public class PersonProperties {
   private String app = "";
