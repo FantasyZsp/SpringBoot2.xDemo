@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import xyz.mydev.junit4.PersonProperties;
+import xyz.mydev.externalizedconfiguration.GirlProperties;
+import xyz.mydev.externalizedconfiguration.PersonProperties;
 
 /**
  * @author zhao

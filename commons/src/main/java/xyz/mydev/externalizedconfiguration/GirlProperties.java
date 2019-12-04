@@ -1,4 +1,4 @@
-package xyz.mydev;
+package xyz.mydev.externalizedconfiguration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
