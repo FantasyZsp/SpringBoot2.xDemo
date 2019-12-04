@@ -1,13 +1,11 @@
 package xyz.mydev.beans.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.Instant;
 
-@Getter
-@Setter
+@Data
 public class Person implements Serializable {
   private Long id;
   private String name;
