@@ -18,13 +18,13 @@ import java.util.Map;
 /**
  * @author ZSP
  */
-public class LinkedEntityUtilV2 {
+public class LinkedEntityUtilV3 {
   /**
    * 首结点 preId
    */
   public static final String ROOT_PRE = "root_pre";
 
-  private static <T extends AbstractLinkedEntityV2> List<T> sort(List<T> unorderedList) {
+  private static <T extends AbstractLinkedEntityV3> List<T> sort(List<T> unorderedList) {
     if (CollectionUtils.isEmpty(unorderedList)) {
       return Collections.emptyList();
     }
@@ -54,7 +54,7 @@ public class LinkedEntityUtilV2 {
    *
    * @author ZSP
    */
-  public static abstract class AbstractLinkedEntityV2 {
+  public interface AbstractLinkedEntityV3 {
 
 
     /**
@@ -77,7 +77,7 @@ public class LinkedEntityUtilV2 {
   @Data
   @AllArgsConstructor
   @NoArgsConstructor
-  public static class ConcreteDemoEntityV2 extends AbstractLinkedEntityV2 {
+  public static class ConcreteDemoEntityV3 implements AbstractLinkedEntityV3 {
     private String id;
     private String preId;
 
@@ -91,18 +91,18 @@ public class LinkedEntityUtilV2 {
   }
 
   public static void main(String[] args) throws JsonProcessingException {
-    ConcreteDemoEntityV2 root = new ConcreteDemoEntityV2("1", ROOT_PRE);
-    ConcreteDemoEntityV2 second = new ConcreteDemoEntityV2("2", "1");
-    ConcreteDemoEntityV2 third = new ConcreteDemoEntityV2("3", "2");
-    ConcreteDemoEntityV2 forth = new ConcreteDemoEntityV2("4", "3");
+    ConcreteDemoEntityV3 root = new ConcreteDemoEntityV3("1", ROOT_PRE);
+    ConcreteDemoEntityV3 second = new ConcreteDemoEntityV3("2", "1");
+    ConcreteDemoEntityV3 third = new ConcreteDemoEntityV3("3", "2");
+    ConcreteDemoEntityV3 forth = new ConcreteDemoEntityV3("4", "3");
 
-    List<ConcreteDemoEntityV2> unorderedList = new ArrayList<>();
+    List<ConcreteDemoEntityV3> unorderedList = new ArrayList<>();
     unorderedList.add(third);
     unorderedList.add(root);
     unorderedList.add(forth);
     unorderedList.add(second);
 
-    List<ConcreteDemoEntityV2> linkedEntities = sort(unorderedList);
+    List<ConcreteDemoEntityV3> linkedEntities = sort(unorderedList);
     System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(linkedEntities));
   }
 }
