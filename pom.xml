@@ -15,6 +15,7 @@
         <module>mapstruct</module>
         <module>bean-lifecycle</module>
         <module>jdk</module>
+        <module>netty</module>
     </modules>
     <packaging>pom</packaging>
 
