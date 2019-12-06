@@ -57,7 +57,7 @@ public class ListDemo {
     // 区间内 [min,max]
     Rule left = min;
     Rule right = max;
-
+    // 由于是排序list，一旦触及右边，就停止。
     boolean rightFlag = true;
     for (int i = 0; i < ruleList.size(); i++) {
 
