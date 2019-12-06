@@ -100,6 +100,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <additionalparam>-Dmaven.wagon.http.ssl.insecure=true</additionalparam>
+                            <additionalparam>-Dmaven.wagon.http.ssl.allowall=true</additionalparam>
+                            <additionalparam>-Dmaven.wagon.http.ssl.ignore.validity.dates=true</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
