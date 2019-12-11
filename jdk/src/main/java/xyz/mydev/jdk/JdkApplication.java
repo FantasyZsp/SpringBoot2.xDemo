@@ -39,15 +39,15 @@ public class JdkApplication {
 //    SSLContext sc = SSLContext.getInstance("SSL");
 //    sc.init(null, trustAllCertificates, new SecureRandom());
 //
-    final Properties props = System.getProperties();
-    props.setProperty("jdk.internal.httpclient.disableHostnameVerification", Boolean.TRUE.toString());
+//    final Properties props = System.getProperties();
+//    props.setProperty("jdk.internal.httpclient.disableHostnameVerification", Boolean.TRUE.toString());
 
 //    System.setProperty("javax.net.ssl.trustStore", "C:/Program Files/Java/jdk-11.0.2/lib/security/jssecacerts");
 //    System.setProperty("jdk.tls.server.protocols", "TLSv1.3");
     HttpClient httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofMillis(500000))
 //      .sslContext(sc)
       .build();
-    HttpRequest requestBuilder = HttpRequest.newBuilder().uri(URI.create("http://www.baidu.com/"))
+    HttpRequest requestBuilder = HttpRequest.newBuilder().uri(URI.create("https://www.baidu.com/"))
       .GET().build();
     HttpResponse<String> result = httpClient.send(requestBuilder, HttpResponse.BodyHandlers.ofString());
     System.out.println(result);
