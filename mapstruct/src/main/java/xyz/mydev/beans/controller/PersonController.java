@@ -15,8 +15,8 @@ import xyz.mydev.beans.service.PersonService;
 import java.util.List;
 
 /**
- * @author  zhao
- * @date  2018/07/24:10/02
+ * @author zhao
+ * @date 2018/07/24:10/02
  * @description
  */
 @RestController("/api")
@@ -51,8 +51,28 @@ public class PersonController {
   }
 
   @GetMapping("/person/{id}")
-  public PersonDTO retrievePerson(@PathVariable Long id) {
-    return personService.findOne(id);
+  public String retrievePerson(@PathVariable String id) {
+    return "personService.findOne(id)";
+  }
+
+  @GetMapping("/{id}/person")
+  public String retrievePerson2(@PathVariable String id) {
+    return "personService.findOne(id)";
+  }
+
+  @GetMapping("/person/123")
+  public String retrievePerson() {
+    return "personService.findOne(1L)";
+  }
+
+  @GetMapping("/123/person")
+  public String retrievePerson3() {
+    return "personService.findOne(1L)";
+  }
+
+  @GetMapping("/person/test")
+  public String retrievePerson2() {
+    return "personService.findOne(1L)";
   }
 
   @GetMapping("/person")
