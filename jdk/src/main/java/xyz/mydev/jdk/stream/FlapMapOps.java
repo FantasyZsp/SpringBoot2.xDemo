@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import xyz.mydev.beans.domain.Person;
+import xyz.mydev.util.JsonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +33,20 @@ public class FlapMapOps {
     list.add(null);
     list.add(null);
     list.add(null);
+    list.add(new Person());
+
+
+    ArrayList<Person> notNull = list.stream().collect(ArrayList::new, (left, right) -> {
+      if (right != null) {
+        left.add(right);
+      }
+    }, ArrayList::addAll);
+
+    System.out.println("notnulls");
+    System.out.println(JsonUtil.obj2StringPretty(notNull));
+    System.out.println("notnullsend");
+
+
     System.out.println(list);
     ObjectMapper objectMapper = new ObjectMapper();
     System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list));
