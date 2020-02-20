@@ -5,6 +5,13 @@ package xyz.mydev.jackson.serialize;
  */
 @lombok.Data
 public class DataDtoImpl implements Data {
+  public DataDtoImpl() {
+    this.id = "id";
+    this.name = "name";
+    this.age = "age";
+    this.info = "info";
+    this.route = "route";
+  }
 
   private String id;
   private String name;

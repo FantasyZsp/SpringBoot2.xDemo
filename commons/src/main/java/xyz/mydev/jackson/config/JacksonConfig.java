@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author ZSP  2018/12/8 18:21
  */
-@Configuration
+//@Configuration
 public class JacksonConfig {
   @Bean("objectMapper")
   public ObjectMapper jacksonObjectMapper() {
