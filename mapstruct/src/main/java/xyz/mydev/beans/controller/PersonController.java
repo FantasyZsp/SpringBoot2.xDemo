@@ -13,6 +13,7 @@ import xyz.mydev.beans.dto.PersonDTO;
 import xyz.mydev.beans.service.PersonService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhao
@@ -78,6 +79,11 @@ public class PersonController {
   @GetMapping("/person")
   public List<PersonDTO> retrieveAllPerson() {
     return personService.findAll();
+  }
+
+  @GetMapping("/person_map")
+  public Map<String, List<PersonDTO>> retrieveAllPerson2() {
+    return null;
   }
 
 }

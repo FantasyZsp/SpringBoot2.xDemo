@@ -9,6 +9,7 @@ import xyz.mydev.beans.dto.PersonDTO;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 //@SpringBootApplication
@@ -17,8 +18,8 @@ public class MapperDemo {
   public static ObjectMapper objectMapper = new ObjectMapper();
 
   public static void main(String[] args) throws Exception {
-    typeConverByJackson();
-//        writeValueAsStringTwice();
+//    typeConverByJackson();
+    writeValueAsStringTwice();
   }
 
   public static void writeValueAsStringTwice() throws Exception {
@@ -26,12 +27,31 @@ public class MapperDemo {
 //        JacksonUtil
     String str1 = "我是一个字符串";
     String time1 = "2018-08-11T02:03:54Z";
-    System.out.println(objectMapper.readValue(objectMapper.writeValueAsString(time1), Instant.class));
+//    System.out.println(objectMapper.readValue(objectMapper.writeValueAsString(time1), Instant.class));
     System.out.println(str1);
     System.out.println(objectMapper.writeValueAsString(str1));
     String str2 = objectMapper.writeValueAsString(str1);
     String str3 = objectMapper.writeValueAsString(str2);
     System.out.println(str3);
+
+    System.out.println("====");
+    AddressDTO addressDTO = new AddressDTO("add", "post");
+    String result = objectMapper.writeValueAsString(addressDTO);
+    System.out.println(result);
+    String result2 = objectMapper.writeValueAsString(result);
+    System.out.println(result2);
+
+    Object addressDTO0 = objectMapper.readValue(result, Object.class);
+    System.out.println(addressDTO0);
+
+//    AddressDTO addressDTO1 = objectMapper.readValue(result2, AddressDTO.class);
+//    System.out.println(addressDTO1);
+
+//    send(addressDTO0);
+//
+//    send(LinkedHashMap)
+
+
   }
 
   public static void typeConverByJackson() throws IOException {
