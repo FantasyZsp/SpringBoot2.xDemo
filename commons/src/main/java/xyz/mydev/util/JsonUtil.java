@@ -52,7 +52,7 @@ public class JsonUtil {
     objectMapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
 
     // map排序
-    objectMapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
+    objectMapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, false);
   }
 
   /**

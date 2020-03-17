@@ -44,6 +44,10 @@ public class MapperDemo {
     Object addressDTO0 = objectMapper.readValue(result, Object.class);
     System.out.println(addressDTO0);
 
+    String msg = "{\"address\":\"add\",\"postCode\":\"post\"}";
+    Object test = objectMapper.readValue(result, AddressDTO.class);
+    System.out.println(test);
+
 //    AddressDTO addressDTO1 = objectMapper.readValue(result2, AddressDTO.class);
 //    System.out.println(addressDTO1);
 
