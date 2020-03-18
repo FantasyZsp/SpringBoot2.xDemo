@@ -108,6 +108,7 @@ public class Java8DateUtils {
   public static boolean isChronological(LocalDateTime start, LocalDateTime end) {
     return !start.isAfter(end);
   }
+
   public static boolean isChronological(LocalDate start, LocalDate end) {
     return !start.isAfter(end);
   }
@@ -143,14 +144,6 @@ public class Java8DateUtils {
     return date.with(TemporalAdjusters.firstDayOfMonth());
   }
 
-  /**
-   * 所在月最后一天
-   *
-   * @author ZSP
-   */
-  public static LocalDate getLastDayOfMonth(LocalDate date) {
-    return date.with(TemporalAdjusters.lastDayOfMonth());
-  }
 
   /**
    * LocalTime 转时间 HH:mm
@@ -166,5 +159,74 @@ public class Java8DateUtils {
   public static long getBetweenDays(LocalDate startDate, LocalDate endDate) {
     return ChronoUnit.DAYS.between(startDate, endDate);
   }
+
+  /**
+   * 所在周月第一天
+   *
+   * @author ZSP
+   */
+  public static LocalDate getFirstDayOfWeeklyMonth(LocalDate date) {
+    return getMonday(date).getMonthValue() == getSunday(date).getMonthValue() ?
+      getFirstDayOfWeeklyMonthWhenThisWeekNotCrossMonth(date) : getFirstDayOfWeeklyMonthWhenThisWeekCrossMonth(date);
+  }
+
+  private static LocalDate getFirstDayOfWeeklyMonthWhenThisWeekNotCrossMonth(LocalDate date) {
+    LocalDate firstDayOfMonth = getFirstDayOfMonth(date);
+    if (firstDayOfMonth.getDayOfWeek().equals(DayOfWeek.MONDAY)) {
+      return firstDayOfMonth;
+    }
+    if (firstDayOfMonth.getDayOfWeek().compareTo(DayOfWeek.FRIDAY) >= 0) {
+      firstDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+    } else {
+      firstDayOfMonth = getMonday(firstDayOfMonth);
+    }
+    return firstDayOfMonth;
+  }
+
+  private static LocalDate getFirstDayOfWeeklyMonthWhenThisWeekCrossMonth(LocalDate date) {
+    LocalDate thursday = date.with(ChronoField.DAY_OF_WEEK, DayOfWeek.THURSDAY.getValue());
+    LocalDate with = thursday.with(ChronoField.DAY_OF_MONTH, 10);
+    return getFirstDayOfWeeklyMonthWhenThisWeekNotCrossMonth(with);
+  }
+
+  /**
+   * 所在周月最后一天
+   *
+   * @author ZSP
+   */
+  public static LocalDate getLastDayOfWeeklyMonth(LocalDate date) {
+    return getMonday(date).getMonthValue() == getSunday(date).getMonthValue() ?
+      getLastDayOfWeeklyMonthWhenThisWeekNotCrossMonth(date) : getLastDayOfWeeklyMonthWhenThisWeekCrossMonth(date);
+  }
+
+  private static LocalDate getLastDayOfWeeklyMonthWhenThisWeekCrossMonth(LocalDate date) {
+    LocalDate thursday = date.with(ChronoField.DAY_OF_WEEK, DayOfWeek.THURSDAY.getValue());
+    LocalDate with = thursday.with(ChronoField.DAY_OF_MONTH, 10);
+    return getLastDayOfWeeklyMonthWhenThisWeekNotCrossMonth(with);
+  }
+
+  private static LocalDate getLastDayOfWeeklyMonthWhenThisWeekNotCrossMonth(LocalDate date) {
+    LocalDate lastDayOfMonth = getLastDayOfMonth(date);
+    if (lastDayOfMonth.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+      return lastDayOfMonth;
+    }
+
+    if (lastDayOfMonth.getDayOfWeek().compareTo(DayOfWeek.THURSDAY) >= 0) {
+      lastDayOfMonth = getSunday(lastDayOfMonth);
+    } else {
+      lastDayOfMonth = getSunday(lastDayOfMonth).minusWeeks(1);
+    }
+    return lastDayOfMonth;
+  }
+
+  /**
+   * 所在月最后一天
+   *
+   * @author ZSP
+   */
+  public static LocalDate getLastDayOfMonth(LocalDate date) {
+    return date.with(TemporalAdjusters.lastDayOfMonth());
+  }
+
 
 }

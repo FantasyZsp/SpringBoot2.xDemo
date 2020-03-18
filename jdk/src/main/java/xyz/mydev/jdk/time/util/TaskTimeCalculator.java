@@ -10,7 +10,9 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
 import static xyz.mydev.jdk.time.util.Java8DateUtils.getFirstDayOfMonth;
+import static xyz.mydev.jdk.time.util.Java8DateUtils.getFirstDayOfWeeklyMonth;
 import static xyz.mydev.jdk.time.util.Java8DateUtils.getLastDayOfMonth;
+import static xyz.mydev.jdk.time.util.Java8DateUtils.getLastDayOfWeeklyMonth;
 import static xyz.mydev.jdk.time.util.Java8DateUtils.getMonday;
 import static xyz.mydev.jdk.time.util.Java8DateUtils.isChronological;
 import static xyz.mydev.jdk.time.util.Java8DateUtils.toTimeMax;
@@ -52,9 +54,8 @@ public class TaskTimeCalculator {
         return weekCase(startDate, publishEventDate);
       case CALENDAR_MONTH:
         return calendarMonthCase(startDate, publishEventDate);
-      case WEEK_MONTH:
-        // TODO
-        return weekMonthCase(startDate, publishEventDate);
+      case WEEKLY_MONTH:
+        return weeklyMonthCase(startDate, publishEventDate);
       case YEAR:
         return yearCase(startDate, publishEventDate);
       default:
@@ -86,11 +87,29 @@ public class TaskTimeCalculator {
     return Optional.of(wrapper);
   }
 
-  public static Optional<CycleInfoWrapper> weekMonthCase(LocalDate startDate, LocalDate publishEventDate) {
+  public static Optional<CycleInfoWrapper> weeklyMonthCase(LocalDate startDate, LocalDate publishEventDate) {
     if (!isChronological(startDate, publishEventDate)) {
       return Optional.empty();
     }
-    throw new RuntimeException("未实现周月计算！");
+
+    LocalDate firstDayOfStart = getFirstDayOfWeeklyMonth(startDate);
+    LocalDate firstDayOfPublish = getFirstDayOfWeeklyMonth(publishEventDate);
+
+
+    int months = (int) ChronoUnit.MONTHS.between(firstDayOfStart.plusWeeks(2).withDayOfMonth(10), firstDayOfPublish.plusWeeks(2).withDayOfMonth(10));
+
+    CycleInfoWrapper wrapper = new CycleInfoWrapper();
+    wrapper.setCycleSequence(months + 1);
+
+    if (months == 0) {
+      // 同周期
+      wrapper.setCycleStartTime(toTimeMin(startDate));
+      wrapper.setCycleEndTime(toTimeMax(getLastDayOfWeeklyMonth(startDate)));
+    } else {
+      wrapper.setCycleStartTime(toTimeMin(firstDayOfPublish));
+      wrapper.setCycleEndTime(toTimeMax(getLastDayOfWeeklyMonth(publishEventDate)));
+    }
+    return Optional.of(wrapper);
   }
 
   public static Optional<CycleInfoWrapper> calendarMonthCase(LocalDate startDate, LocalDate publishEventDate) {

@@ -22,7 +22,7 @@ public enum CycleTypeEnum {
   /**
    * 周月
    */
-  WEEK_MONTH(32),
+  WEEKLY_MONTH(32),
   /**
    * 年
    */
