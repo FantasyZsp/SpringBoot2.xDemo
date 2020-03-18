@@ -3,8 +3,8 @@ package xyz.mydev.jdk.map;
 import org.junit.Assert;
 import xyz.mydev.jdk.map.beans.DefaultMultiKey;
 import xyz.mydev.jdk.map.beans.OrgTask;
-import xyz.mydev.jdk.map.beans.RewardToAccumulateValue;
 import xyz.mydev.jdk.map.beans.UserTask;
+import xyz.mydev.jdk.map.beans.RewardToAccumulateValue;
 import xyz.mydev.util.JsonUtil;
 
 import java.time.LocalDateTime;
@@ -78,19 +78,49 @@ public class DefaultPieceRoleEventTaskMultiKeyTest {
 
   public static OrgTask buildOrgTask(LocalDateTime now) {
     OrgTask orgTask = new OrgTask();
+    String userId = "userId";
+    String roleId = "roleId";
+    String sourceId = "sourceId";
+    String rewardConfigBatchId = "rewardConfigBatchId";
+    String pieceEventId = "pieceEventId";
+    String pieceRoleEventId = "pieceRoleEventId";
+    String pieceEventName = "pieceEventName";
+    String pieceEventGroupId = "pieceEventGroupId";
+    String pieceRoleGroupId = "pieceRoleGroupId";
     String orgId = "orgId";
     String tenantId = "tenantId";
 
-    orgTask.setId("id");
-    orgTask.setCycleSequence(0);
-    orgTask.setCycleStartTime(now);
-    orgTask.setCycleEndTime(now);
-
-    orgTask.setEmpNum(1);
-
-    orgTask.setMoney(1);
-    orgTask.setOrgId(orgId);
-    orgTask.setTenantId(tenantId);
+//    orgTask.setId("id");
+//    orgTask.setCycleSequence(0);
+//    orgTask.setCycleStartTime(now);
+//    orgTask.setCycleEndTime(now);
+//
+//    orgTask.setCompleteCount(1);
+//    orgTask.setEmpNum(1);
+//
+//    orgTask.setMoney(1);
+//    orgTask.setExperience(1);
+//    orgTask.setIntegral(1);
+//    orgTask.setPrestige(1);
+//    orgTask.setRoleId(roleId);
+//    orgTask.setSysPieceSourceId(sourceId);
+//    orgTask.setCycleType(1);
+//
+//    orgTask.setWay(1);
+//    orgTask.setRewardConfigBatchId(rewardConfigBatchId);
+//    orgTask.setPieceEventId(pieceEventId);
+//    orgTask.setPieceRoleEventId(pieceRoleEventId);
+//    orgTask.setPieceEventName(pieceEventName);
+//
+//    orgTask.setPieceEventGroupId(pieceEventGroupId);
+//    orgTask.setPieceRoleGroupId(pieceRoleGroupId);
+//
+//    orgTask.setCreatedAt(now);
+//    orgTask.setUpdatedAt(now);
+//    orgTask.setCreatedBy(userId);
+//    orgTask.setUpdatedBy(userId);
+//    orgTask.setOrgId(orgId);
+//    orgTask.setTenantId(tenantId);
 
     return orgTask;
   }
@@ -98,17 +128,47 @@ public class DefaultPieceRoleEventTaskMultiKeyTest {
   public static UserTask buildUserTask(LocalDateTime now) {
     UserTask userTask = new UserTask();
     String userId = "userId";
+    String roleId = "roleId";
+    String sourceId = "sourceId";
+    String rewardConfigBatchId = "rewardConfigBatchId";
+    String pieceEventId = "pieceEventId";
+    String pieceRoleEventId = "pieceRoleEventId";
+    String pieceEventName = "pieceEventName";
+    String pieceEventGroupId = "pieceEventGroupId";
+    String pieceRoleGroupId = "pieceRoleGroupId";
     String orgId = "orgId";
     String tenantId = "tenantId";
 
     userTask.setId("id");
-    userTask.setUserId(userId);
     userTask.setCycleSequence(0);
     userTask.setCycleStartTime(now);
     userTask.setCycleEndTime(now);
 
-    userTask.setOrgId(orgId);
-    userTask.setTenantId(tenantId);
+//    userTask.setCompleteCount(1);
+//
+//    userTask.setMoney(1);
+//    userTask.setExperience(1);
+//    userTask.setIntegral(1);
+//    userTask.setPrestige(1);
+//    userTask.setRoleId(roleId);
+//    userTask.setSysPieceSourceId(sourceId);
+//    userTask.setCycleType(1);
+//
+//    userTask.setWay(1);
+//    userTask.setRewardConfigBatchId(rewardConfigBatchId);
+//    userTask.setPieceEventId(pieceEventId);
+//    userTask.setPieceRoleEventId(pieceRoleEventId);
+//    userTask.setPieceEventName(pieceEventName);
+//
+//    userTask.setPieceEventGroupId(pieceEventGroupId);
+//    userTask.setPieceRoleGroupId(pieceRoleGroupId);
+//
+//    userTask.setCreatedAt(now);
+//    userTask.setUpdatedAt(now);
+//    userTask.setCreatedBy(userId);
+//    userTask.setUpdatedBy(userId);
+//    userTask.setOrgId(orgId);
+//    userTask.setTenantId(tenantId);
 
     return userTask;
   }
