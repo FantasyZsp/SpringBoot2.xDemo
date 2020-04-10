@@ -19,6 +19,7 @@ public class TimeOutDemo {
   public static void main(String[] args) throws InterruptedException {
 //    testTimeoutAndInterrupt();
     print("***********main start***********");
+    testThreadThrowException();
 
     testExecutorThrowException();
     executorService.shutdown();
@@ -71,7 +72,7 @@ public class TimeOutDemo {
     thread.start();
     thread.join();
 
-    ThreadUtils.sleep(1);
+    ThreadUtils.sleepSeconds(1);
 
     print("main is still running...");
 

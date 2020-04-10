@@ -6,9 +6,17 @@ import java.util.concurrent.TimeUnit;
  * @author zhaosp
  */
 public class ThreadUtils {
-  public static void sleep(long timeout) {
+  public static void sleepSeconds(long timeout) {
     try {
       TimeUnit.SECONDS.sleep(timeout);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void join(long milliseconds) {
+    try {
+      TimeUnit.MILLISECONDS.sleep(milliseconds);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

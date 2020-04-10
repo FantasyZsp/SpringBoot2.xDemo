@@ -25,7 +25,7 @@ public class CompletableFutureDemoTest {
     }, executorService).whenCompleteAsync((o, t) -> log.info(o.toString()), executorService);
 
     log.info(Thread.currentThread().getName());
-    ThreadUtils.sleep(2);
+    ThreadUtils.sleepSeconds(2);
     List<Runnable> runnableList = executorService.shutdownNow();
     log.info("{}", runnableList.size());
 
