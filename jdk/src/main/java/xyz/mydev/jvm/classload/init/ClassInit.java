@@ -1,4 +1,4 @@
-package xyz.mydev.jvm.classload;
+package xyz.mydev.jvm.classload.init;
 
 /**
  * 类初始化

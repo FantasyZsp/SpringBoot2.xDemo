@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.util.StopWatch;
 import xyz.mydev.util.ThreadUtils;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +34,7 @@ public class CompletableFutureBasicMethodTest {
 
     supplyAsync.whenComplete((cat, e) -> {
       print("whenComplete wait...");
-      ThreadUtils.sleepSeconds(1);
+      ThreadUtils.sleepSeconds(10);
       print("whenComplete wake up...");
       print(cat);
     });
@@ -84,6 +85,34 @@ public class CompletableFutureBasicMethodTest {
       print("whenCompleteAsync wake up...");
 
       print(e.getMessage());
+      print(cat);
+    });
+
+    print("invoke...");
+    ///  print("supplyAsync get: {}", supplyAsync.get());
+    ThreadUtils.sleepSeconds(10);
+
+  }
+
+  @Test
+  public void exOccursWhenCompleteOrAsync2() throws ExecutionException, InterruptedException {
+
+    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(() -> {
+      Cat cat = Cat.defaultCat();
+      return cat;
+//      throw new RuntimeException(" ex when supplyAsync");
+    });
+
+    supplyAsync.whenCompleteAsync((cat, e) -> {
+      print("whenCompleteAsync wait...");
+      ThreadUtils.sleepSeconds(1);
+      print("whenCompleteAsync wake up...");
+
+      System.out.println(e);
+      if (e != null) {
+        print(e.getMessage());
+      }
+
       print(cat);
     });
 
@@ -244,6 +273,22 @@ public class CompletableFutureBasicMethodTest {
 
   static void print(String msg, Object... objects) {
     log.info(msg, objects);
+  }
+
+  @Test
+  public void stopWatch() {
+    StopWatch stopWatch = new StopWatch();
+    stopWatch.start("简单测试");
+    stopWatch.stop();
+
+
+    System.out.println("-====");
+    System.out.println(stopWatch.prettyPrint());
+    System.out.println(stopWatch.getTotalTimeMillis());
+    System.out.println(stopWatch.getLastTaskName());
+    System.out.println(stopWatch.getLastTaskInfo());
+    System.out.println(stopWatch.getTaskCount());
+
   }
 
 }

@@ -1,4 +1,4 @@
-package xyz.mydev.jvm.classload;
+package xyz.mydev.jvm.classload.init;
 
 /**
  * @author ZSP
