@@ -165,6 +165,9 @@ public class CompletionServiceDemo {
   private static void save(Provider provider) {
     log.info("start saving =={}== at {}", provider, LocalTime.now());
     sleep(2);
+    if ("s1".equals(provider.name)) {
+      throw new RuntimeException("s1 error");
+    }
     log.info("  end saving =={}== at {}", provider, LocalTime.now());
   }
 
@@ -172,7 +175,7 @@ public class CompletionServiceDemo {
     log.info("===开始询价s1===");
     sleep(10);
     log.info("***结束询价s1***");
-    return new Provider("s1", 999);
+    return new Provider("s1", 111);
   }
 
   private static Provider getPriceByS2() {
@@ -220,8 +223,8 @@ public class CompletionServiceDemo {
     @Override
     public String toString() {
       return "Provider{" +
-        "name='" + name + ", price=" + price +
-        '}';
+        "name=" + name + ", price=" + price +
+        "}";
     }
   }
 }

@@ -361,59 +361,57 @@ public class CompletableFutureBasicMethodTest {
 
   }
 
+  /**
+   * 测试
+   */
   @Test
   public void testWhenComplete() {
+
+    ExecutorService executorService = Executors.newFixedThreadPool(4);
     print("start");
 
     Vector<CompletableFuture<Cat>> futureList = new Vector<>();
-    Vector<Cat> numberExecuted = new Vector<>();
+    Vector<String> numberExecuted = new Vector<>();
 
     List<Integer> integerList = IntStream.range(0, 10).boxed().collect(Collectors.toList());
-    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(() -> {
-      print("mark supplyAsync");
-      return Cat.defaultCat().setName("mark");
-    });
-
-    supplyAsync.whenComplete((cat, e) -> {
-      print("whenComplete wait...");
+    CompletableFuture<Cat> tmp = CompletableFuture.supplyAsync(() -> {
+      print("mark tmp");
+      return Cat.defaultCat().setName("tmp");
+    }).whenComplete((cat, e) -> {
+      print("tmp wait...");
       ThreadUtils.sleepSeconds(5);
-      print("whenComplete wake up...");
+      print("tmp wake up...");
       print(cat);
     });
 
     print("invoke...");
     for (Integer i : integerList) {
 
-
-      CompletableFuture<Cat> supplyAsync2 = CompletableFuture.supplyAsync(() -> {
-        print("testWhenComplete wait...");
+      CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(() -> {
+        print("{} wait...", i);
         ThreadUtils.sleepSeconds(3);
-        Cat cat = Cat.defaultCat().setId(String.valueOf(i));
-        return cat;
+        return Cat.defaultCat().setId(String.valueOf(i));
 //      throw new RuntimeException(" ex when supplyAsync");
-      });
-
-      supplyAsync2.whenComplete((r, e) -> {
-        ThreadUtils.sleepSeconds(5);
-        print("supplyAsync whenComplete...");
-      });
-
-      futureList.add(supplyAsync2);
-    }
-
-    for (CompletableFuture<Cat> future : futureList) {
-      future.whenComplete((cat, e) -> {
-        print("futureList whenComplete...");
+      }, executorService).whenComplete((r, e) -> {
+        print("{} whenComplete...", i);
         if (e == null) {
-          numberExecuted.add(cat);
+          numberExecuted.add(r.getId());
         } else {
           log.info("error reason: {}", e.getMessage());
         }
+        ThreadUtils.sleepSeconds(1);
       });
+
+      futureList.add(supplyAsync);
+    }
+    print("阻塞等待所有结果完成");
+    for (CompletableFuture<Cat> future : futureList) {
+      Cat join = future.join();
+      print("完成！{}", join.getId());
     }
 
 
-    print(numberExecuted);
+    print("执行过的数字count:{},numList:{}", numberExecuted.size(), numberExecuted);
 
 
     ThreadUtils.sleepSeconds(10);
