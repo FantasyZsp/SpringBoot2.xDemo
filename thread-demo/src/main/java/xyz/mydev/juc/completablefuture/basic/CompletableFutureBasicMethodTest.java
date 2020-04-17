@@ -8,8 +8,14 @@ import org.junit.Test;
 import org.springframework.util.StopWatch;
 import xyz.mydev.util.ThreadUtils;
 
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author ZSP
@@ -18,24 +24,87 @@ import java.util.concurrent.ExecutionException;
 public class CompletableFutureBasicMethodTest {
 
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ExecutionException, InterruptedException {
+    print("start");
 
+    Vector<CompletableFuture<Cat>> futureList = new Vector<>();
+    Vector<Cat> numberExecuted = new Vector<>();
+
+    List<Integer> integerList = IntStream.range(0, 10).boxed().collect(Collectors.toList());
+    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(() -> {
+      print("mark supplyAsync");
+      return Cat.defaultCat().setName("mark");
+    });
+
+    supplyAsync.whenComplete((cat, e) -> {
+      print("whenComplete wait...");
+      ThreadUtils.sleepSeconds(5);
+      print("whenComplete wake up...");
+      print(cat);
+    });
+
+    print("invoke...");
+    for (Integer i : integerList) {
+
+
+      CompletableFuture<Cat> supplyAsync2 = CompletableFuture.supplyAsync(() -> {
+        print("testWhenComplete wait...");
+        ThreadUtils.sleepSeconds(3);
+        Cat cat = Cat.defaultCat().setId(String.valueOf(i));
+        return cat;
+//      throw new RuntimeException(" ex when supplyAsync");
+      });
+
+      supplyAsync2.whenComplete((r, e) -> {
+        ThreadUtils.sleepSeconds(5);
+        print("supplyAsync whenComplete...");
+      });
+
+      futureList.add(supplyAsync2);
+    }
+
+    for (CompletableFuture<Cat> future : futureList) {
+      future.whenComplete((cat, e) -> {
+        print("futureList whenComplete...");
+        if (e == null) {
+          numberExecuted.add(cat);
+        } else {
+          log.info("error reason: {}", e.getMessage());
+        }
+      });
+    }
+
+
+    print(numberExecuted);
+
+
+    ThreadUtils.sleepSeconds(10);
   }
 
 
   /**
-   * whenComplete的执行会等待supplyAsync完成，即阻塞等待
+   * whenComplete的执行会等待supplyAsync完成.不一定会阻塞调用线程。
    */
   @Test
   public void supplyWhenComplete() throws ExecutionException, InterruptedException {
-
-    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(Cat::defaultCat);
+    ExecutorService executorService = Executors.newFixedThreadPool(3);
+    ThreadUtils.sleepSeconds(2);
+    CompletableFuture<Cat> supplyAsync2 = CompletableFuture.supplyAsync(Cat::defaultCat, executorService);
+    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(Cat::defaultCat, executorService);
+    CompletableFuture<Cat> supplyAsync3 = CompletableFuture.supplyAsync(Cat::defaultCat, executorService);
 
 
     supplyAsync.whenComplete((cat, e) -> {
-      print("whenComplete wait...");
-      ThreadUtils.sleepSeconds(10);
-      print("whenComplete wake up...");
+      print("supplyAsync wait...");
+      ThreadUtils.sleepSeconds(1);
+      print("supplyAsync wake up...");
+      print(cat);
+    });
+
+    supplyAsync2.whenComplete((cat, e) -> {
+      print("supplyAsync2 wait...");
+      ThreadUtils.sleepSeconds(1);
+      print("supplyAsync2 wake up...");
       print(cat);
     });
 
@@ -43,9 +112,10 @@ public class CompletableFutureBasicMethodTest {
 
     print("supplyAsync get: {}", supplyAsync.get());
 
-    ThreadUtils.sleepSeconds(10);
+    ThreadUtils.sleepSeconds(5);
 
   }
+
 
   /**
    * WhenCompleteAsync是异步执行的，不会阻塞调用线程
@@ -288,6 +358,65 @@ public class CompletableFutureBasicMethodTest {
     System.out.println(stopWatch.getLastTaskName());
     System.out.println(stopWatch.getLastTaskInfo());
     System.out.println(stopWatch.getTaskCount());
+
+  }
+
+  @Test
+  public void testWhenComplete() {
+    print("start");
+
+    Vector<CompletableFuture<Cat>> futureList = new Vector<>();
+    Vector<Cat> numberExecuted = new Vector<>();
+
+    List<Integer> integerList = IntStream.range(0, 10).boxed().collect(Collectors.toList());
+    CompletableFuture<Cat> supplyAsync = CompletableFuture.supplyAsync(() -> {
+      print("mark supplyAsync");
+      return Cat.defaultCat().setName("mark");
+    });
+
+    supplyAsync.whenComplete((cat, e) -> {
+      print("whenComplete wait...");
+      ThreadUtils.sleepSeconds(5);
+      print("whenComplete wake up...");
+      print(cat);
+    });
+
+    print("invoke...");
+    for (Integer i : integerList) {
+
+
+      CompletableFuture<Cat> supplyAsync2 = CompletableFuture.supplyAsync(() -> {
+        print("testWhenComplete wait...");
+        ThreadUtils.sleepSeconds(3);
+        Cat cat = Cat.defaultCat().setId(String.valueOf(i));
+        return cat;
+//      throw new RuntimeException(" ex when supplyAsync");
+      });
+
+      supplyAsync2.whenComplete((r, e) -> {
+        ThreadUtils.sleepSeconds(5);
+        print("supplyAsync whenComplete...");
+      });
+
+      futureList.add(supplyAsync2);
+    }
+
+    for (CompletableFuture<Cat> future : futureList) {
+      future.whenComplete((cat, e) -> {
+        print("futureList whenComplete...");
+        if (e == null) {
+          numberExecuted.add(cat);
+        } else {
+          log.info("error reason: {}", e.getMessage());
+        }
+      });
+    }
+
+
+    print(numberExecuted);
+
+
+    ThreadUtils.sleepSeconds(10);
 
   }
 
