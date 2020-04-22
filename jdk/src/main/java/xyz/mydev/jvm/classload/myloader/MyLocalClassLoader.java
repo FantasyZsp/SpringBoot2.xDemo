@@ -9,6 +9,10 @@ import java.io.InputStream;
 
 /**
  * ClassToBeLoaded资源可以在src/lib压缩文件中获取
+ * <p>
+ * 本类的path和className是分离的，导致加载指定的className时，
+ * 由于双亲委托机制，会先从父类尝试加载className，此时与path的配置无关。
+ * 只有加载不到className时，才会走此类结合path进行加载。
  *
  * @author ZSP
  */
