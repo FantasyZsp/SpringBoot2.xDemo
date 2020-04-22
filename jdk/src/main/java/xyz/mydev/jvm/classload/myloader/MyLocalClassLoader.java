@@ -15,14 +15,18 @@ public class MyLocalClassLoader extends ClassLoader {
 
   private final String classLoaderName;
   private final String fileExtension = ".class";
+  private String path = "";
 
+  public void setPath(String path) {
+    this.path = path;
+  }
 
   /**
    * ClassLoader无参构造函数会将 systemClassLoader作为父类加载器
    * {@link ClassLoader#ClassLoader()}
    */
   public MyLocalClassLoader(String classLoaderName) {
-    super();
+    super(classLoaderName, ClassLoader.getSystemClassLoader());
     this.classLoaderName = classLoaderName;
   }
 
@@ -48,7 +52,7 @@ public class MyLocalClassLoader extends ClassLoader {
 
     byte[] results = null;
 
-    try (InputStream in = new FileInputStream(new File(name + this.fileExtension));
+    try (InputStream in = new FileInputStream(new File(path + name + this.fileExtension));
          ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
     ) {
 
@@ -64,11 +68,25 @@ public class MyLocalClassLoader extends ClassLoader {
     return results;
   }
 
-
   public static void main(String[] args) throws ClassNotFoundException {
     MyLocalClassLoader localClassLoader = new MyLocalClassLoader("myClassLoader");
-    Class<?> aClass = localClassLoader.loadClass("xyz.mydev.jvm.classload.loader.LoaderTest");
+    System.out.println(" 加载一个classPath外部的类");
+    localClassLoader.setPath("C:\\Users\\zhaosp\\Desktop\\");
+    Class<?> bClass = localClassLoader.loadClass("xyz.mydev.jvm.classload.init.ClassToBeLoaded");
+    System.out.println(bClass);
+    System.out.println(bClass.hashCode());
+    System.out.println(bClass.getClassLoader());
+    System.out.println(bClass.getClassLoader().getName());
+    test();
+  }
+
+  public static void test() throws ClassNotFoundException {
+    // 仍然由系统类加载器加载.如果将父类加载器置为null，则是由此类加载器加载。
+    MyLocalClassLoader localClassLoader = new MyLocalClassLoader("myClassLoader");
+    localClassLoader.setPath("D:\\project\\SpringBoot2Demo\\jdk\\target\\classes\\");
+    Class<?> aClass = localClassLoader.loadClass("xyz.mydev.jvm.classload.init.Const");
     System.out.println(aClass);
+    System.out.println(aClass.hashCode());
     System.out.println(aClass.getClassLoader().getName());
   }
 
