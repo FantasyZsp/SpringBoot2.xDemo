@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
+ * ClassToBeLoaded资源可以在src/lib压缩文件中获取
+ *
  * @author ZSP
  */
 @Slf4j
@@ -34,7 +36,7 @@ public class MyLocalClassLoader extends ClassLoader {
    * 手动指定父类加载器
    */
   public MyLocalClassLoader(ClassLoader parent, String classLoaderName) {
-    super(parent);
+    super(classLoaderName, parent);
     this.classLoaderName = classLoaderName;
   }
 
@@ -67,27 +69,4 @@ public class MyLocalClassLoader extends ClassLoader {
     }
     return results;
   }
-
-  public static void main(String[] args) throws ClassNotFoundException {
-    MyLocalClassLoader localClassLoader = new MyLocalClassLoader("myClassLoader");
-    System.out.println(" 加载一个classPath外部的类");
-    localClassLoader.setPath("C:\\Users\\zhaosp\\Desktop\\");
-    Class<?> bClass = localClassLoader.loadClass("xyz.mydev.jvm.classload.init.ClassToBeLoaded");
-    System.out.println(bClass);
-    System.out.println(bClass.hashCode());
-    System.out.println(bClass.getClassLoader());
-    System.out.println(bClass.getClassLoader().getName());
-    test();
-  }
-
-  public static void test() throws ClassNotFoundException {
-    // 仍然由系统类加载器加载.如果将父类加载器置为null，则是由此类加载器加载。
-    MyLocalClassLoader localClassLoader = new MyLocalClassLoader("myClassLoader");
-    localClassLoader.setPath("D:\\project\\SpringBoot2Demo\\jdk\\target\\classes\\");
-    Class<?> aClass = localClassLoader.loadClass("xyz.mydev.jvm.classload.init.Const");
-    System.out.println(aClass);
-    System.out.println(aClass.hashCode());
-    System.out.println(aClass.getClassLoader().getName());
-  }
-
 }
