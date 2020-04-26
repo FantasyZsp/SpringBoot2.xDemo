@@ -14,7 +14,8 @@ import java.lang.reflect.Proxy;
 @Slf4j
 public class Client {
   public static void main(String[] args) throws Exception {
-    System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+//    System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+//    System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
     testByInnerClass();
   }
 
