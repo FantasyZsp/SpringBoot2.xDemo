@@ -31,7 +31,6 @@ public class OverLoadTest {
     overLoadTest.test(grandpa);
     overLoadTest.test(grandpa2);
     overLoadTest.test(grandpa3);
-
-
+    overLoadTest.test(new Father());
   }
 }
