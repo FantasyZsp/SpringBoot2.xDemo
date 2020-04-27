@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author  ZSP
- * @date  2018/10/15 16:25
+ * @author ZSP
+ * @date 2018/10/15 16:25
  * @description
  */
 @FunctionalInterface
@@ -48,7 +48,7 @@ public class LambdaTest {
     List<String> strings = Arrays.asList("this", "is", "an", "apple");
     strings.forEach(MyInterface1::print);
 
-    ArrayList<String> arrayList = new ArrayList(strings);
+    ArrayList<String> arrayList = new ArrayList<>(strings);
     arrayList.add("FFF");
 
 
@@ -61,7 +61,7 @@ public class LambdaTest {
     System.out.printf("调用方法后并没有更改调用者[testSSS=%s] 的值，而是返回了新的字符串实例[testSSS=%s] \n", testSSS, testSSS.toUpperCase());
 
     System.out.println("\n=========");
-    strings.stream().map(s -> s.toUpperCase()).forEach(s -> System.out.print(s + " "));
+    strings.stream().map(String::toUpperCase).forEach(s -> System.out.print(s + " "));
     strings.stream().map(String::toUpperCase).forEach(s -> System.out.print(s + " "));
 
     System.out.println("\n=========");

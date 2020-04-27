@@ -23,3 +23,7 @@ dist/
 nbdist/
 .nb-gradle/
 .gradle/
+*.hprof
+*.nphd
+*.map
+*.ref
