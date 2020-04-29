@@ -4,6 +4,8 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import xyz.mydev.utils.ThreadUtils;
 
+import java.time.LocalDateTime;
+
 /**
  * 方法区产生OOM
  * 设定虚拟机参数，-XX:MaxMetaspaceSize=10m 控制元空间大小
@@ -13,6 +15,7 @@ import xyz.mydev.utils.ThreadUtils;
 public class MethodAreaOOMTest {
 
   public static void main(String[] args) {
+    System.out.println(LocalDateTime.now());
     int count = 0;
     ThreadUtils.sleepSeconds(5);
     try {
