@@ -6,10 +6,16 @@ package xyz.mydev.jvm.classload.init;
  * @author ZSP
  */
 public class ClassInit {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IllegalAccessException, InstantiationException {
     System.out.println(Child.CHILD_FINAL_ID);
     System.out.println("Parent and Child has no loaded");
     System.out.println(Child.FINAL_NUMBER);
+
+
+    // 类泛型
+    Class<Child> childClass = Child.class;
+
+    Parent parent = (Parent) childClass.newInstance();
   }
 }
 
@@ -35,3 +41,4 @@ class Child extends Parent {
     System.out.println("Child static invoke");
   }
 }
+
