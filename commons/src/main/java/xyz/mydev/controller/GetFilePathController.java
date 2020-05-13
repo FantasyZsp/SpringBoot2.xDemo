@@ -14,8 +14,9 @@ public class GetFilePathController {
     System.out.println(getClass().getClassLoader());
 
 
-    URL url = getClass().getClassLoader().getResource("src/main/resources/init.json");
+    URL url = getClass().getClassLoader().getResource("init.json");
     System.out.println("url  " + url);
+    assert url != null;
     path = url.getPath();
     System.out.println("url.getPath(): " + path);
     if (path.contains(":")) {
