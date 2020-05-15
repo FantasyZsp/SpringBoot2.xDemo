@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: local_vm_rabbitmq
+    port: 5672
+    username: admin
+    password: admin123456
+    listener:
+      direct:
+        acknowledge-mode: MANUAL
+      simple:
+        acknowledge-mode: MANUAL

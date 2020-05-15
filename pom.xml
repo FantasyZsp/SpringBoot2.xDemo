@@ -16,6 +16,7 @@
         <module>bean-lifecycle</module>
         <module>jdk</module>
         <module>netty</module>
+        <module>rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
 
