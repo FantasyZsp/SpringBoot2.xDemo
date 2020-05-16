@@ -6,6 +6,14 @@ import java.util.concurrent.TimeUnit;
  * @author zhaosp
  */
 public class ThreadUtils {
+  public static void join(long mills) {
+    try {
+      Thread.currentThread().join(mills);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void sleepSeconds(long timeout) {
     try {
       TimeUnit.SECONDS.sleep(timeout);
@@ -14,11 +22,39 @@ public class ThreadUtils {
     }
   }
 
-  public static void join(long milliseconds) {
+
+  public static void startAndJoin(Thread thread, long mills) {
+    if (!thread.isAlive()) {
+      thread.start();
+    }
     try {
-      TimeUnit.MILLISECONDS.sleep(milliseconds);
+      thread.join(mills);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void startAndJoin(Thread thread) {
+    if (!thread.isAlive()) {
+      thread.start();
+    }
+    try {
+      thread.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void start(Thread thread) {
+    thread.start();
+  }
+
+  public static void join(Thread thread) {
+    try {
+      thread.join();
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
   }
 }
+
