@@ -17,6 +17,7 @@
         <module>jdk</module>
         <module>netty</module>
         <module>rabbitmq</module>
+        <module>rabbitmq-practice</module>
     </modules>
     <packaging>pom</packaging>
 

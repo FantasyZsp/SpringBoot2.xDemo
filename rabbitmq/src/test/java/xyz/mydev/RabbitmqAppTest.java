@@ -6,6 +6,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import xyz.mydev.util.Counter;
 import xyz.mydev.util.ThreadUtils;
@@ -16,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author ZSP
  */
+@Slf4j
 public class RabbitmqAppTest {
 
   @Test
@@ -30,11 +32,33 @@ public class RabbitmqAppTest {
     Connection connection = connectionFactory.newConnection();
     Channel channel = connection.createChannel();
 
+    new Thread(() -> {
+
+      Connection connectionInThread = null;
+      Channel channel2 = null;
+      try {
+        connectionInThread = connectionFactory.newConnection();
+        channel2 = connectionInThread.createChannel();
+
+        for (; ; ) {
+          String msg = "Hello RabbitMQ-" + Counter.getAndIncrement();
+          channel2.basicPublish("", "test001", null, msg.getBytes(StandardCharsets.UTF_8));
+//          ThreadUtils.join(ThreadLocalRandom.current().nextInt(1, 3));
+        }
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+    }).start();
+
     for (; ; ) {
       String msg = "Hello RabbitMQ-" + Counter.getAndIncrement();
       channel.basicPublish("", "test001", null, msg.getBytes(StandardCharsets.UTF_8));
-      ThreadUtils.sleepSeconds(2);
+//      ThreadUtils.join(ThreadLocalRandom.current().nextInt(1, 3));
     }
+
+
 //    Thread.currentThread().join();
 //    channel.close();
 //    connection.close();
@@ -64,9 +88,7 @@ public class RabbitmqAppTest {
         String contentType = properties.getContentType();
         long deliveryTag = envelope.getDeliveryTag();
         // (process the message components here ...)
-
-
-        System.out.println("收到内容: " + new String(body, StandardCharsets.UTF_8));
+        log.info("收到内容:{} ", new String(body, StandardCharsets.UTF_8));
         channel.basicAck(deliveryTag, false);
       }
     };
