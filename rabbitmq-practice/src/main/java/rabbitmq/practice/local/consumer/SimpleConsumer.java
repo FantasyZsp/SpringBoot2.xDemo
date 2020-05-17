@@ -17,19 +17,24 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class SimpleConsumer {
 
-  private static final String QUEUE_NAME = "test001";
+  private static final String DEFAULT_QUEUE_NAME = "test001";
+  private String queueName;
 
-  public static void main(String[] args) throws Exception {
-    start();
+
+  public SimpleConsumer() {
+    this(DEFAULT_QUEUE_NAME)
   }
 
+  public SimpleConsumer(String queueName) {
+    this.queueName = queueName;
+  }
 
-  public static void start() throws Exception {
+  public void start() throws Exception {
 
     Channel channel = MyConnectionFactory.getConsumerConnection().createChannel();
 
     // 声明队列
-    channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+    channel.queueDeclare(queueName, true, false, false, null);
 
     // 创建一个消费者
     DefaultConsumer consumer = new DefaultConsumer(channel) {
@@ -44,9 +49,14 @@ public class SimpleConsumer {
       }
     };
 
-    channel.basicConsume(QUEUE_NAME, false, consumer);
+    channel.basicConsume(queueName, false, consumer);
     while (true) {
       ThreadUtils.join(50);
     }
+  }
+
+
+  public static void main(String[] args) throws Exception {
+    new SimpleConsumer().start();
   }
 }
