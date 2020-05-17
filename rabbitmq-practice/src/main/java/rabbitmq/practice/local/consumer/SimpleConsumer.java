@@ -22,7 +22,7 @@ public class SimpleConsumer {
 
 
   public SimpleConsumer() {
-    this(DEFAULT_QUEUE_NAME)
+    this(DEFAULT_QUEUE_NAME);
   }
 
   public SimpleConsumer(String queueName) {
