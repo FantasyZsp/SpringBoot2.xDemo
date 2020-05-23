@@ -9,9 +9,8 @@ import java.util.concurrent.TimeUnit;
  * @author ZSP
  */
 @SuppressWarnings("all")
-public interface IDelayMessage<T> extends Delayed {
+public interface IDelayMessageCase extends Delayed {
 
-  T getPayload();
 
   LocalDateTime getStartTime();
 
