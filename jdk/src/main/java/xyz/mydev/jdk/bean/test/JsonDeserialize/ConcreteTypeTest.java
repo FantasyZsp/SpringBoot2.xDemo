@@ -5,7 +5,9 @@ import org.junit.Test;
 import xyz.mydev.jdk.bean.IDelayMessage;
 import xyz.mydev.jdk.bean.SimpleDelayMessage;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +32,12 @@ public class ConcreteTypeTest extends BaseTest {
     log.info("paramType: {}", genericInterfaceParamType);
     log.info("paramType(可作为反射用): {}", genericInterfaceParamType.getTypeName());
 
-
     new Temp().processString(objectMapper.writeValueAsString(iDelayMessage));
+
+
+    List<IDelayMessage<T>> iDelayMessages = new ArrayList<>();
+    iDelayMessages.add(iDelayMessage);
+    new Temp().processStringBatch(objectMapper.writeValueAsString(iDelayMessages));
 
   }
 
@@ -66,8 +72,14 @@ class Temp extends BaseTest {
   public <T> void processStringBatch(String message) throws Exception {
     log.info("处理信息: {}", message);
 
-    SimpleDelayMessage delayMessage = objectMapper.readValue(message, SimpleDelayMessage.class);
+
+    Method processBatch = Temp.class.getDeclaredMethod("processBatch", List.class);
+    Type genericParameterType = processBatch.getGenericParameterTypes()[0];
+    System.out.println(genericParameterType);
+
+    Object delayMessage = objectMapper.readerFor(objectMapper.getTypeFactory().constructType(genericParameterType)).readValue(message);
     log.info("处理信息: {}", delayMessage);
+
   }
 }
 
