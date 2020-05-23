@@ -1,4 +1,4 @@
-package xyz.mydev.jdk.map.beans;
+package xyz.mydev.jdk.bean;
 
 import lombok.Data;
 
