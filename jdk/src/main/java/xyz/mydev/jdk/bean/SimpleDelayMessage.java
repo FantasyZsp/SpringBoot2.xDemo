@@ -2,7 +2,6 @@ package xyz.mydev.jdk.bean;
 
 import lombok.Data;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 
 /**
@@ -17,9 +16,12 @@ public class SimpleDelayMessage implements IDelayMessage<SimpleEntity> {
     this.payload = payload;
   }
 
+  @Override
+  public LocalDateTime getTime() {
+    return startTime;
+  }
+
   public static void main(String[] args) {
-
-
 
 
   }

@@ -13,16 +13,24 @@ public interface IDelayMessage<T> extends Delayed {
 
   T getPayload();
 
-  LocalDateTime getStartTime();
+  LocalDateTime getTime();
 
   @Override
   default long getDelay(TimeUnit unit) {
-    long delay = unit.convert(Duration.between(LocalDateTime.now(), getStartTime()));
+    long delay = unit.convert(Duration.between(LocalDateTime.now(), getTime()));
     return delay > 0 ? delay : 0;
   }
 
   @Override
   default int compareTo(Delayed o) {
     return (int) (getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
+  }
+
+  default String getPayloadClassName() {
+    return getPayload().getClass().getName();
+  }
+
+  default String getClassName() {
+    return getClass().getName();
   }
 }
