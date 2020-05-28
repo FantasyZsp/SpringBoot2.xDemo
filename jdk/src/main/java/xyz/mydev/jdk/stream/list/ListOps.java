@@ -1,10 +1,14 @@
 package xyz.mydev.jdk.stream.list;
 
 import com.google.common.collect.Lists;
+import xyz.mydev.jdk.stream.bean.VesselContainer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author ZSP
@@ -12,6 +16,12 @@ import java.util.List;
 public class ListOps {
 
   public static void main(String[] args) {
+    List<VesselContainer> list = new ArrayList<>();
+    Map<Integer, VesselContainer> collect = list.stream().collect(Collectors.toMap(VesselContainer::getId, Function.identity()));
+    System.out.println(collect);
+  }
+
+  public static void test() {
     List<String> list = Collections.emptyList();
 
     list.sort(null);
