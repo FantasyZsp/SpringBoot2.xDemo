@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,8 @@ public class ListOps {
     List<VesselContainer> list = new ArrayList<>();
     Map<Integer, VesselContainer> collect = list.stream().collect(Collectors.toMap(VesselContainer::getId, Function.identity()));
     System.out.println(collect);
+    AtomicLong atomicLong = new AtomicLong();
+    long andIncrement = atomicLong.getAndIncrement();
   }
 
   public static void test() {
