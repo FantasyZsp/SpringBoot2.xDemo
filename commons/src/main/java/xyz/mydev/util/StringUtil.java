@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author  zhao
- * @date  2018/09/15 10:36
+ * @author zhao
+ * @date 2018/09/15 10:36
  * @description
  */
 public class StringUtil {

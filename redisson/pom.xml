@@ -11,11 +11,13 @@
 
   <artifactId>redisson</artifactId>
 
-  <properties>
-    <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
-  </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>xyz.mydev</groupId>
+      <artifactId>thread-demo</artifactId>
+      <version>0.0.2</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
@@ -23,13 +25,6 @@
     </dependency>
 
 
-    <!-- Lombok框架 -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.8</version>
-      <!--<scope>provided</scope>-->
-    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -49,23 +44,11 @@
     </dependency>
 
     <dependency>
-      <groupId>com.meitu</groupId>
-      <artifactId>java-lmstfy-client</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-json</artifactId>
       <version>2.1.6.RELEASE</version>
     </dependency>
 
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
-    </dependency>
 
     <!-- test -->
     <dependency>

@@ -7,8 +7,8 @@ import xyz.mydev.beans.dto.PersonDTO;
 import java.time.Instant;
 
 /**
- * @author  zhao
- * @date  2018/08/11 09:41
+ * @author zhao
+ * @date 2018/08/11 09:41
  * @description
  */
 public class GsonDemo {

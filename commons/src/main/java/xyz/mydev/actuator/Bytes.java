@@ -1,9 +1,9 @@
 package xyz.mydev.actuator;
 
 /**
- * @author  zhao
- * @date  2018/09/13 10:57
- * @description  * byte操作类.
+ * @author zhao
+ * @date 2018/09/13 10:57
+ * @description * byte操作类.
  */
 public class Bytes {
   /**

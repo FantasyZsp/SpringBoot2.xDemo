@@ -3,8 +3,8 @@ package xyz.mydev.jackson.dto;
 import java.io.Serializable;
 
 /**
- * @author  zhao
- * @date  2018/07/25:10/58
+ * @author zhao
+ * @date 2018/07/25:10/58
  * @description
  */
 public class PictureDTO implements Serializable {

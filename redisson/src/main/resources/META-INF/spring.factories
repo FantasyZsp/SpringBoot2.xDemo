@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=xyz.mydev.redisson.config.RedissonConfig,\
+  xyz.mydev.redisson.config.JacksonConfig

@@ -1,8 +1,8 @@
 package xyz.mydev.jdk.getclass;
 
 /**
- * @author  zhao
- * @date  2018/08/10 18:25
+ * @author zhao
+ * @date 2018/08/10 18:25
  * @description
  */
 public class GetClassAndclass {

@@ -8,8 +8,8 @@ import xyz.mydev.jackson.vo.UserWithPlansVO;
 import xyz.mydev.jackson.vo.UserWithPlansVO2;
 
 /**
- * @author  zhao
- * @date  2018/09/12 11:15
+ * @author zhao
+ * @date 2018/09/12 11:15
  * @description
  */
 @Mapper(componentModel = "spring", uses = {ManyPlanMapper.class})

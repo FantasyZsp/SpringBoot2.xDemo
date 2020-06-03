@@ -4,11 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author  zhao
- * @date  2018/07/31 20:11
- * @description  参考https://segmentfault.com/a/1190000008315137
- * @description  参考https://www.cnblogs.com/warking/p/5710303.html
- * @description  参考https://blog.csdn.net/evankaka/article/details/50637994
+ * @author zhao
+ * @date 2018/07/31 20:11
+ * @description 参考https://segmentfault.com/a/1190000008315137
+ * @description 参考https://www.cnblogs.com/warking/p/5710303.html
+ * @description 参考https://blog.csdn.net/evankaka/article/details/50637994
  */
 public class LogBackDemo {
   //    日志级别

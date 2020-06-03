@@ -1,9 +1,7 @@
 package xyz.mydev.jdk.bean;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.junit.Test;
-import xyz.mydev.jdk.util.JsonUtil;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;

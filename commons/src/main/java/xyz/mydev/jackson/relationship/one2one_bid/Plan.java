@@ -20,9 +20,9 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * @author  zhao
- * @date  2018/09/08 18:42
- * @description  计划表：一个用户拥有一个计划，也可以没有计划。但一个计划必须有一个用户。
+ * @author zhao
+ * @date 2018/09/08 18:42
+ * @description 计划表：一个用户拥有一个计划，也可以没有计划。但一个计划必须有一个用户。
  */
 
 @Entity

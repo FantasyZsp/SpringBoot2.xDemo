@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 
 /**
- * @author  zhao
- * @date  2018/09/12 11:26
+ * @author zhao
+ * @date 2018/09/12 11:26
  * @description
  */
 public class MPlanVO {

@@ -18,7 +18,7 @@ public interface PersonMapper {
 
   /**
    * @description Entity和DTO互转时，不必全都标注。使用@InheritInverseConfiguration注解，name指出另一个方法名。
-   * @author  ZSP
+   * @author ZSP
    * @date 2018/7/25
    * @param: [person]
    * @return: PersonDTO

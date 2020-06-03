@@ -21,9 +21,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author  zhao
- * @date  2018/09/07 15:00
- * @description  测试序列化
+ * @author zhao
+ * @date 2018/09/07 15:00
+ * @description 测试序列化
  */
 @RestController
 @RequestMapping("/mplan")

@@ -1,8 +1,8 @@
 package xyz.mydev.jdk.lanmbda;
 
 /**
- * @author  ZSP
- * @date  2018/10/15 20:48
+ * @author ZSP
+ * @date 2018/10/15 20:48
  * @description
  */
 public class Test2 {

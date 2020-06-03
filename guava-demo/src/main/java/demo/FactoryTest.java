@@ -17,8 +17,6 @@ public class FactoryTest {
 //    System.out.println(produce3);
 
 
-
-
     GeliFactory meidiFactory = (GeliFactory) getFactory(1);
     Production produce = meidiFactory.produce();
     System.out.println(produce);

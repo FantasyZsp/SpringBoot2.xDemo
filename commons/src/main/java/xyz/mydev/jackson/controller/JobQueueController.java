@@ -17,9 +17,9 @@ import xyz.mydev.jackson.repository.PlanRepository;
 import java.io.IOException;
 
 /**
- * @author  zhao
- * @date  2018/09/07 15:00
- * @description  测试序列化
+ * @author zhao
+ * @date 2018/09/07 15:00
+ * @description 测试序列化
  */
 @RestController
 @RequestMapping("/job-queue")

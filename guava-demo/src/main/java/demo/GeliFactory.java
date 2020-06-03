@@ -1,11 +1,9 @@
 package demo;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 @Data
 public class GeliFactory implements Factory {
-
 
 
   private String name;

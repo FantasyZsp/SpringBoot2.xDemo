@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author  ZSP
- * @date  2018/10/20 19:37
- * @description  判断两组时间段跨度
+ * @author ZSP
+ * @date 2018/10/20 19:37
+ * @description 判断两组时间段跨度
  * Status        变量                         枚举            区域图示
  * -2  左全跨     isAllBeforeMinDate          BEFORE_MIN      ()       -> MIN
  * -1  左跨       isCrossMinDate              CROSS_MIN       ([MIN])  -> MAX

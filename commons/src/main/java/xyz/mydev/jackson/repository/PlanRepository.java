@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import xyz.mydev.jackson.relationship.one2one_bid.Plan;
 
 /**
- * @author  zhao
- * @date  2018/09/08 15:20
+ * @author zhao
+ * @date 2018/09/08 15:20
  * @description
  */
 

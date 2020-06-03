@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import xyz.mydev.jackson.relationship.many2one_un.ManyPlan;
 
 /**
- * @author  zhao
- * @date  2018/09/08 15:20
+ * @author zhao
+ * @date 2018/09/08 15:20
  * @description
  */
 

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author  zhao
- * @date  2018/08/11 15:16
+ * @author zhao
+ * @date 2018/08/11 15:16
  * @description
  */
 public class HashMapDTO {

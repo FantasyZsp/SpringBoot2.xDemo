@@ -1,7 +1,5 @@
 package xyz.mydev.util;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 /**
  * @author ZSP
  */
@@ -20,8 +18,6 @@ public interface ICounter {
   long addAndGet(long delta);
 
   void set(long value);
-
-
 
 
 }

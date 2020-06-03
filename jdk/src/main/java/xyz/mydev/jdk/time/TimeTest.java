@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * @author  zhao
- * @date  2018/07/25:20/05
+ * @author zhao
+ * @date 2018/07/25:20/05
  * @description
  */
 public class TimeTest {

@@ -25,7 +25,6 @@ public class MapToString {
     System.out.println(collect.toString());
 
 
-
   }
 
 }

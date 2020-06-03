@@ -18,6 +18,6 @@ public class AppTest {
 
   @Test
   public void thread() {
-      new Thread();
+    new Thread();
   }
 }

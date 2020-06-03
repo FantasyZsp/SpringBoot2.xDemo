@@ -3,8 +3,8 @@ package xyz.mydev.jackson.relationship.one2one_bid;
 import javax.persistence.Embeddable;
 
 /**
- * @author  zhao
- * @date  2018/07/24:09/27
+ * @author zhao
+ * @date 2018/07/24:09/27
  * @description
  */
 @Embeddable

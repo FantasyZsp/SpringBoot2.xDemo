@@ -20,6 +20,4 @@ public interface ICounter {
   void set(long value);
 
 
-
-
 }

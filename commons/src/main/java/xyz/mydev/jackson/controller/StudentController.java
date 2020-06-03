@@ -8,8 +8,8 @@ import xyz.mydev.jackson.relationship.m2m.Student;
 import xyz.mydev.jackson.repository.StudentRepository;
 
 /**
- * @author  zhao
- * @date  2018/09/12 15:16
+ * @author zhao
+ * @date 2018/09/12 15:16
  * @description
  */
 @RestController

@@ -1,8 +1,8 @@
 package xyz.mydev.actuator;
 
 /**
- * @author  zhao
- * @date  2018/09/13 10:39
+ * @author zhao
+ * @date 2018/09/13 10:39
  * @description
  */
 public class MonitorInfoBean {

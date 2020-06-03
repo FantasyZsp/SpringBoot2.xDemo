@@ -8,5 +8,6 @@ public class ThreadApi {
     Thread thread = new Thread();
     System.out.println(thread.isAlive());
     thread.start();
-    System.out.println(thread.isAlive());  }
+    System.out.println(thread.isAlive());
+  }
 }

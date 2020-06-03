@@ -3,7 +3,6 @@ package xyz.mydev.jdk.time.util;
 import java.util.Objects;
 
 /**
- *
  * @author ZSP
  */
 public enum CycleTypeEnum {

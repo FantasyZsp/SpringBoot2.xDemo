@@ -3,8 +3,8 @@ package xyz.mydev.jackson.dto;
 import java.io.Serializable;
 
 /**
- * @author  zhao
- * @date  2018/07/26:10/24
+ * @author zhao
+ * @date 2018/07/26:10/24
  * @description
  */
 public class DamageDTO implements Serializable {

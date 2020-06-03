@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 /**
- * @author  zhao
- * @date  2018/07/25:11/46
+ * @author zhao
+ * @date 2018/07/25:11/46
  * @description
  */
 public class ProcessDTO implements Serializable {

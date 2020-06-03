@@ -1,7 +1,5 @@
 package xyz.mydev.jvm.memory;
 
-import xyz.mydev.utils.ThreadUtils;
-
 /**
  * 栈溢出测试
  * 设定虚拟机参数-Xss160k
