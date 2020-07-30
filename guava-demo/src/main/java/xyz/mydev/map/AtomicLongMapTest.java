@@ -10,10 +10,16 @@ public class AtomicLongMapTest {
     AtomicLongMap<String> map = AtomicLongMap.create();
 
     long l = map.get("1");
+    long l2 = map.get("1");
     System.out.println(l);
+    System.out.println(l2);
 
 
     System.out.println(map.getAndIncrement("2"));
+    System.out.println(map.getAndIncrement("2"));
+    System.out.println(map.getAndIncrement("2"));
+    System.out.println(map.incrementAndGet("3"));
+    System.out.println(map.incrementAndGet("3"));
     System.out.println(map.incrementAndGet("3"));
 
   }

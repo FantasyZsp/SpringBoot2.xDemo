@@ -1,6 +1,7 @@
 package xyz.mydev.jdk.stream;
 
 import com.google.common.collect.Lists;
+import org.junit.Test;
 import xyz.mydev.jdk.bean.IdTimeEntity;
 import xyz.mydev.jdk.bean.SimpleEntity;
 import xyz.mydev.util.JsonUtil;
@@ -8,6 +9,7 @@ import xyz.mydev.util.JsonUtil;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ import static java.util.stream.Collectors.toList;
  *
  * @author ZSP
  */
+@SuppressWarnings("all")
 public class GroupingByDemo2 {
   public static void main(String[] args) {
 
@@ -67,6 +70,27 @@ public class GroupingByDemo2 {
     targetTime.sort(Comparator.reverseOrder());
 
     System.out.println(JsonUtil.obj2StringPretty(treeMap));
+
+
+    Object[] objects = records.stream().map(IdTimeEntity::getStartTime).toArray();
+  }
+
+
+  @Test
+  public void test3() {
+    LocalDateTime now = LocalDateTime.now();
+    IdTimeEntity simpleEntity = new IdTimeEntity("1", now);
+    IdTimeEntity simpleEntity2 = new IdTimeEntity("2", now.plusDays(1L));
+    IdTimeEntity simpleEntity3 = new IdTimeEntity("3", now.plusDays(2L));
+    IdTimeEntity simpleEntity4 = new IdTimeEntity("4", now.plusDays(3L));
+
+
+    List<IdTimeEntity> records = Lists.newArrayList(simpleEntity4, simpleEntity3, simpleEntity2, simpleEntity);
+    LinkedHashMap<String, List<LocalDateTime>> linked = records.stream().collect(Collectors.groupingBy(IdTimeEntity::getId, LinkedHashMap::new, mapping(IdTimeEntity::getStartTime, toList())));
+
+    List<LocalDateTime> targetTime = linked.get("1");
+
+    System.out.println(JsonUtil.obj2StringPretty(linked));
   }
 
 

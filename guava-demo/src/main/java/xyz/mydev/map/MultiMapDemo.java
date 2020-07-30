@@ -44,6 +44,16 @@ public class MultiMapDemo {
 
 
   public static void main(String[] args) {
+
+    Multimap<String, NameBean> multiMap = HashMultimap.create();
+    Collection<NameBean> nameBeans = multiMap.get("1");
+    System.out.println(nameBeans);
+
+
+
+  }
+
+  public static void test() {
     Multimap<String, NameBean> init = initHashMultiMap();
     System.out.println(init);
     print(init.asMap());
@@ -54,7 +64,6 @@ public class MultiMapDemo {
     HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
     objectObjectHashMap.put(1, 2);
     System.out.println(objectObjectHashMap.get(null));
-
   }
 
   private static <T> void print(T t) {
