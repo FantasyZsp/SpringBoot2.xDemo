@@ -14,7 +14,8 @@ public class BeanApplication {
   public static void main(String[] args) {
     ConfigurableApplicationContext applicationContext = SpringApplication.run(BeanApplication.class, args);
     applicationContext.publishEvent(new GenericEvent<>(new User("id", "zsp")));
-
     applicationContext.close();
+
+
   }
 }
