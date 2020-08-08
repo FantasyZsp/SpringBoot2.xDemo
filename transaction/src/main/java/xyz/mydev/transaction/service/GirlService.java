@@ -24,6 +24,8 @@ public class GirlService {
   private GirlRepository girlRepository;
   @Autowired
   private JdbcTemplate jdbcTemplate;
+  @Autowired
+  private GirlService that;
 
   @SuppressWarnings("all")
   @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.NESTED, rollbackFor = Exception.class)
@@ -141,5 +143,23 @@ public class GirlService {
       throw new RuntimeException("异步线程出错", e);
     }
     return girls;
+  }
+
+  @Transactional
+  public Girl fetchById(Integer id) {
+    return girlRepository.selectById(id);
+  }
+
+  @Transactional
+  public Girl fetchById2(Integer id) {
+
+    Girl girl = that.fetchById(id);
+    System.out.println(girl);
+
+
+    Girl girl2 = that.fetchById(id);
+    System.out.println(girl2);
+
+    return girl;
   }
 }
