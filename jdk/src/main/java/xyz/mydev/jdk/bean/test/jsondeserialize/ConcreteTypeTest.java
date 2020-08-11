@@ -1,4 +1,4 @@
-package xyz.mydev.jdk.bean.test.jsonDeserialize;
+package xyz.mydev.jdk.bean.test.jsondeserialize;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

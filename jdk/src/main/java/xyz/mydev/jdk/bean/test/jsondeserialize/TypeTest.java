@@ -1,4 +1,4 @@
-package xyz.mydev.jdk.bean.test.jsonDeserialize;
+package xyz.mydev.jdk.bean.test.jsondeserialize;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;

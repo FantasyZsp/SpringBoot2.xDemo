@@ -1,4 +1,4 @@
-package xyz.mydev.jdk.bean.test.jsonDeserialize;
+package xyz.mydev.jdk.bean.test.jsondeserialize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import xyz.mydev.common.utils.JsonUtil;
@@ -30,7 +30,6 @@ public class BaseTest {
 
 
   protected Type getGenericInterfaceParamType(Object object) {
-    Type actualTypeArgument = ((ParameterizedType) object.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
-    return actualTypeArgument;
+    return ((ParameterizedType) object.getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
   }
 }

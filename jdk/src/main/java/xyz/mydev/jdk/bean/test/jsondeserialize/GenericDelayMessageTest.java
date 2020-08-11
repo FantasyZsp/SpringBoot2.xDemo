@@ -1,4 +1,4 @@
-package xyz.mydev.jdk.bean.test.jsonDeserialize;
+package xyz.mydev.jdk.bean.test.jsondeserialize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import xyz.mydev.common.utils.JsonUtil;
