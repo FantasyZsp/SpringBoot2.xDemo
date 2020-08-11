@@ -8,7 +8,7 @@ public interface IMonitorService {
    * 获得当前的监控对象.
    *
    * @return 返回构造好的监控对象
-   * @throws Exception
+   * @throws Exception 异常
    */
   public MonitorInfoBean getMonitorInfoBean() throws Exception;
 }

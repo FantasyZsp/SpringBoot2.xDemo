@@ -34,6 +34,7 @@ public class MonitorServiceImpl implements IMonitorService {
    * @throws Exception
    * @author GuoHuang
    */
+  @Override
   public MonitorInfoBean getMonitorInfoBean() throws Exception {
     int mb = 1024 * 1024;
     // 可使用内存

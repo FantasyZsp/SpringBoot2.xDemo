@@ -1,7 +1,8 @@
 package xyz.mydev.datastructure;
 
 import org.junit.Test;
-import xyz.mydev.util.JsonUtil;
+import xyz.mydev.common.utils.JsonUtil;
+
 
 import java.util.HashMap;
 import java.util.List;
