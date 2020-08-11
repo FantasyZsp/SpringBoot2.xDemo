@@ -10,10 +10,10 @@ import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.redisson.RootTest;
 import xyz.mydev.redisson.test.object.bean.Person;
 import xyz.mydev.redisson.utils.SimpleThreadFactory;
-import xyz.mydev.redisson.utils.ThreadUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -173,7 +173,6 @@ public class MapTest extends RootTest {
       log.info("初始化是否成功：{}", testAtomicLong.compareAndSet(0, 1));
       log.info("获取值：{}", testAtomicLong.get());
     }).start();
-
 
 
     System.out.println(testAtomicLong.get());

@@ -12,8 +12,8 @@ import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.redisson.RootTest;
-import xyz.mydev.redisson.utils.ThreadUtils;
 
 import javax.validation.constraints.NotNull;
 import java.time.Duration;

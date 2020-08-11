@@ -3,9 +3,9 @@ package xyz.mydev.redisson.test.lock;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.redisson.api.RLock;
+import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.redisson.RedissonClientTestApp;
 import xyz.mydev.redisson.utils.SimpleThreadFactory;
-import xyz.mydev.redisson.utils.ThreadUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
       <groupId>xyz.mydev</groupId>
-      <artifactId>thread-demo</artifactId>
+      <artifactId>utils</artifactId>
       <version>0.0.2</version>
     </dependency>
     <dependency>
