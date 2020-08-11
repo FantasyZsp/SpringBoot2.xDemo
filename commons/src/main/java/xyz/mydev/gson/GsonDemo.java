@@ -1,8 +1,8 @@
 package xyz.mydev.gson;
 
 import com.google.gson.Gson;
-import xyz.mydev.beans.dto.AddressDTO;
-import xyz.mydev.beans.dto.PersonDTO;
+import xyz.mydev.common.beans.dto.AddressDTO;
+import xyz.mydev.common.beans.dto.PersonDTO;
 
 import java.time.Instant;
 

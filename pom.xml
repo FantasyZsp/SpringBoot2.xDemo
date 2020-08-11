@@ -9,8 +9,8 @@
   <modules>
     <module>thread-demo</module>
     <module>commons</module>
-    <module>guava-demo</module>
     <module>proxy-demo</module>
+    <module>guava-demo</module>
     <module>transaction</module>
     <module>mapstruct</module>
     <module>bean-lifecycle</module>
@@ -19,6 +19,7 @@
     <module>utils</module>
     <module>redisson</module>
     <module>excel-practice</module>
+    <module>app-utils</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -56,7 +57,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
     </dependency>
 
     <dependency>

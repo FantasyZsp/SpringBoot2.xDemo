@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.util.StopWatch;
-import xyz.mydev.util.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.Vector;

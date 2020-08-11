@@ -1,6 +1,6 @@
 package xyz.mydev.synchronizeddemo;
 
-import xyz.mydev.util.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 /**
  * @author ZSP

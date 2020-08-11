@@ -13,6 +13,12 @@
 
 
   <dependencies>
+
+    <dependency>
+      <groupId>xyz.mydev</groupId>
+      <artifactId>utils</artifactId>
+      <version>0.0.2</version>
+    </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-jdk8</artifactId>

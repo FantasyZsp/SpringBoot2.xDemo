@@ -18,7 +18,7 @@
     </dependency>
     <dependency>
       <groupId>xyz.mydev</groupId>
-      <artifactId>commons</artifactId>
+      <artifactId>utils</artifactId>
       <version>0.0.2</version>
       <scope>compile</scope>
     </dependency>

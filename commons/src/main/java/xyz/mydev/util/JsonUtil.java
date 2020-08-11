@@ -10,8 +10,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import xyz.mydev.beans.dto.AddressDTO;
-import xyz.mydev.beans.dto.PersonDTO;
+import xyz.mydev.common.beans.dto.AddressDTO;
+import xyz.mydev.common.beans.dto.PersonDTO;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

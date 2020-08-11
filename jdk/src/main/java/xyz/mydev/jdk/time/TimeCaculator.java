@@ -1,6 +1,6 @@
 package xyz.mydev.jdk.time;
 
-import xyz.mydev.util.DateUtil;
+import xyz.mydev.common.utils.DateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

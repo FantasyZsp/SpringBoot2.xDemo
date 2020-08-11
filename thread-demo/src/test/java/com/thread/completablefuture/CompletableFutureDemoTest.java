@@ -3,8 +3,8 @@ package com.thread.completablefuture;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
+import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.juc.completablefuture.CompletionServiceDemo;
-import xyz.mydev.util.ThreadUtils;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

@@ -3,8 +3,8 @@ package xyz.mydev.jdk.stream;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import xyz.mydev.beans.domain.Person;
-import xyz.mydev.util.JsonUtil;
+import xyz.mydev.common.beans.Person;
+import xyz.mydev.common.utils.JsonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;

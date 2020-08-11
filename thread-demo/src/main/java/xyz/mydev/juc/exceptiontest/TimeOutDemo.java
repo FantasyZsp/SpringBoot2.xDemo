@@ -1,7 +1,7 @@
 package xyz.mydev.juc.exceptiontest;
 
 import lombok.extern.slf4j.Slf4j;
-import xyz.mydev.util.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

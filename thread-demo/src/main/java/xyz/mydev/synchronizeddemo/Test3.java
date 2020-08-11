@@ -1,6 +1,6 @@
 package xyz.mydev.synchronizeddemo;
 
-import xyz.mydev.util.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 /**
  * 当子类通过super调用父类的同步方法时，锁定的对象是子类的实例;

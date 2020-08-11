@@ -2,9 +2,9 @@ package xyz.mydev.jdk.stream;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
+import xyz.mydev.common.utils.JsonUtil;
 import xyz.mydev.jdk.bean.IdTimeEntity;
 import xyz.mydev.jdk.bean.SimpleEntity;
-import xyz.mydev.util.JsonUtil;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;

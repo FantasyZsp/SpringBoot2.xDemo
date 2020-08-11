@@ -2,7 +2,7 @@ package xyz.mydev.map;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import xyz.mydev.util.JsonUtil;
+import xyz.mydev.common.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

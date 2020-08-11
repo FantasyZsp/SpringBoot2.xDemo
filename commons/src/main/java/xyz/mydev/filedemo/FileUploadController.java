@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import xyz.mydev.vo.ResultVO;
+import xyz.mydev.common.beans.vo.ResultVO;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.UUID;
 
-import static xyz.mydev.util.StringUtil.generateFilePath;
-import static xyz.mydev.vo.ResultVO.success;
+import static xyz.mydev.common.beans.vo.ResultVO.success;
 
 /**
  * @author ZSP
@@ -58,7 +58,13 @@ public class FileUploadController {
     System.out.println(generateFilePath('/', driverPath, date, vesselVoyageNumber, jobQueueCode, "fileName.png"));
   }
 
-  public void fileUpload() {
 
+  /**
+   * @author ZSP
+   * @description 传入节点生成路径。分隔符:
+   * @date 2018/11/23
+   */
+  public static String generateFilePath(char delimiter, String... strings) {
+    return String.join(String.valueOf(delimiter), Arrays.asList(strings));
   }
 }

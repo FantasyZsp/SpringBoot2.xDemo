@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import xyz.mydev.util.JsonUtil;
+import xyz.mydev.common.utils.JsonUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -48,7 +48,6 @@ public class MultiMapDemo {
     Multimap<String, NameBean> multiMap = HashMultimap.create();
     Collection<NameBean> nameBeans = multiMap.get("1");
     System.out.println(nameBeans);
-
 
 
   }

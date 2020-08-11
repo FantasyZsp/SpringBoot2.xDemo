@@ -1,9 +1,9 @@
 package xyz.mydev.jdk.bean.test.JsonDeserialize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import xyz.mydev.common.utils.JsonUtil;
 import xyz.mydev.jdk.bean.GenericDelayMessage;
 import xyz.mydev.jdk.bean.SimpleEntity;
-import xyz.mydev.jdk.util.JsonUtil;
 
 import java.time.LocalDateTime;
 

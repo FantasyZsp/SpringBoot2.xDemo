@@ -1,6 +1,6 @@
 package xyz.mydev.jdk.stream;
 
-import xyz.mydev.beans.domain.Person;
+import xyz.mydev.common.beans.Person;
 
 import java.time.Instant;
 import java.util.ArrayList;

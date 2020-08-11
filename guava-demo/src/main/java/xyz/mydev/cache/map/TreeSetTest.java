@@ -1,7 +1,7 @@
 package xyz.mydev.cache.map;
 
 import xyz.mydev.beans.DelayMsg;
-import xyz.mydev.util.JsonUtil;
+import xyz.mydev.common.utils.JsonUtil;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;

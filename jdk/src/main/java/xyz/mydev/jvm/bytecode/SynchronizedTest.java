@@ -1,6 +1,6 @@
 package xyz.mydev.jvm.bytecode;
 
-import xyz.mydev.utils.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 /**
  * @author ZSP

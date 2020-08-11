@@ -2,7 +2,7 @@ package xyz.mydev.jvm.memory;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
-import xyz.mydev.utils.ThreadUtils;
+import xyz.mydev.common.utils.ThreadUtils;
 
 import java.time.LocalDateTime;
 
