@@ -131,6 +131,7 @@ public class MapTest extends RootTest {
     testLocalCacheMap.put(5, Person.of("5", "小王", "河南"));
 
     testLocalCacheMap.put(6, Person.of("6", "小小", "河南"));
+
     System.out.println(testLocalCacheMap.get(1));
     System.out.println(testLocalCacheMap.get(2));
     log.info("test");
