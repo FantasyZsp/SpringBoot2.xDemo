@@ -35,7 +35,7 @@ public class DelayQueueTest extends RootTest {
 
 
   /**
-   * 没有去重
+   * 本身没有去重机制
    */
   @Test
   public void testSameKey() {
@@ -44,11 +44,9 @@ public class DelayQueueTest extends RootTest {
     Consumer consumer = new Consumer(redissonClient, queueName);
     consumer.start();
 
-    Order order = Order.ofSeconds(180);
+    Order order;
 
     Producer producer = new Producer(redissonClient, queueName);
-
-    System.out.println(producer.getBlockingFairQueue().contains(order));
 
     for (int i = 0; i < 99; i++) {
       order = Order.ofSeconds(20);

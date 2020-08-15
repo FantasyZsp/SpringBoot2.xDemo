@@ -58,11 +58,24 @@ public class Producer extends Thread {
 
   public void produce() {
     Order order = Order.ofSeconds(ThreadLocalRandom.current().nextInt(minSecond, maxSecond));
-    delayedQueue.offer(order, order.getDelay(TimeUnit.MILLISECONDS), TimeUnit.MILLISECONDS);
-    log.info("放入延时队列: {} {}", order.getId(), order.getInvalidTime());
+    produceDistinct(order);
   }
 
   public void produce(Order order) {
+    produceDistinct(order);
+  }
+
+
+  /**
+   * 去重
+   */
+  public void produceDistinct(Order order) {
+    // TODO 这种方式效率太低了，换一种O(1)的
+    if (delayedQueue.contains(order)) {
+      log.info("msg already exists: {}", order);
+      return;
+    }
+
     delayedQueue.offer(order, order.getDelay(TimeUnit.MILLISECONDS), TimeUnit.MILLISECONDS);
     log.info("放入延时队列: {} {}", order.getId(), order.getInvalidTime());
   }
