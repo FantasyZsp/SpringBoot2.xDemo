@@ -5,10 +5,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.redisson.api.RBlockingQueue;
-import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import xyz.mydev.common.utils.ThreadUtils;
-import xyz.mydev.redisson.RootTest;
+import xyz.mydev.redisson.RedissonClientTestApp;
 import xyz.mydev.redisson.delayqueue.Consumer;
 import xyz.mydev.redisson.delayqueue.Order;
 import xyz.mydev.redisson.delayqueue.Producer;
@@ -19,9 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @author ZSP
  */
 @Slf4j
-public class DelayQueueTest extends RootTest {
-  @Autowired(required = false)
-  private RedissonClient redissonClient;
+public class DelayQueueTest extends RedissonClientTestApp {
 
   @Before
   public void before() {
