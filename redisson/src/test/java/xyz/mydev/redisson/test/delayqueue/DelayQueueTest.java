@@ -48,8 +48,8 @@ public class DelayQueueTest extends RootTest {
 
     Producer producer = new Producer(redissonClient, queueName);
 
-    for (int i = 0; i < 99; i++) {
-      order = Order.ofSeconds(20);
+    for (int i = 0; i < 9999; i++) {
+      order = Order.ofSeconds(200000);
       producer.produce(order);
       producer.produce(order);
       ThreadUtils.join(1000);

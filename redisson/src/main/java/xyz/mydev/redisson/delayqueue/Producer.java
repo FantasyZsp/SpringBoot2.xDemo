@@ -4,12 +4,15 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
+import org.redisson.api.RScoredSortedSet;
 import org.redisson.api.RedissonClient;
 import xyz.mydev.common.utils.ThreadUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.redisson.RedissonObject.prefixName;
 
 /**
  * @author ZSP
@@ -26,6 +29,7 @@ public class Producer extends Thread {
 
   private final RBlockingQueue<Order> blockingFairQueue;
   private final RDelayedQueue<Order> delayedQueue;
+  private final RScoredSortedSet<Order> sortedSet;
 
 
   public Producer(RedissonClient redissonClient, int count, int minSecond, int maxSecond) {
@@ -45,6 +49,7 @@ public class Producer extends Thread {
     this.queueName = queueName;
     this.blockingFairQueue = redissonClient.getBlockingQueue(queueName);
     this.delayedQueue = redissonClient.getDelayedQueue(blockingFairQueue);
+    sortedSet = redissonClient.getScoredSortedSet(prefixName("redisson_delay_queue_timeout", getName()));
   }
 
   @Override
@@ -71,6 +76,10 @@ public class Producer extends Thread {
    */
   public void produceDistinct(Order order) {
     // TODO 这种方式效率太低了，换一种O(1)的
+    // 延时队列对应的集合
+    redissonClient.getBucket(prefixName("redisson_delay_queue_timeout", queueName)).isExists();
+    System.out.println(sortedSet.contains(order));
+
     if (delayedQueue.contains(order)) {
       log.info("msg already exists: {}", order);
       return;
