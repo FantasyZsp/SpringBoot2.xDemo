@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.redisson.api.RBlockingQueue;
+import org.redisson.api.RDelayedQueue;
 import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.redisson.RedissonClientTestApp;
 import xyz.mydev.redisson.delayqueue.Consumer;
@@ -55,6 +56,29 @@ public class DelayQueueTest extends RedissonClientTestApp {
   }
 
   @Test
+  public void testProduceOne() {
+    String queueName = "same_key";
+
+    Producer producer = new Producer(redissonClient, queueName);
+    producer.produce(Order.ofSeconds(200));
+
+
+    ThreadUtils.sleepSeconds(10000);
+  }
+
+  @Test
+  public void testConsumeOne() {
+    String queueName = "same_key";
+
+
+    Producer producer = new Producer(redissonClient, queueName);
+    producer.produce(Order.ofSeconds(10));
+
+    Consumer consumer = new Consumer(redissonClient, queueName);
+    ThreadUtils.startAndJoin(consumer);
+  }
+
+  @Test
   public void testProducer() {
     Thread producer = new Producer(redissonClient, 10, 10, 60);
     Thread producer2 = new Producer(redissonClient, 10, 20, 180);
@@ -87,7 +111,7 @@ public class DelayQueueTest extends RedissonClientTestApp {
   @Test
   public void testConsumeEx() {
     log.info("testConsumeEx start...");
-    RBlockingQueue<Order> blockingFairQueue = redissonClient.getBlockingQueue("delay_queue");
+    RBlockingQueue<Order> blockingFairQueue = redissonClient.getBlockingQueue("same_key");
     // 这里必须获取一下延时队列，否则blockingFairQueue.take()会一直阻塞
     redissonClient.getDelayedQueue(blockingFairQueue);
     Order order;
@@ -102,12 +126,21 @@ public class DelayQueueTest extends RedissonClientTestApp {
   }
 
 
+  /**
+   * 不会从队列中删除元素
+   * 但是会拿到没到期的元素
+   */
   @Test
   public void testPeek() {
     log.info("testConsumeEx start...");
-    RBlockingQueue<Order> blockingFairQueue = redissonClient.getBlockingQueue("delay_queue");
+    RBlockingQueue<Order> blockingFairQueue = redissonClient.getBlockingQueue("same_key");
     // 这里必须获取一下延时队列，否则blockingFairQueue.take()会一直阻塞
-    redissonClient.getDelayedQueue(blockingFairQueue);
+    RDelayedQueue<Order> delayedQueue = redissonClient.getDelayedQueue(blockingFairQueue);
+
+    Order input = Order.ofSeconds(1000);
+    delayedQueue.offer(input, input.getDelay(TimeUnit.MILLISECONDS), TimeUnit.MILLISECONDS);
+
+
     Order order = null;
     try {
 

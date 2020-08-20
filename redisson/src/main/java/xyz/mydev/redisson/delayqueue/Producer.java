@@ -1,18 +1,18 @@
 package xyz.mydev.redisson.delayqueue;
 
+import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
+import org.redisson.api.RBucket;
 import org.redisson.api.RDelayedQueue;
-import org.redisson.api.RScoredSortedSet;
 import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.StringCodec;
 import xyz.mydev.common.utils.ThreadUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.redisson.RedissonObject.prefixName;
 
 /**
  * @author ZSP
@@ -29,7 +29,7 @@ public class Producer extends Thread {
 
   private final RBlockingQueue<Order> blockingFairQueue;
   private final RDelayedQueue<Order> delayedQueue;
-  private final RScoredSortedSet<Order> sortedSet;
+  private final DistinctCache setCache;
 
 
   public Producer(RedissonClient redissonClient, int count, int minSecond, int maxSecond) {
@@ -49,7 +49,8 @@ public class Producer extends Thread {
     this.queueName = queueName;
     this.blockingFairQueue = redissonClient.getBlockingQueue(queueName);
     this.delayedQueue = redissonClient.getDelayedQueue(blockingFairQueue);
-    sortedSet = redissonClient.getScoredSortedSet(prefixName("redisson_delay_queue_timeout", getName()));
+    setCache = new DistinctCache(redissonClient, queueName);
+
   }
 
   @Override
@@ -72,22 +73,64 @@ public class Producer extends Thread {
 
 
   /**
-   * 去重
+   * 去重，无法复用 ZSet redisson_delay_queue_timeout:{same_key}，因为数据被pack加密
+   * // TODO 改为lua脚本，原子地判重和入队列，防止数据不一致。
    */
   public void produceDistinct(Order order) {
-    // TODO 这种方式效率太低了，换一种O(1)的
-    // 延时队列对应的集合
-    redissonClient.getBucket(prefixName("redisson_delay_queue_timeout", queueName)).isExists();
-    System.out.println(sortedSet.contains(order));
 
-    if (delayedQueue.contains(order)) {
-      log.info("msg already exists: {}", order);
+    if (setCache.contains(order.getId())) {
+      log.info("msg already exists in setCache: {}", order);
       return;
+    }
+
+    // 这种方式效率太低了，换一种O(1)的。但无法复用 delayedQueue，只能用空间去换
+    if (false) {
+      if (delayedQueue.contains(order)) {
+        log.info("msg already exists in delayedQueue: {}", order);
+        return;
+      }
     }
 
     delayedQueue.offer(order, order.getDelay(TimeUnit.MILLISECONDS), TimeUnit.MILLISECONDS);
     log.info("放入延时队列: {} {}", order.getId(), order.getInvalidTime());
   }
 
+  /**
+   * https://blog.csdn.net/SCGH_Fx/article/details/90437766
+   */
+  public static String convertByteBufToString(ByteBuf buf) {
+    String str;
+    // 处理堆缓冲区
+    if (buf.hasArray()) {
+      str = new String(buf.array(), buf.arrayOffset() + buf.readerIndex(), buf.readableBytes());
+    } else { // 处理直接缓冲区以及复合缓冲区
+      byte[] bytes = new byte[buf.readableBytes()];
+      buf.getBytes(buf.readerIndex(), bytes);
+      str = new String(bytes, 0, buf.readableBytes());
+    }
+    return str;
+  }
+
+  static class DistinctCache {
+
+    private final RedissonClient redissonClient;
+    private final String queueName;
+
+    DistinctCache(RedissonClient redissonClient, String queueName) {
+      this.redissonClient = redissonClient;
+      this.queueName = queueName;
+    }
+
+    public boolean contains(String key) {
+      RBucket<Object> bucket = redissonClient.getBucket(generateKey(key), StringCodec.INSTANCE);
+      return !bucket.trySet(key, 45, TimeUnit.SECONDS);
+    }
+
+    private String generateKey(String key) {
+      return queueName + ":" + "distinctKey:" + key;
+    }
+
+
+  }
 
 }
