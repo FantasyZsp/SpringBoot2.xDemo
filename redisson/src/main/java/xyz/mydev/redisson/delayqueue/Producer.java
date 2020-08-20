@@ -95,6 +95,7 @@ public class Producer extends Thread {
     log.info("放入延时队列: {} {}", order.getId(), order.getInvalidTime());
   }
 
+
   /**
    * https://blog.csdn.net/SCGH_Fx/article/details/90437766
    */
