@@ -2,8 +2,8 @@ package xyz.mydev.juc.threadlocal;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.TtlRunnable;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,9 +36,11 @@ public class InheritableDemo {
   }
 
 
-  public static void testReplace() throws Exception {
+  @Test
+  public void testReplace() throws Exception {
     final InheritableThreadLocal<Text> inheritableThreadLocal = new InheritableThreadLocal<>();
     inheritableThreadLocal.set(new Text("from main Thread"));
+
     System.out.println(inheritableThreadLocal.get());
 
     Runnable runnable = () -> {
@@ -124,19 +126,5 @@ public class InheritableDemo {
     System.out.println("========");
     System.out.println("print by main : " + local.get());
 
-  }
-
-  @Setter
-  static class Text {
-    public String name;
-
-    public Text(String name) {
-      this.name = name;
-    }
-
-    @Override
-    public String toString() {
-      return name;
-    }
   }
 }
