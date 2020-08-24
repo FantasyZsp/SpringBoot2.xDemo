@@ -79,6 +79,23 @@ public class DelayQueueTest extends RedissonClientTestApp {
   }
 
   @Test
+  public void testLoopConsumeOne() {
+    String queueName = "same_key";
+
+
+    Producer producer = new Producer(redissonClient, queueName);
+    Consumer consumer = new Consumer(redissonClient, queueName);
+    ThreadUtils.start(consumer);
+    int i = 0;
+    while (++i < 20) {
+      producer.produce(Order.ofSeconds(10));
+
+    }
+    ThreadUtils.join(consumer);
+
+  }
+
+  @Test
   public void testProducer() {
     Thread producer = new Producer(redissonClient, 10, 10, 60);
     Thread producer2 = new Producer(redissonClient, 10, 20, 180);

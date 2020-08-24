@@ -124,7 +124,7 @@ public class Producer extends Thread {
 
     public boolean contains(String key) {
       RBucket<Object> bucket = redissonClient.getBucket(generateKey(key), StringCodec.INSTANCE);
-      return !bucket.trySet(key, 45, TimeUnit.SECONDS);
+      return !bucket.trySet(key, 15, TimeUnit.MINUTES);
     }
 
     private String generateKey(String key) {
