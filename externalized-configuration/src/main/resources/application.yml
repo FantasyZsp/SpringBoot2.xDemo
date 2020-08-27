@@ -3,3 +3,35 @@ person:
   name: zsp
   address: zz
   age: 18
+delay-queue:
+  rocketmq:
+    name-server: nama-server-address
+    producers:
+      common-producer:
+        group: common-producer-group
+        instance-name: common-producer
+      exclusive-producer:
+        group: exclusive-group
+        instance-name: exclusive-producer
+    consumers:
+      consumer1:
+        topic: topic1
+        group: group1
+        instance-name: consumer1-instance
+        tag: consumer1-tag
+        consume-thread-min: 4
+        consume-thread-max: 10
+      consumer2:
+        topic: topic2
+        group: group2
+        instance-name: consumer2-instance
+        tag: consumer2-tag
+        consume-thread-min: 4
+        consume-thread-max: 10
+      consumer3:
+        topic: topic3
+        group: group3
+        instance-name: consumer3-instance
+        tag: "*"
+        consume-thread-min: 4
+        consume-thread-max: 10
