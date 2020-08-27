@@ -1,0 +1,5 @@
+person:
+  app: bean-lifecycle
+  name: zsp
+  address: zz
+  age: 18

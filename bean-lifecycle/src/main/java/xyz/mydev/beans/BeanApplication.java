@@ -9,7 +9,7 @@ import xyz.mydev.beans.pojo.User;
 /**
  * @author zhaosp
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "xyz.mydev.beans")
 public class BeanApplication {
   public static void main(String[] args) {
     ConfigurableApplicationContext applicationContext = SpringApplication.run(BeanApplication.class, args);

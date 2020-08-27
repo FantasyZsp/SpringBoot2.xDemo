@@ -20,6 +20,7 @@
     <module>redisson</module>
     <module>excel-practice</module>
     <module>app-utils</module>
+    <module>externalized-configuration</module>
   </modules>
   <packaging>pom</packaging>
 

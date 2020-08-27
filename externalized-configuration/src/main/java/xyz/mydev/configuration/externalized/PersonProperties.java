@@ -1,12 +1,14 @@
-package xyz.mydev.externalizedconfiguration;
+package xyz.mydev.configuration.externalized;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * @author zhao
+ * @author ZSP
  */
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "person")
 public class PersonProperties {
   private String app = "";
