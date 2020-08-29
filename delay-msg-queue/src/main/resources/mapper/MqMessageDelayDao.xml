@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.mydev.mq.delay.repository.MqMessageDelayDao">
+
+  <update id="updateToSent">
+    update mq_message_delay
+    <set>
+      status = 1,
+      <if test="mark!= null and mark != ''">
+        mark = #{mark},
+      </if>
+    </set>
+    where id = #{id}
+    and status = 0
+  </update>
+  <update id="updateStatus">
+    update mq_message_delay
+    <set>
+      <if test="mark!= null and mark != ''">
+        mark = #{mark},
+      </if>
+      status = #{status},
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateStatusWhenConsumeError">
+    update mq_message_delay
+    <set>
+      <if test="mark!= null and mark != ''">
+        mark = #{mark},
+      </if>
+      status = #{status},
+    </set>
+    where id = #{id}
+    and status = 1
+  </update>
+
+  <!--查询单个-->
+  <select id="selectById" resultType="xyz.mydev.mq.delay.repository.MqMessageDelay">
+    select *
+    from mq_message_delay
+    where id = #{id}
+  </select>
+  <select id="selectIdById" resultType="java.lang.String">
+    select id
+    from mq_message_delay
+    where id = #{id}
+  </select>
+  <select id="findWillSentBetween" resultType="xyz.mydev.mq.delay.repository.MqMessageDelay">
+    select *
+    from mq_message_delay
+    where status = 0
+      and time >= #{startTime}
+      and time &lt;= #{endTime}
+    order by time
+    limit #{limitSize}
+  </select>
+  <select id="findWillSent" resultType="xyz.mydev.mq.delay.repository.MqMessageDelay">
+    select *
+    from mq_message_delay
+    where status = 0
+      and time &gt;= #{startTime}
+      and time &lt;= #{endTime}
+    order by time
+  </select>
+
+  <select id="countWillSentBetween" resultType="java.lang.Long">
+    select count(*)
+    from mq_message_delay
+    where time &gt;= #{startTime}
+      and time &lt;= #{endTime}
+      and status = 0
+  </select>
+  <select id="findCheckpoint" resultType="java.time.LocalDateTime">
+    select min(time) as checkPoint
+    from (select min(time) as time
+          from mq_message_delay
+          where status = 0
+          union all
+          select max(time) as time
+          from mq_message_delay
+          where status != 0) as tmp
+  </select>
+  <select id="findNextCheckpointAfter" resultType="java.time.LocalDateTime">
+    select min(time) as nextCheckPoint
+    from (select min(time) as time
+          from mq_message_delay
+          where status = 0
+            and time >= #{oldCheckPoint}
+          union all
+          select max(time) as time
+          from mq_message_delay
+          where status != 0
+            and time >= #{oldCheckPoint}) as tmp
+  </select>
+  <select id="existById" resultType="java.lang.Boolean">
+    select exists(select 1 from mq_message_delay where id = #{id})
+  </select>
+
+
+  <!--新增所有列-->
+  <insert id="insert">
+    insert into mq_message_delay(id, channel, tag, mq_platform, mq_platform_msg_id, business_id, message, time,
+                                 system_context, status,
+                                 retry_times_when_failed, total_retry_times,
+                                 mark, created_at,
+                                 updated_at)
+    values (#{id}, #{channel}, #{tag}, #{mqPlatform}, #{mqPlatformMsgId}, #{businessId}, #{message}, #{time},
+            #{systemContext}, #{status},
+            #{retryTimesWhenFailed}, #{totalRetryTimes},
+            #{mark},
+            #{createdAt},
+            #{updatedAt})
+  </insert>
+
+</mapper>

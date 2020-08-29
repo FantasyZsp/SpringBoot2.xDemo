@@ -21,6 +21,7 @@
     <module>excel-practice</module>
     <module>app-utils</module>
     <module>externalized-configuration</module>
+    <module>delay-msg-queue</module>
   </modules>
   <packaging>pom</packaging>
 

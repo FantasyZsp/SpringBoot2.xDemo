@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: application-delay-msg
+  profiles:
+    include: zsp
+  cloud:
+    nacos:
+      config:
+        server-addr: local-vm:8848
+        file-extension: yml
+      discovery:
+        enabled: true
+        server-addr: local-vm:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

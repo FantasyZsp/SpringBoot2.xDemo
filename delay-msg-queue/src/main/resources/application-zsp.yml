@@ -1,0 +1,75 @@
+mybatis:
+  mapper-locations: "classpath*:/mapper/*.xml"
+  configuration:
+    map-underscore-to-camel-case: true
+spring:
+  data:
+    redis:
+      repositories.enabled: false
+  cache:
+    type: redis
+    redis:
+      time-to-live: "1800000"
+  redis:
+    host: localhost
+    port: 6379
+    database: 10
+  jackson:
+    default-property-inclusion: non_null
+  mvc:
+    throw-exception-if-no-handler-found: true
+  datasource:
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 20
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/delay_msg?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  path: /var/log/
+  level:
+    root: info
+    net.ttddyy.dsproxy.listener.logging: debug
+    org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl: debug
+delay-queue:
+  rocketmq:
+    name-server: local-vm:9876
+    producers:
+      common-producer:
+        group: common-producer-group
+    consumers:
+      # 业务名，对应某个业务下，消费者的配置
+      delay-msg-consumer:
+        topic: common-delay-message-topic
+        group: delay-msg-consumer-group
+        instance-name: delay-msg-consumer
+        tag: custom-tag
+        consume-thread-min: 4
+        consume-thread-max: 10
+      delay-msg-consumer2:
+        topic: custom-topic
+        group: delay-msg-consumer2-group
+        instance-name: delay-msg-consumer2
+        tag: '*'
+        consume-thread-min: 4
+        consume-thread-max: 10
+redis-lock:
+  enable: true
+redisson:
+  address: redis://${spring.redis.host:127.0.0.1}:${spring.redis.port:6379}
+  database: ${spring.redis.database:1}
+  connection-pool-size: 32
+  mode: single
