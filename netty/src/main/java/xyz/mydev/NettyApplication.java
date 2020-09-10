@@ -1,12 +1,14 @@
 package xyz.mydev;
 
-import io.netty.channel.nio.NioEventLoopGroup;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author ZSP
  */
+@SpringBootApplication
 public class NettyApplication {
   public static void main(String[] args) {
-    NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+    SpringApplication.run(NettyApplication.class);
   }
 }

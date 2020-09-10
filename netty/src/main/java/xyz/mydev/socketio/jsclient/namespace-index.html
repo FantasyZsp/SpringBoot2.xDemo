@@ -1,0 +1,217 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<head>
+
+  <title>ROOM-1 CLIENT1</title>
+
+  <link href="bootstrap.css" rel="stylesheet">
+
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .console {
+      height: 400px;
+      overflow: auto;
+    }
+
+    .username-msg {
+      color: orange;
+    }
+
+    .connect-msg {
+      color: green;
+    }
+
+    .disconnect-msg {
+      color: red;
+    }
+
+    .send-msg {
+      color: #888
+    }
+  </style>
+
+
+  <script src="js/socket.io/socket.io.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/jquery-1.10.1.min.js"></script>
+
+  <script>
+
+    var clientId1 = 'user1_' + Math.floor((Math.random() * 1000) + 1);
+    var roomKey = 'ROOM-1';
+
+    var wsUrl = 'ws://127.0.0.1:9092?roomKey=ROOM-1&clientId=' + clientId1 + '&clientName=' + clientId1 + '&businessId=20173078&businessData=测试数据';
+
+    var chat1Socket = io.connect(wsUrl, {transports: ['websocket', 'xhr-polling', 'jsonp-polling']}, () => {
+      console.log("connect==========" + chat1Socket.connected);
+    });
+
+
+    function connectHandler(parentId) {
+      return function () {
+        output('<span class="connect-msg">Client has connected to the server!</span>', parentId);
+      }
+    }
+
+    function messageHandler(parentId) {
+      return function (data) {
+        output('<span class="username-msg">' + data.clientId + ':</span> ' + data.message, parentId);
+      }
+    }
+
+    function tipsHandler(parentId) {
+      return function (data) {
+        output('<span class="username-msg">' + data.clientId + ':' + data.message + ':</span> ', parentId);
+      }
+    }
+
+    function eventOneHandler(parentId) {
+      return function (data) {
+        output('<span class="username-msg">' + JSON.stringify(data) + ':</span> ', parentId);
+      }
+    }
+
+
+    function disconnectHandler(parentId) {
+      return function () {
+        output('<span class="disconnect-msg">The client has disconnected!</span>', parentId);
+      }
+    }
+
+    function sendMessageHandler(parentId, clientId, chatSocket) {
+
+      console.log("sendMessageHandler=======");
+
+      var message = $(parentId + ' .msg').val();
+      $(parentId + ' .msg').val('');
+
+      var jsonObject = {
+        // '@class': 'com.corundumstudio.socketio.demo.ChatObject',
+        roomKey: roomKey,
+        clientId: clientId,
+        message: message
+      };
+      chatSocket.emit('publishMsg', jsonObject, function (data) {
+        console.log(data.success + data.message);
+        tipsHandler('#chat1');
+      });
+    }
+
+
+    // chat1Socket.on('connect', connectHandler('#chat1'));
+    chat1Socket.on('connect', () => {
+      console.log("connect==========" + chat1Socket.connected);
+    });
+    chat1Socket.on('disconnect', () => {
+      console.log("disconnect=======" + chat1Socket.disconnected);
+    });
+
+
+    chat1Socket.on('message', messageHandler('#chat1'));
+    // chat1Socket.on('connect_error', () => {
+    //     console.log("disconnect");
+    //     console.log(chat1Socket.disconnected);
+    //     chat1Socket.disconnect();
+    // });
+
+    chat1Socket.on('EVENT_ONE', eventOneHandler('#chat1'));
+
+    chat1Socket.on('EVENT_TWO', eventOneHandler('#chat1'));
+
+
+    chat1Socket.on('disconnect', disconnectHandler('#chat1'));
+
+    chat1Socket.on('LEAVE_ROOM', tipsHandler('#chat1'));
+
+    chat1Socket.on('JOIN_ROOM', tipsHandler('#chat1'));
+
+    // chat1Socket.on('OCR_BAY_FAILURE', tipsHandler('#chat1'));
+    // chat1Socket.on('OCR_BAY_SUCCESS', tipsHandler('#chat1'));
+
+    chat1Socket.on('CHANGE_INFO', (data) => {
+      console.log(data);
+    });
+
+    function changeInfo() {
+      console.log("changeInfo invoke")
+      const query = {
+        roomKey: roomKey,
+        clientId: "clientId-" + Math.random().toString(36).slice(-8),
+        clientName: Math.random().toString(12).slice(-4),
+        businessId: Math.random().toString(36).slice(-12),
+        businessData: Math.random().toString(36)
+      };
+      chat1Socket.emit('CHANGE_INFO', query, function (data) {
+        console.log(data.success + data.message);
+      });
+    }
+
+
+    function sendDisconnect1() {
+      chat1Socket.disconnect();
+    }
+
+    function sendDisconnect2() {
+      chat2Socket.disconnect();
+    }
+
+    function sendMessage1() {
+      sendMessageHandler('#chat1', clientId1, chat1Socket);
+    }
+
+
+    function output(message, parentId) {
+      var currentTime = "<span class='time'>" + moment().format('HH:mm:ss.SSS') + "</span>";
+      var element = $("<div>" + currentTime + " " + message + "</div>");
+      $(parentId + ' .console').prepend(element);
+    }
+
+    $(document).keydown(function (e) {
+      if (e.keyCode == 13) {
+        $('#send').click();
+      }
+    });
+  </script>
+</head>
+
+<body>
+
+<h1>Namespaces demo chat</h1>
+
+<br/>
+
+<div id="chat1" style="width: 49%; float: left;">
+  <h4>chat1</h4>
+  <div class="console well">
+  </div>
+
+  <form class="well form-inline" onsubmit="return false;">
+    <label>
+      <input class="msg input-xlarge" type="text" placeholder="Type something..."/>
+    </label>
+    <button type="button" onClick="sendMessage1()" class="btn" id="send">Send</button>
+    <button type="button" onClick="sendDisconnect1()" class="btn">Disconnect</button>
+    <button type="button" onClick="changeInfo()" class="btn">ChangeInfo</button>
+  </form>
+</div>
+
+<!--<div id="chat2" style="width: 49%; float: right;">-->
+<!--  <h4>chat2</h4>-->
+<!--  <div class="console well">-->
+<!--  </div>-->
+
+<!--  <form class="well form-inline" onsubmit="return false;">-->
+<!--    <input class="msg input-xlarge" type="text" placeholder="Type something..."/>-->
+<!--    <button type="button" onClick="sendMessage2()" class="btn" id="send">Send</button>-->
+<!--    <button type="button" onClick="sendDisconnect2()" class="btn">Disconnect</button>-->
+<!--    <button type="button" onClick="sendConfigCraneHandler()" class="btn">ConfigCrane</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+</body>
+
+</html>

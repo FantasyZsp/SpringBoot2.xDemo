@@ -1,46 +1,26 @@
 package xyz.mydev.common.beans.vo;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author ZSP
  */
 @ToString
+@Getter
+@Setter
 public class ResultVO<T> {
-  private Integer statusCode;
+  private Integer status;
   private String message;
   private T data;
 
   private ResultVO() {
   }
 
-  private ResultVO(int statusCode, String message, T data) {
-    this.statusCode = statusCode;
+  private ResultVO(int status, String message, T data) {
+    this.status = status;
     this.message = message;
-    this.data = data;
-  }
-
-  public int getStatusCode() {
-    return statusCode;
-  }
-
-  public void setStatusCode(int statusCode) {
-    this.statusCode = statusCode;
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
-
-  public T getData() {
-    return data;
-  }
-
-  public void setData(T data) {
     this.data = data;
   }
 
@@ -54,7 +34,7 @@ public class ResultVO<T> {
 
   public static <T> ResultVO<T> success(int statusCode, String message, T data) {
     ResultVO<T> vo = new ResultVO<>();
-    vo.setStatusCode(statusCode);
+    vo.setStatus(statusCode);
     vo.setMessage(message);
     vo.setData(data);
     return vo;
@@ -70,6 +50,10 @@ public class ResultVO<T> {
 
   public static <T> ResultVO<T> failure(int statusCode, String message, T data) {
     return success(statusCode, message, data);
+  }
+
+  public boolean success() {
+    return this.status == 200;
   }
 
 

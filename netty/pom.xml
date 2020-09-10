@@ -23,6 +23,21 @@
       <version>1.7.12</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>xyz.mydev</groupId>
+      <artifactId>utils</artifactId>
+      <version>0.0.2</version>
+    </dependency>
   </dependencies>
 
 
