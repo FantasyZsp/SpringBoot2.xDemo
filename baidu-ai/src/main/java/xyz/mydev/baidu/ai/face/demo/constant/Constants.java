@@ -20,4 +20,10 @@ public interface Constants {
     String URL = "URL";
     String FACE_TOKEN = "FACE_TOKEN";
   }
+
+  interface ActionType {
+    String ACTION_TYPE_APPEND = "APPEND";
+    String ACTION_TYPE_REPLACE = "REPLACE";
+    String ACTION_TYPE_UPDATE = "UPDATE";
+  }
 }

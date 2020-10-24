@@ -31,7 +31,7 @@ public class AddUserResult extends CommonResult {
   @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
   @Data
   @NoArgsConstructor
-  private static class Result {
+  public static class Result {
     private String faceToken;
     private LocationBean location;
   }
