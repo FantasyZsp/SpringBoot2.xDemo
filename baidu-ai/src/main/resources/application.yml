@@ -1,0 +1,38 @@
+mydev:
+  baidu:
+    ai:
+      face-api-key:
+        api-id: 1
+        api-key: 2
+        secret-key: 3
+      face-quality-control:
+        defaultControlProperties:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          score: 80
+        # DEFAULT NORMAL
+        addUser:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          score: 80
+        # DEFAULT NORMAL
+        updateUser:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          score: 80
+        # DEFAULT NORMAL
+        searchSingle:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          score: 80
+        # DEFAULT LOW
+        searchBatch:
+          qualityControl: LOW
+          livenessControl: LOW
+          score: 80
+        # DEFAULT NORMAL
+        userAuth:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          score: 80
+

@@ -9,7 +9,11 @@ public interface Constants {
 
   String LIVENESS_CONTROL_KEY = "liveness_control";
 
+  String USER_ID_KEY = "user_id";
+
   String USER_INFO_KEY = "user_info";
+
+  String ACTION_TYPE_KEY = "action_type";
 
   interface ImageType {
     String BASE64 = "BASE64";
