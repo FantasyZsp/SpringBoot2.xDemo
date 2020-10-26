@@ -6,7 +6,6 @@ import lombok.Setter;
 import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 
@@ -31,11 +30,17 @@ public class UserFaceSearchInfo {
   @Builder.Default
   private String imageType = Constants.ImageType.URL;
 
-  @Builder.Default
-  @Max(10)
-  private Integer maxFaceNum = 1;
 
-
+  /**
+   * matchThreshold
+   * 匹配阈值（设置阈值后，score低于此阈值的用户信息将不会返回） 最大100 最小0 默认80
+   * 此阈值设置得越高，检索速度将会越快，推荐使用默认阈值80
+   * <p>
+   * <p>
+   * maxFaceNum
+   * 最多处理人脸的数目
+   * 默认值为1(仅检测图片中面积最大的那个人脸) 最大值10
+   */
   private ControlProperties controlProperties;
 
   /**
@@ -43,4 +48,6 @@ public class UserFaceSearchInfo {
    * 一般由前置的参数处理维护
    */
   private HashMap<String, String> options;
+
+
 }

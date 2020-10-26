@@ -2,6 +2,7 @@ package xyz.mydev.baidu.ai.face.property;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
  */
 @Getter
 @Setter
+@ToString
 public class BaiduAiFaceQualityControlProperties implements InitializingBean {
   private ControlProperties defaultControlProperties;
   private ControlProperties addUser;

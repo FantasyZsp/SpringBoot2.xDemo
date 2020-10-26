@@ -6,9 +6,9 @@ import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
+import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
@@ -73,28 +73,39 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 多个人脸搜索
    */
-  public SearchBatchResult searchBatch(UserFaceSearchInfo userFaceSearchInfo) {
-    prepareParamForSearchUserFace(userFaceSearchInfo);
-    return targetClientAdapter.searchBatch(userFaceSearchInfo);
+  public SearchBatchResult searchBatch(UserFaceSearchInfo searchInfo) {
+    if (searchInfo.getControlProperties() == null) {
+      searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getSearchBatch());
+    }
+    prepareParamForSearchUserFace(searchInfo);
+    return targetClientAdapter.searchBatch(searchInfo);
   }
 
   /**
    * 单人脸搜索
    */
-  public SearchSingleResult searchSingle(UserFaceSearchInfo userFaceSearchInfo) {
-    prepareParamForSearchUserFace(userFaceSearchInfo);
-    return targetClientAdapter.searchSingle(userFaceSearchInfo);
+  public SearchSingleResult searchSingle(UserFaceSearchInfo searchInfo) {
+    if (searchInfo.getControlProperties() == null) {
+      searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getSearchSingle());
+    }
+
+    prepareParamForSearchUserFace(searchInfo);
+    return targetClientAdapter.searchSingle(searchInfo);
   }
 
   /**
    * 人脸认证
    */
-  public SearchSingleResult userAuth(UserFaceSearchInfo userFaceSearchInfo) {
-    if (StringUtils.isBlank(Objects.requireNonNull(userFaceSearchInfo).getUserId())) {
+  public SearchSingleResult userAuth(UserFaceSearchInfo searchInfo) {
+    if (StringUtils.isBlank(Objects.requireNonNull(searchInfo).getUserId())) {
       throw new IllegalArgumentException("userAuth requires userId");
     }
-    prepareParamForSearchUserFace(userFaceSearchInfo);
-    return targetClientAdapter.searchSingle(userFaceSearchInfo);
+    if (searchInfo.getControlProperties() == null) {
+      searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getUserAuth());
+    }
+
+    prepareParamForSearchUserFace(searchInfo);
+    return targetClientAdapter.searchSingle(searchInfo);
   }
 
 
@@ -147,8 +158,9 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
 
     Objects.requireNonNull(searchInfo);
 
+    // 外部没传，按照默认级别给
     if (searchInfo.getControlProperties() == null) {
-      searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getAddUser());
+      searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getDefaultControlProperties());
     }
 
     String image = searchInfo.getImage();
@@ -167,6 +179,18 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
 
     if (StringUtils.isNotBlank(searchInfo.getUserId())) {
       options.put(Constants.USER_ID_KEY, searchInfo.getUserId());
+    }
+
+    if (controlProperties.getMaxFaceNum() != null) {
+      options.put(Constants.MAX_FACE_NUM_KEY, String.valueOf(controlProperties.getMaxFaceNum()));
+    }
+
+    if (controlProperties.getMaxUserNum() != null) {
+      options.put(Constants.MAX_USER_NUM_KEY, String.valueOf(controlProperties.getMaxUserNum()));
+    }
+
+    if (controlProperties.getMatchThreshold() != null) {
+      options.put(Constants.MATCH_THRESHOLD_KEY, String.valueOf(controlProperties.getMatchThreshold()));
     }
     searchInfo.setOptions(options);
   }

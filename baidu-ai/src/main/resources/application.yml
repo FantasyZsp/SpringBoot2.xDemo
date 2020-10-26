@@ -9,30 +9,37 @@ mydev:
         defaultControlProperties:
           qualityControl: NORMAL
           livenessControl: NORMAL
-          score: 80
+          matchThreshold: 80
+          maxFaceNum: 1
+          maxUserNum: 10
         # DEFAULT NORMAL
         addUser:
           qualityControl: NORMAL
           livenessControl: NORMAL
-          score: 80
+          matchThreshold: 80
         # DEFAULT NORMAL
         updateUser:
           qualityControl: NORMAL
           livenessControl: NORMAL
-          score: 80
+          matchThreshold: 80
         # DEFAULT NORMAL
         searchSingle:
           qualityControl: NORMAL
           livenessControl: NORMAL
-          score: 80
+          matchThreshold: 80
+          maxFaceNum: 1
+          maxUserNum: 1
         # DEFAULT LOW
         searchBatch:
           qualityControl: LOW
           livenessControl: LOW
-          score: 80
+          matchThreshold: 80
+          maxFaceNum: 10
+          maxUserNum: 10
         # DEFAULT NORMAL
         userAuth:
           qualityControl: NORMAL
           livenessControl: NORMAL
-          score: 80
-
+          matchThreshold: 80
+          maxFaceNum: 1
+          maxUserNum: 1

@@ -3,16 +3,18 @@ package xyz.mydev.baidu.ai.face;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
+import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.constant.Constants;
-import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
+import xyz.mydev.baidu.ai.face.constant.Constants;
+import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.common.utils.JsonUtil;
 
 import java.util.Optional;
@@ -23,7 +25,7 @@ import java.util.Optional;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Slf4j
-public class BaiduAiFaceClientDelegatorTest {
+public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
 
 
   static String image = "xxx";
@@ -33,6 +35,9 @@ public class BaiduAiFaceClientDelegatorTest {
 
   @Autowired
   private BaiduAiFaceClientDelegator delegator;
+
+  @Autowired
+  private BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties;
 
   @Test
   public void addUser() {
@@ -76,13 +81,13 @@ public class BaiduAiFaceClientDelegatorTest {
 
   @Test
   public void searchBatch() {
+
+    baiduAiFaceQualityControlProperties.getSearchBatch().setMatchThreshold(99);
     SearchBatchResult searchBatchResult = delegator.searchBatch(UserFaceSearchInfo.builder()
 
       .groupIdList(groupIdTest)
       .image(image)
       .imageType(Constants.ImageType.URL)
-      .maxFaceNum(10)
-
       .build());
 
     System.out.println(JsonUtil.obj2StringPretty(searchBatchResult));
@@ -118,5 +123,10 @@ public class BaiduAiFaceClientDelegatorTest {
     System.out.println(JsonUtil.obj2StringPretty(searchSingleResult));
     Optional.ofNullable(searchSingleResult.getResult()).ifPresent(x -> System.out.println(x.getFaceToken()));
     Optional.ofNullable(searchSingleResult.getResult()).ifPresent(x -> System.out.println(x.getUserList()));
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    log.info("识别配置: {}", baiduAiFaceQualityControlProperties);
   }
 }

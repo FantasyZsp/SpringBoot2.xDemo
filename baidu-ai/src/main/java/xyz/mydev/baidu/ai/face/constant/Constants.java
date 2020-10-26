@@ -15,6 +15,12 @@ public interface Constants {
 
   String ACTION_TYPE_KEY = "action_type";
 
+  String MAX_FACE_NUM_KEY = "max_face_num";
+  
+  String MAX_USER_NUM_KEY = "max_user_num";
+
+  String MATCH_THRESHOLD_KEY = "match_threshold";
+
   interface ImageType {
     String BASE64 = "BASE64";
     String URL = "URL";
