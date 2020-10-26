@@ -1,13 +1,13 @@
-package xyz.mydev.baidu.ai.face.demo.client;
+package xyz.mydev.baidu.ai.face.client;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import xyz.mydev.baidu.ai.face.demo.BaiduAiFaceApiClientAdapter;
-import xyz.mydev.baidu.ai.face.demo.BaiduAiFaceClientDelegator;
-import xyz.mydev.baidu.ai.face.demo.property.BaiduAiFaceApiKeyProperties;
-import xyz.mydev.baidu.ai.face.demo.property.BaiduAiFaceQualityControlProperties;
+import xyz.mydev.baidu.ai.face.BaiduAiFaceApiClientAdapter;
+import xyz.mydev.baidu.ai.face.BaiduAiFaceClientDelegator;
+import xyz.mydev.baidu.ai.face.property.BaiduAiFaceApiKeyProperties;
+import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 
 /**
  * @author ZSP

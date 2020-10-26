@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.client.bean;
+package xyz.mydev.baidu.ai.face.client.bean;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -22,27 +22,19 @@ import java.util.Objects;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class SearchBatchResult extends CommonResult {
+public class SearchSingleResult extends CommonResult {
+
   private ResultBean result;
 
   @NoArgsConstructor
   @Data
   @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
   public static class ResultBean {
-    private Integer faceNum;
-    private List<FaceListBean> faceList;
-
-    @NoArgsConstructor
-    @Data
-    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-    public static class FaceListBean {
-      private String faceToken;
-      private LocationBean location;
-      private List<UserListBean> userList;
-    }
+    private String faceToken;
+    private List<UserListBean> userList;
   }
 
-  public static SearchBatchResult convert(Map<String, Object> map) {
-    return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchBatchResult.class);
+  public static SearchSingleResult convert(Map<String, Object> map) {
+    return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchSingleResult.class);
   }
 }

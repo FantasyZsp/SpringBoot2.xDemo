@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo;
+package xyz.mydev.baidu.ai.face;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

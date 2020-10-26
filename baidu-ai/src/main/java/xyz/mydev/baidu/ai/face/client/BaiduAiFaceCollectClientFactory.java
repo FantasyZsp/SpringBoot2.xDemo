@@ -1,7 +1,7 @@
-package xyz.mydev.baidu.ai.face.demo.client;
+package xyz.mydev.baidu.ai.face.client;
 
 import com.baidu.aip.face.AipFace;
-import xyz.mydev.baidu.ai.face.demo.property.BaiduAiFaceApiKeyProperties;
+import xyz.mydev.baidu.ai.face.property.BaiduAiFaceApiKeyProperties;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.client.bean;
+package xyz.mydev.baidu.ai.face.client.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

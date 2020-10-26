@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.property;
+package xyz.mydev.baidu.ai.face.property;
 
 import lombok.Getter;
 import lombok.Setter;

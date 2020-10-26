@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.constant;
+package xyz.mydev.baidu.ai.face.constant;
 
 /**
  * @author ZSP

@@ -1,10 +1,10 @@
-package xyz.mydev.baidu.ai.face.demo.client.bean;
+package xyz.mydev.baidu.ai.face.client.bean;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import xyz.mydev.baidu.ai.face.demo.constant.Constants;
-import xyz.mydev.baidu.ai.face.demo.property.ControlProperties;
+import xyz.mydev.baidu.ai.face.constant.Constants;
+import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;

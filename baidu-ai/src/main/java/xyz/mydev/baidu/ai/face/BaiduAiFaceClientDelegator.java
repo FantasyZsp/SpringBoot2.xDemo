@@ -1,16 +1,16 @@
-package xyz.mydev.baidu.ai.face.demo;
+package xyz.mydev.baidu.ai.face;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
-import xyz.mydev.baidu.ai.face.demo.client.bean.AddUserResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.CommonResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchBatchResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceInfo;
-import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceSearchInfo;
-import xyz.mydev.baidu.ai.face.demo.constant.Constants;
-import xyz.mydev.baidu.ai.face.demo.property.BaiduAiFaceQualityControlProperties;
-import xyz.mydev.baidu.ai.face.demo.property.ControlProperties;
+import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
+import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
+import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
+import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
+import xyz.mydev.baidu.ai.face.constant.Constants;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
+import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
+import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
 import java.util.HashMap;
 import java.util.Objects;

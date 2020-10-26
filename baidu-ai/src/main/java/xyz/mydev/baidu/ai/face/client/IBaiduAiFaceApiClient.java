@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.client;
+package xyz.mydev.baidu.ai.face.client;
 
 import com.baidu.aip.face.FaceVerifyRequest;
 import com.baidu.aip.face.MatchRequest;

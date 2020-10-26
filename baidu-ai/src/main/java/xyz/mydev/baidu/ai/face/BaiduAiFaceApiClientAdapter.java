@@ -1,13 +1,13 @@
-package xyz.mydev.baidu.ai.face.demo;
+package xyz.mydev.baidu.ai.face;
 
 import com.baidu.aip.face.AipFace;
 import org.json.JSONObject;
-import xyz.mydev.baidu.ai.face.demo.client.bean.AddUserResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.CommonResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchBatchResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceInfo;
-import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceSearchInfo;
+import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
+import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
+import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
+import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
 
 import java.util.HashMap;
 

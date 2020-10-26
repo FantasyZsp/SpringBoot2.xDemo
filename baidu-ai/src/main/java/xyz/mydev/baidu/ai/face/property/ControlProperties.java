@@ -1,10 +1,10 @@
-package xyz.mydev.baidu.ai.face.demo.property;
+package xyz.mydev.baidu.ai.face.property;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.Assert;
-import xyz.mydev.baidu.ai.face.demo.constant.LivenessControlEnum;
-import xyz.mydev.baidu.ai.face.demo.constant.QualityControlEnum;
+import xyz.mydev.baidu.ai.face.constant.LivenessControlEnum;
+import xyz.mydev.baidu.ai.face.constant.QualityControlEnum;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package xyz.mydev.baidu.ai.face.demo.constant;
+package xyz.mydev.baidu.ai.face.constant;
 
 /**
  * 百度智能云文档{@link <a href="https://ai.baidu.com/ai-doc/FACE/Gk37c1uzc"/>}
