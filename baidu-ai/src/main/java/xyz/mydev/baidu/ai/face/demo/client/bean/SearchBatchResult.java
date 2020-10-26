@@ -1,5 +1,7 @@
 package xyz.mydev.baidu.ai.face.demo.client.bean;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,42 +21,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SearchResult extends CommonResult {
-
-  private Integer errorCode;
-  private String errorMsg;
-  private Long logId;
-
-  private Long timestamp;
-  private Integer cached;
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class SearchBatchResult extends CommonResult {
   private ResultBean result;
 
   @NoArgsConstructor
   @Data
+  @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
   public static class ResultBean {
     private Integer faceNum;
     private List<FaceListBean> faceList;
 
     @NoArgsConstructor
     @Data
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     public static class FaceListBean {
       private String faceToken;
       private LocationBean location;
       private List<UserListBean> userList;
-
-
-      @NoArgsConstructor
-      @Data
-      public static class UserListBean {
-        private String groupId;
-        private String userId;
-        private String userInfo;
-        private Double score;
-      }
     }
   }
 
-  public static SearchResult convert(Map<String, Object> map) {
-    return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchResult.class);
+  public static SearchBatchResult convert(Map<String, Object> map) {
+    return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchBatchResult.class);
   }
 }

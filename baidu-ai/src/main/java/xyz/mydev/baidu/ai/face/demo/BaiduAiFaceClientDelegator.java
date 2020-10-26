@@ -4,7 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import xyz.mydev.baidu.ai.face.demo.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.demo.client.bean.CommonResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchResult;
+import xyz.mydev.baidu.ai.face.demo.client.bean.SearchBatchResult;
+import xyz.mydev.baidu.ai.face.demo.client.bean.SearchSingleResult;
 import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceSearchInfo;
 import xyz.mydev.baidu.ai.face.demo.constant.Constants;
@@ -62,17 +63,17 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 删除人脸
    */
-  public CommonResult deleteUserFace(String groupId, String userId, String faceToken) {
+  public CommonResult deleteUserFace(String userId, String groupId, String faceToken) {
     Objects.requireNonNull(groupId);
     Objects.requireNonNull(userId);
     Objects.requireNonNull(faceToken);
-    return targetClientAdapter.faceDelete(groupId, userId, faceToken);
+    return targetClientAdapter.faceDelete(userId, groupId, faceToken);
   }
 
   /**
    * 多个人脸搜索
    */
-  public SearchResult searchBatch(UserFaceSearchInfo userFaceSearchInfo) {
+  public SearchBatchResult searchBatch(UserFaceSearchInfo userFaceSearchInfo) {
     prepareParamForSearchUserFace(userFaceSearchInfo);
     return targetClientAdapter.searchBatch(userFaceSearchInfo);
   }
@@ -80,7 +81,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 单人脸搜索
    */
-  public SearchResult searchSingle(UserFaceSearchInfo userFaceSearchInfo) {
+  public SearchSingleResult searchSingle(UserFaceSearchInfo userFaceSearchInfo) {
     prepareParamForSearchUserFace(userFaceSearchInfo);
     return targetClientAdapter.searchSingle(userFaceSearchInfo);
   }
@@ -88,7 +89,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 人脸认证
    */
-  public SearchResult userAuth(UserFaceSearchInfo userFaceSearchInfo) {
+  public SearchSingleResult userAuth(UserFaceSearchInfo userFaceSearchInfo) {
     if (StringUtils.isBlank(Objects.requireNonNull(userFaceSearchInfo).getUserId())) {
       throw new IllegalArgumentException("userAuth requires userId");
     }

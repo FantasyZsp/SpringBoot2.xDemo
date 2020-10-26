@@ -4,7 +4,8 @@ import com.baidu.aip.face.AipFace;
 import org.json.JSONObject;
 import xyz.mydev.baidu.ai.face.demo.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.demo.client.bean.CommonResult;
-import xyz.mydev.baidu.ai.face.demo.client.bean.SearchResult;
+import xyz.mydev.baidu.ai.face.demo.client.bean.SearchBatchResult;
+import xyz.mydev.baidu.ai.face.demo.client.bean.SearchSingleResult;
 import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.demo.client.bean.UserFaceSearchInfo;
 
@@ -38,18 +39,18 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
   /**
    * 多个人脸搜索接口
    */
-  public SearchResult searchBatch(UserFaceSearchInfo info) {
+  public SearchBatchResult searchBatch(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.multiSearch(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
-    return SearchResult.convert(jsonObject.toMap());
+    return SearchBatchResult.convert(jsonObject.toMap());
   }
 
   /**
    * 单个人脸搜索接口/人脸认证
    * 取决于是否在option中指定了userId
    */
-  public SearchResult searchSingle(UserFaceSearchInfo info) {
+  public SearchSingleResult searchSingle(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.search(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
-    return SearchResult.convert(jsonObject.toMap());
+    return SearchSingleResult.convert(jsonObject.toMap());
   }
 
   /**
@@ -81,7 +82,8 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 人脸删除接口
    */
   public CommonResult faceDelete(String userId, String groupId, String faceToken, HashMap<String, String> options) {
-    return CommonResult.convert(targetClient.faceDelete(userId, groupId, faceToken, options).toMap());
+    JSONObject jsonObject = targetClient.faceDelete(userId, groupId, faceToken, options);
+    return CommonResult.convert(jsonObject.toMap());
   }
 
 //  /**
