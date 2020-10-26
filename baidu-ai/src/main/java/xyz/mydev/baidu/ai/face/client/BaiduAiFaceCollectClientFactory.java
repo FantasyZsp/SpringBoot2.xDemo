@@ -19,8 +19,8 @@ public class BaiduAiFaceCollectClientFactory {
   public AipFace getClient() {
     AipFace client = new AipFace(baiduAiFaceApiKeyProperties.getApiId(), baiduAiFaceApiKeyProperties.getApiKey(), baiduAiFaceApiKeyProperties.getSecretKey());
     // 可选：设置网络连接参数
-    client.setConnectionTimeoutInMillis(2000);
-    client.setSocketTimeoutInMillis(60000);
+    client.setConnectionTimeoutInMillis(baiduAiFaceApiKeyProperties.getClientConnectConfig().getConnectionTimeoutMillis());
+    client.setSocketTimeoutInMillis(baiduAiFaceApiKeyProperties.getClientConnectConfig().getConnectionTimeoutMillis());
     return client;
   }
 
@@ -29,8 +29,8 @@ public class BaiduAiFaceCollectClientFactory {
     Objects.requireNonNull(apiKey);
     Objects.requireNonNull(secretKey);
     AipFace client = new AipFace(apiId, apiKey, secretKey);
-    client.setConnectionTimeoutInMillis(2000);
-    client.setSocketTimeoutInMillis(60000);
+    client.setConnectionTimeoutInMillis(baiduAiFaceApiKeyProperties.getClientConnectConfig().getConnectionTimeoutMillis());
+    client.setSocketTimeoutInMillis(baiduAiFaceApiKeyProperties.getClientConnectConfig().getConnectionTimeoutMillis());
     return client;
   }
 }
