@@ -1,18 +1,22 @@
 package xyz.mydev.baidu.ai.face;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
+import xyz.mydev.baidu.ai.face.client.bean.MatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
 import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -109,6 +113,40 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   }
 
 
+  /**
+   * 人脸认证
+   */
+  public MatchResult match(List<UserFaceMatchInfo> matchInfoList) {
+    prepareParamForMatchUser(matchInfoList);
+    return targetClientAdapter.match(matchInfoList);
+  }
+
+  private void prepareParamForMatchUser(List<UserFaceMatchInfo> matchInfoList) {
+    Objects.requireNonNull(matchInfoList);
+    if (CollectionUtils.isEmpty(matchInfoList) || matchInfoList.size() != 2) {
+      throw new IllegalArgumentException("matchInfoList invalid");
+    }
+
+    for (UserFaceMatchInfo info : matchInfoList) {
+      Objects.requireNonNull(info.getImage());
+      Objects.requireNonNull(info.getImageType());
+
+      if (info.getControlProperties() == null) {
+        info.setControlProperties(baiduAiFaceQualityControlProperties.getMatch());
+      }
+
+      ControlProperties controlProperties = info.getControlProperties();
+      Objects.requireNonNull(controlProperties);
+      String qualityControl = controlProperties.getQualityControl();
+      String livenessControl = controlProperties.getLivenessControl();
+      Objects.requireNonNull(qualityControl);
+      Objects.requireNonNull(livenessControl);
+    }
+
+
+  }
+
+
   private void prepareParamForUpdateUserFace(UserFaceInfo userFaceInfo) {
     prepareParamForAddUserFace(userFaceInfo);
   }
@@ -122,17 +160,18 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
     String userId = userFaceInfo.getUserId();
     String userInfo = userFaceInfo.getUserInfo();
     String image = userFaceInfo.getImage();
-    ControlProperties controlProperties = userFaceInfo.getControlProperties();
 
     if (StringUtils.isBlank(userId)) {
       throw new IllegalArgumentException();
     }
+    Objects.requireNonNull(image);
+
+    ControlProperties controlProperties = userFaceInfo.getControlProperties();
     Objects.requireNonNull(controlProperties);
     String qualityControl = controlProperties.getQualityControl();
     String livenessControl = controlProperties.getLivenessControl();
     Objects.requireNonNull(qualityControl);
     Objects.requireNonNull(livenessControl);
-    Objects.requireNonNull(image);
 
     boolean userInfoExists = StringUtils.isNotBlank(userInfo);
     HashMap<String, String> options = new HashMap<>(userInfoExists ? 4 : 2);

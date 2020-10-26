@@ -18,6 +18,7 @@ public class BaiduAiFaceQualityControlProperties implements InitializingBean {
   private ControlProperties searchSingle;
   private ControlProperties searchBatch;
   private ControlProperties userAuth;
+  private ControlProperties match;
 
   public BaiduAiFaceQualityControlProperties() {
     this.defaultControlProperties = new ControlProperties();
@@ -26,6 +27,7 @@ public class BaiduAiFaceQualityControlProperties implements InitializingBean {
     this.searchSingle = ControlProperties.buildNormal();
     this.searchBatch = ControlProperties.buildLow(80);
     this.userAuth = ControlProperties.buildNormal();
+    this.match = ControlProperties.buildNormal();
   }
 
   @Override
@@ -47,6 +49,9 @@ public class BaiduAiFaceQualityControlProperties implements InitializingBean {
       searchBatch = ControlProperties.buildLow(80);
     }
     if (userAuth == null) {
+      this.userAuth = ControlProperties.buildNormal();
+    }
+    if (match == null) {
       this.userAuth = ControlProperties.buildNormal();
     }
   }

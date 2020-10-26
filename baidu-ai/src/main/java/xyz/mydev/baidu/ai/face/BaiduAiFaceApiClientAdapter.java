@@ -1,15 +1,20 @@
 package xyz.mydev.baidu.ai.face;
 
 import com.baidu.aip.face.AipFace;
+import com.baidu.aip.face.MatchRequest;
 import org.json.JSONObject;
 import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
+import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
+import xyz.mydev.baidu.ai.face.client.bean.MatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 主要职责：
@@ -39,6 +44,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
   /**
    * 多个人脸搜索接口
    */
+  @Override
   public SearchBatchResult searchBatch(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.multiSearch(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
     return SearchBatchResult.convert(jsonObject.toMap());
@@ -48,6 +54,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 单个人脸搜索接口/人脸认证
    * 取决于是否在option中指定了userId
    */
+  @Override
   public SearchSingleResult searchSingle(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.search(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
     return SearchSingleResult.convert(jsonObject.toMap());
@@ -74,6 +81,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
   /**
    * 人脸删除接口
    */
+  @Override
   public CommonResult faceDelete(String userId, String groupId, String faceToken) {
     return faceDelete(userId, groupId, faceToken, null);
   }
@@ -81,9 +89,30 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
   /**
    * 人脸删除接口
    */
-  public CommonResult faceDelete(String userId, String groupId, String faceToken, HashMap<String, String> options) {
+  private CommonResult faceDelete(String userId, String groupId, String faceToken, HashMap<String, String> options) {
     JSONObject jsonObject = targetClient.faceDelete(userId, groupId, faceToken, options);
     return CommonResult.convert(jsonObject.toMap());
+  }
+
+
+  /**
+   * 人脸对比接口
+   * 两张人脸图片相似度对比：比对两张图片中人脸的相似度，并返回相似度分值
+   */
+  @Override
+  public MatchResult match(List<UserFaceMatchInfo> infoList) {
+
+    List<MatchRequest> inputs = new ArrayList<>(2);
+
+    for (UserFaceMatchInfo info : infoList) {
+      inputs.add(new MatchRequest(info.getImage(),
+        info.getImageType(),
+        info.getFaceType(),
+        info.getControlProperties().getQualityControl(),
+        info.getControlProperties().getLivenessControl()));
+    }
+
+    return MatchResult.convert(targetClient.match(inputs).toMap());
   }
 
 //  /**
@@ -189,17 +218,6 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
 //  public JSONObject videoFaceliveness(String sessionId, String video, HashMap<String, String> options) {
 //    return targetClient.videoFaceliveness(sessionId, video, options);
 //  }
-
-
-//  /**
-//   * TODO 人脸对比接口
-//   * 两张人脸图片相似度对比：比对两张图片中人脸的相似度，并返回相似度分值
-//   */
-//  @Override
-//  public JSONObject match(List<MatchRequest> input) {
-//    return targetClient.match(input);
-//  }
-
 //  /**
 //   * 在线活体检测接口
 //   */

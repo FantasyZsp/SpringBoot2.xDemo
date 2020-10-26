@@ -20,10 +20,6 @@ import java.util.HashMap;
 @Builder
 public class UserFaceInfo {
 
-  public static final String ACTION_TYPE_APPEND = "APPEND";
-  public static final String ACTION_TYPE_REPLACE = "REPLACE";
-
-
   @NotBlank
   private String groupId;
   @NotBlank
@@ -48,7 +44,7 @@ public class UserFaceInfo {
    * REPLACE : 当user_id不存在时, 则会注册这个user_id的用户
    * 默认使用UPDATE
    */
-  private String actionType = ACTION_TYPE_REPLACE;
+  private String actionType = Constants.ActionType.ACTION_TYPE_REPLACE;
 
   private ControlProperties controlProperties;
 

@@ -43,3 +43,9 @@ mydev:
           matchThreshold: 80
           maxFaceNum: 1
           maxUserNum: 1
+        match:
+          qualityControl: NORMAL
+          livenessControl: NORMAL
+          matchThreshold: 80
+          maxFaceNum: 1
+          maxUserNum: 1

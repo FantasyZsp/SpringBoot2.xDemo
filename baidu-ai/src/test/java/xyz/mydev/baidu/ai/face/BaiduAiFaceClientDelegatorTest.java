@@ -9,14 +9,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
+import xyz.mydev.baidu.ai.face.client.bean.MatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
 import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
+import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
 import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.common.utils.JsonUtil;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -123,6 +126,21 @@ public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
     System.out.println(JsonUtil.obj2StringPretty(searchSingleResult));
     Optional.ofNullable(searchSingleResult.getResult()).ifPresent(x -> System.out.println(x.getFaceToken()));
     Optional.ofNullable(searchSingleResult.getResult()).ifPresent(x -> System.out.println(x.getUserList()));
+  }
+
+  @Test
+  public void match() {
+    MatchResult matchResult = delegator.match(List.of(UserFaceMatchInfo.builder()
+        .image("xx")
+        .imageType(Constants.ImageType.FACE_TOKEN)
+        .build(),
+      UserFaceMatchInfo.builder()
+        .image("xxx")
+        .imageType(Constants.ImageType.URL)
+        .build()));
+
+    System.out.println(JsonUtil.obj2StringPretty(matchResult));
+    Optional.ofNullable(matchResult.getResult()).ifPresent(x -> System.out.println(x.getFaceToken()));
   }
 
   @Override
