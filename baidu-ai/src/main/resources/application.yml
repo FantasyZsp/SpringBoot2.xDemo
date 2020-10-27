@@ -1,51 +1,55 @@
 mydev:
   baidu:
     ai:
-      face-api-key:
-        api-id: 1
-        api-key: 2
-        secret-key: 3
-      face-quality-control:
-        defaultControlProperties:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-          maxFaceNum: 1
-          maxUserNum: 10
-        # DEFAULT NORMAL
-        addUser:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-        # DEFAULT NORMAL
-        updateUser:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-        # DEFAULT NORMAL
-        searchSingle:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-          maxFaceNum: 1
-          maxUserNum: 1
-        # DEFAULT LOW
-        searchBatch:
-          qualityControl: LOW
-          livenessControl: LOW
-          matchThreshold: 80
-          maxFaceNum: 10
-          maxUserNum: 10
-        # DEFAULT NORMAL
-        userAuth:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-          maxFaceNum: 1
-          maxUserNum: 1
-        match:
-          qualityControl: NORMAL
-          livenessControl: NORMAL
-          matchThreshold: 80
-          maxFaceNum: 1
-          maxUserNum: 1
+      face:
+        face-api-key:
+          api-id: 1
+          api-key: 2
+          secret-key: 3
+          client-connect-config:
+            connection-timeout-millis: 2000
+            socket-timeout-millis: 60000
+        face-quality-control:
+          defaultControlProperties:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+            maxFaceNum: 1
+            maxUserNum: 10
+          # DEFAULT NORMAL
+          addUser:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+          # DEFAULT NORMAL
+          updateUser:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+          # DEFAULT NORMAL
+          searchSingle:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+            maxFaceNum: 1
+            maxUserNum: 1
+          # DEFAULT LOW
+          searchBatch:
+            qualityControl: LOW
+            livenessControl: LOW
+            matchThreshold: 80
+            maxFaceNum: 10
+            maxUserNum: 10
+          # DEFAULT NORMAL
+          userAuth:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+            maxFaceNum: 1
+            maxUserNum: 1
+          match:
+            qualityControl: NORMAL
+            livenessControl: NORMAL
+            matchThreshold: 80
+            maxFaceNum: 1
+            maxUserNum: 1

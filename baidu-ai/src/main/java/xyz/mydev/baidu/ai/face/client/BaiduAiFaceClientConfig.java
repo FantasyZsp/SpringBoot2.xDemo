@@ -15,14 +15,14 @@ import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 @Configuration
 public class BaiduAiFaceClientConfig {
   @Bean
-  @ConfigurationProperties("mydev.baidu.ai.face-quality-control")
+  @ConfigurationProperties("mydev.baidu.ai.face.face-quality-control")
   @ConditionalOnMissingBean
   public BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties() {
     return new BaiduAiFaceQualityControlProperties();
   }
 
   @Bean
-  @ConfigurationProperties("mydev.baidu.ai.face-api-key")
+  @ConfigurationProperties("mydev.baidu.ai.face.face-api-key")
   @ConditionalOnMissingBean
   public BaiduAiFaceApiKeyProperties baiduAiFaceApiKeyProperties() {
     return new BaiduAiFaceApiKeyProperties();
