@@ -1,4 +1,4 @@
-package jdk;
+package xyz.mydev.proxy.demo.jdk;
 
 import lombok.extern.slf4j.Slf4j;
 

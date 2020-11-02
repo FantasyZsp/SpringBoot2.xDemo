@@ -1,4 +1,4 @@
-package jdk;
+package xyz.mydev.proxy.demo.jdk;
 
 /**
  * @author ZSP

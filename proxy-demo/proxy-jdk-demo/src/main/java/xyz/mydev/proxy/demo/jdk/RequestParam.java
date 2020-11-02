@@ -1,4 +1,4 @@
-package jdk;
+package xyz.mydev.proxy.demo.jdk;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
