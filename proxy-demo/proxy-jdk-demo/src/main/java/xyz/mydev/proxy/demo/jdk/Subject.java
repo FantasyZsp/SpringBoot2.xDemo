@@ -1,4 +1,4 @@
-package xyz.mydev.jdk;
+package jdk;
 
 /**
  * @author ZSP

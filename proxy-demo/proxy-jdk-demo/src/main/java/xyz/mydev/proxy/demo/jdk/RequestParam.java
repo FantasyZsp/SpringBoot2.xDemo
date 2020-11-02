@@ -1,4 +1,4 @@
-package xyz.mydev.jdk;
+package jdk;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
