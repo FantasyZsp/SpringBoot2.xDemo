@@ -1,8 +1,11 @@
 package xyz.mydev.baidu.ai.face;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
 import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
 import xyz.mydev.baidu.ai.face.client.bean.MatchResult;
@@ -12,6 +15,7 @@ import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
 import xyz.mydev.baidu.ai.face.constant.Constants;
+import xyz.mydev.baidu.ai.face.exception.RetryableException;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.baidu.ai.face.property.ControlProperties;
 
@@ -29,11 +33,13 @@ import java.util.Objects;
  *
  * @author ZSP
  */
-public class BaiduAiFaceClientDelegator implements InitializingBean {
+@Slf4j
+public class BaiduAiFaceClientDelegator {
 
   private final BaiduAiFaceApiClientAdapter targetClientAdapter;
   private final BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties;
 
+  private static final String RECOVER_CODE = "-200";
 
   public BaiduAiFaceClientDelegator(BaiduAiFaceApiClientAdapter targetClientAdapter,
                                     BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties) {
@@ -45,6 +51,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 注册人脸
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverAddUser", stateful = false)
   public AddUserResult addUser(UserFaceInfo userFaceInfo) {
     if (userFaceInfo.getControlProperties() == null) {
       userFaceInfo.setControlProperties(baiduAiFaceQualityControlProperties.getAddUser());
@@ -56,6 +63,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 更新人脸
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverAddUser", stateful = false)
   public AddUserResult updateUser(UserFaceInfo userFaceInfo) {
     if (userFaceInfo.getControlProperties() == null) {
       userFaceInfo.setControlProperties(baiduAiFaceQualityControlProperties.getUpdateUser());
@@ -67,6 +75,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 删除人脸
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverDeleteUserFace", stateful = false)
   public CommonResult deleteUserFace(String userId, String groupId, String faceToken) {
     Objects.requireNonNull(groupId);
     Objects.requireNonNull(userId);
@@ -76,7 +85,9 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
 
   /**
    * 多个人脸搜索
+   * 仅返回符合阈值的用户信息
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverSearchBatch", stateful = false)
   public SearchBatchResult searchBatch(UserFaceSearchInfo searchInfo) {
     if (searchInfo.getControlProperties() == null) {
       searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getSearchBatch());
@@ -88,6 +99,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 单人脸搜索
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverSearchSingleOrUserAuth", stateful = false)
   public SearchSingleResult searchSingle(UserFaceSearchInfo searchInfo) {
     if (searchInfo.getControlProperties() == null) {
       searchInfo.setControlProperties(baiduAiFaceQualityControlProperties.getSearchSingle());
@@ -100,6 +112,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 人脸认证
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverSearchSingleOrUserAuth", stateful = false)
   public SearchSingleResult userAuth(UserFaceSearchInfo searchInfo) {
     if (StringUtils.isBlank(Objects.requireNonNull(searchInfo).getUserId())) {
       throw new IllegalArgumentException("userAuth requires userId");
@@ -116,6 +129,7 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
   /**
    * 人脸认证
    */
+  @Retryable(value = {RetryableException.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverMatch", stateful = false)
   public MatchResult match(List<UserFaceMatchInfo> matchInfoList) {
     prepareParamForMatchUser(matchInfoList);
     return targetClientAdapter.match(matchInfoList);
@@ -234,7 +248,34 @@ public class BaiduAiFaceClientDelegator implements InitializingBean {
     searchInfo.setOptions(options);
   }
 
-  @Override
-  public void afterPropertiesSet() throws Exception {
+
+  @Recover
+  public AddUserResult recoverAddUser(Exception e, UserFaceInfo userFaceInfo) {
+    log.error("recover after AddUser retry ex: {}", e.getMessage());
+    return AddUserResult.recoverResult(RECOVER_CODE, e.getMessage());
+  }
+
+  @Recover
+  public CommonResult recoverDeleteUserFace(Exception e, String userId, String groupId, String faceToken) {
+    log.error("recover after DeleteUserFace retry ex: {}", e.getMessage());
+    return CommonResult.recoverCommonResult(RECOVER_CODE, e.getMessage());
+  }
+
+  @Recover
+  public SearchBatchResult recoverSearchBatch(Exception e, UserFaceSearchInfo searchInfo) {
+    log.error("recover after SearchBatch retry ex: {}", e.getMessage());
+    return SearchBatchResult.recoverSearchBatchResult(RECOVER_CODE, e.getMessage());
+  }
+
+  @Recover
+  public SearchSingleResult recoverSearchSingleOrUserAuth(Exception e, UserFaceSearchInfo searchInfo) {
+    log.error("recover after SearchSingleOrUserAuth retry ex: {}", e.getMessage());
+    return SearchSingleResult.recoverSearchSingleResult(RECOVER_CODE, e.getMessage());
+  }
+
+  @Recover
+  public MatchResult recoverMatch(Exception e, List<UserFaceMatchInfo> matchInfoList) {
+    log.error("recover after Match retry ex: {}", e.getMessage());
+    return MatchResult.recoverMatchResult(RECOVER_CODE, e.getMessage());
   }
 }

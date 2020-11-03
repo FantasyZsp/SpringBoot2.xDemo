@@ -19,8 +19,14 @@ import xyz.mydev.baidu.ai.face.constant.Constants;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.common.utils.JsonUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author ZSP
@@ -141,6 +147,40 @@ public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
 
     System.out.println(JsonUtil.obj2StringPretty(matchResult));
     Optional.ofNullable(matchResult.getResult()).ifPresent(x -> System.out.println(x.getFaceToken()));
+  }
+
+  @Test
+  public void searchBatchQpsTest() throws InterruptedException {
+
+    ExecutorService executorService = Executors.newFixedThreadPool(20);
+    baiduAiFaceQualityControlProperties.getSearchBatch().setMatchThreshold(99);
+
+
+    List<Callable<SearchBatchResult>> taskList = new ArrayList<>();
+    for (int i = 0; i < 30; i++) {
+      Callable<SearchBatchResult> callable = () ->
+        delegator.searchBatch(UserFaceSearchInfo.builder()
+          .groupIdList(groupIdTest)
+          .image(image)
+          .imageType(Constants.ImageType.URL)
+          .build());
+
+      taskList.add(callable);
+    }
+
+    List<Future<SearchBatchResult>> futures = executorService.invokeAll(taskList);
+
+    AtomicLong atomicLong = new AtomicLong();
+    for (Future<SearchBatchResult> future : futures) {
+      try {
+        log.info("num:{}, result: {}", atomicLong.incrementAndGet(), future.get().getErrorCode());
+      } catch (Exception e) {
+        e.printStackTrace();
+        break;
+      }
+    }
+
+
   }
 
   @Override

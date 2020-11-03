@@ -11,6 +11,8 @@ import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
 import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
+import xyz.mydev.baidu.ai.face.exception.RateLimitException;
+import xyz.mydev.baidu.ai.face.support.RequestLimiter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +47,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 多个人脸搜索接口
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:searchBatch", exceptionClass = RateLimitException.class)
   public SearchBatchResult searchBatch(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.multiSearch(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
     return SearchBatchResult.convert(jsonObject.toMap());
@@ -55,6 +58,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 取决于是否在option中指定了userId
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:searchSingle", exceptionClass = RateLimitException.class)
   public SearchSingleResult searchSingle(UserFaceSearchInfo info) {
     JSONObject jsonObject = targetClient.search(info.getImage(), info.getImageType(), info.getGroupIdList(), info.getOptions());
     return SearchSingleResult.convert(jsonObject.toMap());
@@ -64,6 +68,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 人脸注册接口
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:addUser", exceptionClass = RateLimitException.class)
   public AddUserResult addUser(UserFaceInfo userFaceInfo) {
     JSONObject jsonObject = targetClient.addUser(userFaceInfo.getImage(), userFaceInfo.getImageType(), userFaceInfo.getGroupId(), userFaceInfo.getUserId(), userFaceInfo.getOptions());
     return AddUserResult.convert(jsonObject.toMap());
@@ -73,6 +78,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 人脸更新接口
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:updateUser", exceptionClass = RateLimitException.class)
   public AddUserResult updateUser(UserFaceInfo userFaceInfo) {
     JSONObject jsonObject = targetClient.updateUser(userFaceInfo.getImage(), userFaceInfo.getImageType(), userFaceInfo.getGroupId(), userFaceInfo.getUserId(), userFaceInfo.getOptions());
     return AddUserResult.convert(jsonObject.toMap());
@@ -82,6 +88,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 人脸删除接口
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:faceDelete", exceptionClass = RateLimitException.class)
   public CommonResult faceDelete(String userId, String groupId, String faceToken) {
     return faceDelete(userId, groupId, faceToken, null);
   }
@@ -100,6 +107,7 @@ public class BaiduAiFaceApiClientAdapter implements IBaiduAiFaceApiClientAdapter
    * 两张人脸图片相似度对比：比对两张图片中人脸的相似度，并返回相似度分值
    */
   @Override
+  @RequestLimiter(name = "BaiduAiFaceApiClientAdapter:match", exceptionClass = RateLimitException.class)
   public MatchResult match(List<UserFaceMatchInfo> infoList) {
 
     List<MatchRequest> inputs = new ArrayList<>(2);

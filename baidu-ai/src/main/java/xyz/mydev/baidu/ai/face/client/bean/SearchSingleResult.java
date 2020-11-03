@@ -37,4 +37,12 @@ public class SearchSingleResult extends CommonResult {
   public static SearchSingleResult convert(Map<String, Object> map) {
     return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchSingleResult.class);
   }
+
+  public static SearchSingleResult recoverSearchSingleResult(String errorCode, String errorMsg) {
+    SearchSingleResult searchSingleResult = new SearchSingleResult();
+    searchSingleResult.setErrorCode(errorCode);
+    searchSingleResult.setErrorMsg(errorMsg);
+    searchSingleResult.setTimestamp(System.currentTimeMillis());
+    return searchSingleResult;
+  }
 }

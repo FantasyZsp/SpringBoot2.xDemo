@@ -37,4 +37,12 @@ public class MatchResult extends CommonResult {
   public static MatchResult convert(Map<String, Object> map) {
     return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), MatchResult.class);
   }
+
+  public static MatchResult recoverMatchResult(String errorCode, String errorMsg) {
+    MatchResult matchResult = new MatchResult();
+    matchResult.setErrorCode(errorCode);
+    matchResult.setErrorMsg(errorMsg);
+    matchResult.setTimestamp(System.currentTimeMillis());
+    return matchResult;
+  }
 }

@@ -34,4 +34,12 @@ public class AddUserResult extends CommonResult {
   public static AddUserResult convert(Map<String, Object> map) {
     return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), AddUserResult.class);
   }
+
+  public static AddUserResult recoverResult(String errorCode, String errorMsg) {
+    AddUserResult addUserResult = new AddUserResult();
+    addUserResult.setErrorCode(errorCode);
+    addUserResult.setErrorMsg(errorMsg);
+    addUserResult.setTimestamp(System.currentTimeMillis());
+    return addUserResult;
+  }
 }

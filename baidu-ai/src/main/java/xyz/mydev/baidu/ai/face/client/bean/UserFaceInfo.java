@@ -44,6 +44,7 @@ public class UserFaceInfo {
    * REPLACE : 当user_id不存在时, 则会注册这个user_id的用户
    * 默认使用UPDATE
    */
+  @Builder.Default
   private String actionType = Constants.ActionType.ACTION_TYPE_REPLACE;
 
   private ControlProperties controlProperties;

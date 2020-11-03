@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.annotation.EnableRetry;
 import xyz.mydev.baidu.ai.face.BaiduAiFaceApiClientAdapter;
 import xyz.mydev.baidu.ai.face.BaiduAiFaceClientDelegator;
 import xyz.mydev.baidu.ai.face.property.BaiduAiFaceApiKeyProperties;
@@ -13,6 +14,7 @@ import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
  * @author ZSP
  */
 @Configuration
+@EnableRetry
 public class BaiduAiFaceClientConfig {
   @Bean
   @ConfigurationProperties("mydev.baidu.ai.face.face-quality-control")
@@ -30,9 +32,15 @@ public class BaiduAiFaceClientConfig {
 
 
   @Bean
-  public BaiduAiFaceClientDelegator baiduAiFaceClientDelegator(BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties,
-                                                               BaiduAiFaceCollectClientFactory faceCollectClientFactory) {
-    return new BaiduAiFaceClientDelegator(new BaiduAiFaceApiClientAdapter(faceCollectClientFactory.getClient()), baiduAiFaceQualityControlProperties);
+  public BaiduAiFaceApiClientAdapter baiduAiFaceApiClientAdapter(BaiduAiFaceCollectClientFactory faceCollectClientFactory) {
+    return new BaiduAiFaceApiClientAdapter(faceCollectClientFactory.getClient());
+  }
+
+
+  @Bean
+  public BaiduAiFaceClientDelegator baiduAiFaceClientDelegator(BaiduAiFaceApiClientAdapter baiduAiFaceApiClientAdapter,
+                                                               BaiduAiFaceQualityControlProperties baiduAiFaceQualityControlProperties) {
+    return new BaiduAiFaceClientDelegator(baiduAiFaceApiClientAdapter, baiduAiFaceQualityControlProperties);
   }
 
   @Bean

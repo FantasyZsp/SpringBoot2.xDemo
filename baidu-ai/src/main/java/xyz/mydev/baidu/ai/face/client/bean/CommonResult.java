@@ -18,7 +18,7 @@ import java.util.Objects;
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CommonResult {
-  private Integer errorCode;
+  private String errorCode;
   private Long logId;
   private String errorMsg;
 
@@ -29,11 +29,19 @@ public class CommonResult {
 
   @JsonIgnore
   public boolean success() {
-    return Objects.equals(errorCode, 0);
+    return Objects.equals(errorCode, "0");
   }
 
   public static CommonResult convert(Map<String, Object> map) {
     return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), CommonResult.class);
+  }
+
+  public static CommonResult recoverCommonResult(String errorCode, String errorMsg) {
+    CommonResult commonResult = new CommonResult();
+    commonResult.setErrorCode(errorCode);
+    commonResult.setErrorMsg(errorMsg);
+    commonResult.setTimestamp(System.currentTimeMillis());
+    return commonResult;
   }
 
 }

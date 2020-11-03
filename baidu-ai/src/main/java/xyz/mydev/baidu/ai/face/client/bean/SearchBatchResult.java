@@ -45,4 +45,12 @@ public class SearchBatchResult extends CommonResult {
   public static SearchBatchResult convert(Map<String, Object> map) {
     return JsonUtil.string2Obj(JsonUtil.obj2String(Objects.requireNonNull(map)), SearchBatchResult.class);
   }
+
+  public static SearchBatchResult recoverSearchBatchResult(String errorCode, String errorMsg) {
+    SearchBatchResult searchBatchResult = new SearchBatchResult();
+    searchBatchResult.setErrorCode(errorCode);
+    searchBatchResult.setErrorMsg(errorMsg);
+    searchBatchResult.setTimestamp(System.currentTimeMillis());
+    return searchBatchResult;
+  }
 }
