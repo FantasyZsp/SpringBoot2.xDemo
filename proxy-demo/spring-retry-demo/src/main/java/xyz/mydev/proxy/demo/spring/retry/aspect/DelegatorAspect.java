@@ -19,7 +19,7 @@ import xyz.mydev.proxy.demo.spring.retry.server.CommonResult;
 @Slf4j
 public class DelegatorAspect {
 
-  @Pointcut("execution(public xyz.mydev.proxy.demo.spring.retry.server.CommonResult xyz.mydev.proxy.demo.spring.retry.RetryBasedRetValServiceAdapter.*(..))")
+  @Pointcut("execution(public * xyz.mydev.proxy.demo.spring.retry.RetryBasedRetValServiceAdapter.*(..))")
   public void delegatorPointCut() {
   }
 

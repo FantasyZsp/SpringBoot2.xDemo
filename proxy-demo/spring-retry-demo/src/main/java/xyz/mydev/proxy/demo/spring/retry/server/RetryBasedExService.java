@@ -22,16 +22,16 @@ public class RetryBasedExService {
 
     if (true) {
       log.info("ex...");
-      throw new RemoteAccessException("RemoteAccessException....");
+      throw new RemoteAccessException("RuntimeException....");
     }
 
     return id + " invoke success";
   }
 
   @Recover
-  public String recover(RemoteAccessException e, String id) {
-    String recoverResult = "recover for id: " + id + "....";
-    log.error("recover after retry ex: {}", e.getMessage());
+  public String recover(RuntimeException e, String id) {
+    String recoverResult = "recover result for " + id;
+    log.error("recover invoking after retry ex: {}", e.getMessage());
     return recoverResult;
   }
 }

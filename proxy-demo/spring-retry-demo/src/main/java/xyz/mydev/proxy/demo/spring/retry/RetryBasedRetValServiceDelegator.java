@@ -5,6 +5,7 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import xyz.mydev.proxy.demo.spring.retry.server.AddUserResult;
 import xyz.mydev.proxy.demo.spring.retry.server.CommonResult;
 
 /**
@@ -25,11 +26,27 @@ public class RetryBasedRetValServiceDelegator {
     return retryBasedRetValServiceAdapter.retryTestBasedRetVal(id);
   }
 
+  @Retryable(value = {Exception.class}, maxAttempts = 3, backoff = @Backoff(delay = 10L, multiplier = 1), recover = "recoverAddUser", stateful = false)
+  public AddUserResult addUser(String id) {
+    return retryBasedRetValServiceAdapter.addUser(id);
+  }
+
   @Recover
   public CommonResult recover(Exception e, String id) {
     log.error("RetryBasedReturnValService recover after retry ex: {}", e.getMessage());
     String recoverResult = "RetryBasedReturnValService recover for id: " + id + "....";
     return CommonResult.builder()
+      .errorCode("201")
+      .errorMsg(recoverResult)
+      .result(null)
+      .build();
+  }
+
+  @Recover
+  public AddUserResult recoverAddUser(Exception e, String id) {
+    log.error("RetryBasedReturnValService recover after retry ex: {}", e.getMessage());
+    String recoverResult = "RetryBasedReturnValService recover for id: " + id + "....";
+    return AddUserResult.customBuilder()
       .errorCode("201")
       .errorMsg(recoverResult)
       .result(null)

@@ -3,6 +3,7 @@ package xyz.mydev.proxy.demo.spring.retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import xyz.mydev.proxy.demo.spring.retry.server.AddUserResult;
 import xyz.mydev.proxy.demo.spring.retry.server.CommonResult;
 import xyz.mydev.proxy.demo.spring.retry.server.RetryBasedExService;
 
@@ -31,6 +32,12 @@ public class ClientService {
 
   public CommonResult getRetVal(String id) {
     CommonResult result = retryBasedRetValServiceDelegator.retryTestBasedRetVal(id);
+    log.info("delegator: {}", result);
+    return result;
+  }
+
+  public AddUserResult addUser(String id) {
+    AddUserResult result = retryBasedRetValServiceDelegator.addUser(id);
     log.info("delegator: {}", result);
     return result;
   }

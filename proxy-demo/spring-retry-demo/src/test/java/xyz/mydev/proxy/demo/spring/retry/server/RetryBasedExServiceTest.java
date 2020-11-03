@@ -29,4 +29,11 @@ public class RetryBasedExServiceTest {
     CommonResult info = clientService.getRetVal("id");
     log.info("info: {}", info);
   }
+
+
+  @Test
+  public void testAddUser() {
+    AddUserResult info = clientService.addUser("id");
+    log.info("info: {}", info);
+  }
 }

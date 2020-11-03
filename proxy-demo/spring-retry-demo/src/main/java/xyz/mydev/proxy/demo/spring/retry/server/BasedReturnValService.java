@@ -32,5 +32,23 @@ public class BasedReturnValService {
       .build();
   }
 
+  public AddUserResult addUser(String id) {
+    log.info("base server invoke");
+
+    if (ThreadLocalRandom.current().nextBoolean()) {
+      log.info("addUser ex...");
+      return AddUserResult.customBuilder()
+        .errorMsg("addUser业务失败")
+        .errorCode("500")
+        .build();
+    }
+
+    return AddUserResult.customBuilder()
+      .errorCode("0")
+      .errorMsg("success")
+      .result(null)
+      .build();
+  }
+
 
 }
