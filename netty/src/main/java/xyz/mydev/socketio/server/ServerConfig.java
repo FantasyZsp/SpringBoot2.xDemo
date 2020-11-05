@@ -32,6 +32,11 @@ public class ServerConfig {
     config.setPort(9092);
     config.setTransports(Transport.POLLING, Transport.WEBSOCKET);
     config.setOrigin(":*:");
+
+    config.setPingTimeout(600_000);
+    config.setFirstDataTimeout(600_000);
+
+
     // 必须携带 roomKey 参数
     config.setAuthorizationListener(data -> {
       try {
