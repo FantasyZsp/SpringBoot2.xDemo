@@ -40,7 +40,7 @@ public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
   static String image = "xxx";
   static String userId = "testMyUserId";
   static String userInfo = "testMyUserInfo";
-  static String groupIdTest = "zspTestGroup";
+  static String groupIdTest = "studentAttendance";
 
   @Autowired
   private BaiduAiFaceClientDelegator delegator;
@@ -146,7 +146,7 @@ public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
         .build()));
 
     System.out.println(JsonUtil.obj2StringPretty(matchResult));
-    Optional.ofNullable(matchResult.getResult()).ifPresent(x -> System.out.println(x.getFaceToken()));
+    Optional.ofNullable(matchResult.getResult()).ifPresent(x -> System.out.println(x.getFaceList()));
   }
 
   @Test
