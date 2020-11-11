@@ -53,3 +53,8 @@ mydev:
             matchThreshold: 80
             maxFaceNum: 1
             maxUserNum: 1
+qiniu:
+  access_key: 1-2vT68noVfbTX525CFhvB
+  secret_key: 1
+  bucket: 1
+  domain: 1

@@ -14,19 +14,9 @@
   <dependencies>
 
     <dependency>
-      <groupId>com.baidu.aip</groupId>
-      <artifactId>java-sdk</artifactId>
-      <version>4.15.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>xyz.mydev</groupId>
+      <artifactId>ai-face-baidu-autoconfig</artifactId>
+      <version>1.0.4</version>
     </dependency>
 
     <dependency>
@@ -44,12 +34,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
       <version>${spring.boot.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>26.0-jre</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework.retry/spring-retry -->

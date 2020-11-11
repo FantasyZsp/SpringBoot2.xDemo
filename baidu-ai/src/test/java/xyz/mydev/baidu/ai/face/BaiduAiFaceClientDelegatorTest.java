@@ -5,18 +5,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import xyz.mydev.baidu.ai.face.client.bean.AddUserResult;
-import xyz.mydev.baidu.ai.face.client.bean.CommonResult;
-import xyz.mydev.baidu.ai.face.client.bean.MatchResult;
-import xyz.mydev.baidu.ai.face.client.bean.SearchBatchResult;
-import xyz.mydev.baidu.ai.face.client.bean.SearchSingleResult;
-import xyz.mydev.baidu.ai.face.client.bean.UserFaceInfo;
-import xyz.mydev.baidu.ai.face.client.bean.UserFaceMatchInfo;
-import xyz.mydev.baidu.ai.face.client.bean.UserFaceSearchInfo;
-import xyz.mydev.baidu.ai.face.constant.Constants;
-import xyz.mydev.baidu.ai.face.property.BaiduAiFaceQualityControlProperties;
+import xyz.mydev.ai.face.baidu.BaiduAiFaceClientDelegator;
+import xyz.mydev.ai.face.baidu.client.bean.AddUserResult;
+import xyz.mydev.ai.face.baidu.client.bean.CommonResult;
+import xyz.mydev.ai.face.baidu.client.bean.MatchResult;
+import xyz.mydev.ai.face.baidu.client.bean.SearchBatchResult;
+import xyz.mydev.ai.face.baidu.client.bean.SearchSingleResult;
+import xyz.mydev.ai.face.baidu.client.bean.UserFaceInfo;
+import xyz.mydev.ai.face.baidu.client.bean.UserFaceMatchInfo;
+import xyz.mydev.ai.face.baidu.client.bean.UserFaceSearchInfo;
+import xyz.mydev.ai.face.baidu.client.constant.Constants;
+import xyz.mydev.ai.face.baidu.client.property.BaiduAiFaceQualityControlProperties;
 import xyz.mydev.common.utils.JsonUtil;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Slf4j
+@SpringBootApplication
 public class BaiduAiFaceClientDelegatorTest implements InitializingBean {
 
 
