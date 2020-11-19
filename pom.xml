@@ -22,7 +22,8 @@
     <module>app-utils</module>
     <module>externalized-configuration</module>
     <module>delay-msg-queue</module>
-    <module>baidu-ai</module>
+<!--    <module>baidu-ai</module>-->
+    <module>spring-practice</module>
   </modules>
   <packaging>pom</packaging>
 
