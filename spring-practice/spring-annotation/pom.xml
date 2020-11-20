@@ -13,25 +13,34 @@
   <artifactId>spring-annotaion</artifactId>
   <dependencies>
 
-    <!-- Spring 5.0 最新发布版本 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
+    <!--    &lt;!&ndash; Spring 5.0 最新发布版本 &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.springframework</groupId>-->
+    <!--      <artifactId>spring-context</artifactId>-->
+    <!--    </dependency>-->
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
     </dependency>
 
-    <!-- Spring 5 索引依赖 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context-indexer</artifactId>
-      <version>${spring.version}</version>
-      <optional>true</optional>
-    </dependency>
+    <!--    &lt;!&ndash; Spring 5 索引依赖 &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.springframework</groupId>-->
+    <!--      <artifactId>spring-context-indexer</artifactId>-->
+    <!--      <version>${spring.version}</version>-->
+    <!--      <optional>true</optional>-->
+    <!--    </dependency>-->
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sishu</groupId>
+      <artifactId>redis-lock-starter</artifactId>
+      <version>1.1.4</version>
+    </dependency>
   </dependencies>
 
 

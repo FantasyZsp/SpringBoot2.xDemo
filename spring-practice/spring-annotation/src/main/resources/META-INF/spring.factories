@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=xyz.mydev.spring.annotation.config.TestAutoConfiguration

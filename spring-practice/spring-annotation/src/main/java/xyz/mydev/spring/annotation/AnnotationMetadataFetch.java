@@ -1,5 +1,7 @@
 package xyz.mydev.spring.annotation;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
@@ -10,9 +12,15 @@ import java.util.Set;
 
 
 @TransactionalService
+@Slf4j
 public class AnnotationMetadataFetch {
 
-  public static void main(String[] args) throws IOException {
+
+  public AnnotationMetadataFetch() {
+    log.info("AnnotationMetadataFetch instant");
+  }
+
+  public static void test(String[] args) throws IOException {
     // @TransactionalService 标注在当前类 TransactionalServiceAnnotationMetadataBootstrap
     String className = AnnotationMetadataFetch.class.getName();
     // 构建 MetadataReaderFactory 实例
@@ -31,5 +39,11 @@ public class AnnotationMetadataFetch {
       });
 
     });
+  }
+
+  @Bean
+  public String testAnnotationMetadataFetchBean() {
+    log.info("testAnnotationMetadataFetchBean instant");
+    return "testAnnotationMetadataFetchBean";
   }
 }
