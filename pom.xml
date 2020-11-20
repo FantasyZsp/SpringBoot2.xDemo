@@ -24,6 +24,8 @@
     <module>delay-msg-queue</module>
     <module>baidu-ai</module>
     <module>flink-demo</module>
+    <!--    <module>baidu-ai</module>-->
+    <module>spring-practice</module>
   </modules>
   <packaging>pom</packaging>
 
