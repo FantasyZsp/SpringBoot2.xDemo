@@ -61,6 +61,12 @@ public class MapTest extends RootTest {
     System.out.println(mapCache.containsKey("1"));
     System.out.println(mapCache.containsKey("2"));
     System.out.println(mapCache.containsKey("3"));
+
+
+    Person current3 = mapCache.putIfAbsent("3", Person.of("3", "转瞬即逝333", "嘤嘤嘤333"), 10L, TimeUnit.SECONDS);
+    Person current4 = mapCache.putIfAbsent("4", Person.of("4", "转瞬即逝444", "嘤嘤嘤444"), 10L, TimeUnit.SECONDS);
+    System.out.println(current3);
+    System.out.println(current4);
     ThreadUtils.join(2000);
     System.out.println(mapCache.containsKey("3"));
 
