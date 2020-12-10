@@ -1,4 +1,4 @@
-package xyz.mydev.spring.annotation;
+package com.sishu;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +7,15 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Import;
-import xyz.mydev.ComponentNeedImport;
 
 /**
  * @author ZSP
  */
 @SpringBootApplication
 @Slf4j
-@Import(ComponentNeedImport.class)
-public class SpringFactoryDemo implements ApplicationRunner {
+public class PackageTestApp implements ApplicationRunner {
 
-  public SpringFactoryDemo() {
+  public PackageTestApp() {
     log.info("SpringFactoryDemo instant");
   }
 
@@ -26,7 +23,7 @@ public class SpringFactoryDemo implements ApplicationRunner {
   private BusinessService businessService;
 
   public static void main(String[] args) {
-    ConfigurableApplicationContext run = SpringApplication.run(SpringFactoryDemo.class, args);
+    ConfigurableApplicationContext run = SpringApplication.run(PackageTestApp.class, args);
 
     run.close();
 

@@ -6,11 +6,12 @@
     <artifactId>spring-practice</artifactId>
     <groupId>xyz.mydev</groupId>
     <version>0.0.2</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>spring-annotaion</artifactId>
+  <artifactId>package-test</artifactId>
+
+
   <dependencies>
 
     <!--    &lt;!&ndash; Spring 5.0 最新发布版本 &ndash;&gt;-->
