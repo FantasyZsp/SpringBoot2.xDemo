@@ -27,3 +27,4 @@ nbdist/
 *.nphd
 *.map
 *.ref
+*.log
