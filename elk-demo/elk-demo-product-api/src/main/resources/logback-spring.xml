@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <appender name="LOGSTASH-PRODUCT" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+  <!--  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">-->
+  <!--    <destination>localhost:5000</destination>-->
+  <!--    <encoder>-->
+  <!--      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+  <!--      <charset>UTF-8</charset>-->
+  <!--    </encoder>-->
+  <!--  </appender>-->
+
+  <appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
     <destination>localhost:5000</destination>
     <encoder>
       <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
       <charset>UTF-8</charset>
     </encoder>
+    <topic>test</topic>
+    <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
+    <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+    <producerConfig>bootstrap.servers=192.168.0.66:9092</producerConfig>
+    <appender-ref ref="CONSOLE"/>
   </appender>
+
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
   <root level="INFO">
-    <appender-ref ref="LOGSTASH-PRODUCT"/>
+    <appender-ref ref="KAFKA"/>
     <appender-ref ref="CONSOLE"/>
   </root>
 </configuration>
