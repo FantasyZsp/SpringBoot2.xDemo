@@ -8,22 +8,29 @@
   <!--    </encoder>-->
   <!--  </appender>-->
 
-  <appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
-    <destination>localhost:5000</destination>
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-      <charset>UTF-8</charset>
-    </encoder>
-    <topic>test</topic>
-    <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
-    <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
-    <producerConfig>bootstrap.servers=192.168.0.66:9092</producerConfig>
-    <appender-ref ref="CONSOLE"/>
-  </appender>
+  <!--  <appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">-->
+  <!--    <destination>localhost:5000</destination>-->
+  <!--    <encoder>-->
+  <!--      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+  <!--      <charset>UTF-8</charset>-->
+  <!--    </encoder>-->
+  <!--    <topic>test</topic>-->
+  <!--    <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>-->
+  <!--    <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>-->
+  <!--    <producerConfig>bootstrap.servers=192.168.0.66:9092</producerConfig>-->
+  <!--    <appender-ref ref="CONSOLE"/>-->
+  <!--  </appender>-->
 
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} [%tid] - %msg%n</pattern>
+    </layout>
+  </appender>
+
   <root level="INFO">
-    <appender-ref ref="KAFKA"/>
+    <!--    <appender-ref ref="KAFKA"/>-->
     <appender-ref ref="CONSOLE"/>
   </root>
 </configuration>
