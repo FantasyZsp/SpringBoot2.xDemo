@@ -3,29 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>springboot2</artifactId>
+    <artifactId>elk-demo</artifactId>
     <groupId>xyz.mydev</groupId>
     <version>0.0.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jdk</artifactId>
+  <artifactId>elk-demo-product-api</artifactId>
+
   <dependencies>
     <dependency>
-      <groupId>xyz.mydev</groupId>
-      <artifactId>utils</artifactId>
-      <version>0.0.2</version>
-      <scope>compile</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
-      <version>3.2.8</version>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>6.5</version>
     </dependency>
+
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-websocket</artifactId>
-      <version>${spring.version}</version>
+      <groupId>com.github.danielwegener</groupId>
+      <artifactId>logback-kafka-appender</artifactId>
+      <version>0.2.0-RC2</version>
     </dependency>
 
 
@@ -35,5 +35,7 @@
       <artifactId>apm-toolkit-logback-1.x</artifactId>
       <version>8.3.0</version>
     </dependency>
+
   </dependencies>
+
 </project>

@@ -26,6 +26,7 @@
     <module>flink-demo</module>
     <!--    <module>baidu-ai</module>-->
     <module>spring-practice</module>
+    <module>elk-demo</module>
   </modules>
   <packaging>pom</packaging>
 
