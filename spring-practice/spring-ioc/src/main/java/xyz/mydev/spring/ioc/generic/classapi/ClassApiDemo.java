@@ -3,9 +3,12 @@ package xyz.mydev.spring.ioc.generic.classapi;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.core.GenericTypeResolver;
+import org.springframework.core.ResolvableType;
 
 import java.lang.reflect.Method;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,6 +60,63 @@ public class ClassApiDemo {
 
     GenericUtils.displayReturnTypeGenericInfo(aClass, List.class, "abstractGenericMethod", List.class);
 
+    System.out.println(GenericTypeResolver.getTypeVariableMap(GenericBean.class));
+
+  }
+
+  @Test
+  public void testResolvableType() {
+    exampleResolvableTypeApi();
+
+  }
+
+
+  @Test
+  public void testMethodParameter() {
+
+//    MethodParameter
+
+
+  }
+
+  private HashMap<Integer, List<String>> myMap;
+
+  public void exampleResolvableTypeApi() {
+    ResolvableType t;
+    try {
+      t = ResolvableType.forField(getClass().getDeclaredField("myMap"));
+    } catch (NoSuchFieldException e) {
+      throw new RuntimeException(e);
+    }
+
+    // 所见即所得 java.util.HashMap<java.lang.Integer, java.util.List<java.lang.String>>
+    System.out.println(t);
+    // class java.util.HashMap
+    System.out.println(t.resolve());
+    // java.util.AbstractMap<java.lang.Integer, java.util.List<java.lang.String>>
+    System.out.println(t.getSuperType());
+
+    // java.util.Map<java.lang.Integer, java.util.List<java.lang.String>>
+    System.out.println(t.asMap());
+
+    // java.lang.Integer
+    System.out.println(t.getGeneric(0));
+    // class java.lang.Integer
+    System.out.println(t.getGeneric(0).resolve());
+    // class java.lang.Integer
+    System.out.println(t.getGeneric(0).getRawClass());
+
+    // java.util.List<java.lang.String>
+    System.out.println(t.getGeneric(1));
+
+    // interface java.util.List
+    System.out.println(t.getGeneric(1).resolve());
+    // interface java.util.List
+    System.out.println(t.getGeneric(1).getRawClass());
+    // class java.lang.String
+    System.out.println(t.resolveGeneric(1, 0));
+    // java.lang.String
+    System.out.println(t.getGeneric(1).getGeneric(0));
   }
 
 }

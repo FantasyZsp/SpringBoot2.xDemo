@@ -5,6 +5,9 @@ import org.springframework.core.GenericTypeResolver;
 import java.lang.reflect.Method;
 
 /**
+ * GenericTypeResolver 处理非集合类型泛型
+ * GenericCollectionTypeResolver 处理集合类型泛型,4.3以上废弃
+ *
  * @author ZSP
  */
 public class GenericUtils {
