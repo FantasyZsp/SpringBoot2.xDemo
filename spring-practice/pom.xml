@@ -12,6 +12,7 @@
     <module>spring-annotation</module>
     <module>package-test</module>
     <module>spring-aop</module>
+    <module>spring-ioc</module>
   </modules>
   <modelVersion>4.0.0</modelVersion>
 
