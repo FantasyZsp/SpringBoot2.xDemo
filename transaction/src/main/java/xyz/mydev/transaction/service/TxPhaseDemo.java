@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.core.ResolvableType;
+import org.springframework.core.ResolvableTypeProvider;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
@@ -30,13 +32,20 @@ public class TxPhaseDemo {
 
   @Transactional
   public void save(Integer id) {
-    Girl girl = new Girl();
-    girl.setId(id);
-    girl.setAge(1);
-    girl.setCupSize("D");
+    Girl girl = Girl.build(1);
     girlService.save(girl);
     log.info("publish info ");
     applicationEventPublisher.publishEvent(new GirlEvent(girl));
+  }
+
+
+  @Transactional
+  public void saveWithGenericEvent(Integer id) {
+    Girl girl = Girl.build(1);
+    girlService.save(girl);
+    log.info("publish info ");
+    applicationEventPublisher.publishEvent(new MyGenericEvent<>(girl));
+    applicationEventPublisher.publishEvent(new MyGenericEvent<>(new Object()));
   }
 
 
@@ -44,6 +53,27 @@ public class TxPhaseDemo {
   @TransactionalEventListener
   public void handleGirlSaveEvent(GirlEvent girlEvent) {
     log.info("receive info : {}", girlEvent.getData());
+  }
+
+  @Async
+  @TransactionalEventListener
+  public void handleGirlSaveEvent222(Girl girlEvent) {
+    log.info("receive Girl info : {}", girlEvent);
+  }
+
+  @Async
+  @TransactionalEventListener
+  public void handleGirlSaveMyGenericEvent(MyGenericEvent<Girl> girlEvent) {
+    log.info("handleGirlSaveMyGenericEvent receive Girl info : {}", girlEvent);
+  }
+
+  /**
+   * 监听到全部的，泛型事件具有继承性
+   */
+  @Async
+  @TransactionalEventListener
+  public void handleGirlSaveMyGenericEventObject(MyGenericEvent<Object> girlEvent) {
+    log.info("handleGirlSaveMyGenericEventObject receive Girl info : {}", girlEvent);
   }
 
 
@@ -58,5 +88,16 @@ class GirlEvent extends ApplicationEvent {
   public GirlEvent(Girl girl) {
     super(girl);
     this.data = girl;
+  }
+}
+
+class MyGenericEvent<T> extends ApplicationEvent implements ResolvableTypeProvider {
+  public MyGenericEvent(T source) {
+    super(source);
+  }
+
+  @Override
+  public ResolvableType getResolvableType() {
+    return ResolvableType.forClassWithGenerics(getClass(), ResolvableType.forInstance(getSource()));
   }
 }
