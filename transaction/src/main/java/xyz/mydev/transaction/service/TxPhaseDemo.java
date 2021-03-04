@@ -101,3 +101,40 @@ class MyGenericEvent<T> extends ApplicationEvent implements ResolvableTypeProvid
     return ResolvableType.forClassWithGenerics(getClass(), ResolvableType.forInstance(getSource()));
   }
 }
+
+class ThreadTestSleep {
+
+  public static void main(String[] args) {
+    Thread thread = new Thread(() -> {
+
+
+      while (true) {
+        long start = System.currentTimeMillis();
+
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+
+        try {
+          Thread.sleep(1000 * 10);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+
+        long end = System.currentTimeMillis();
+
+        System.out.println("耗时: " + (end - start));
+
+
+      }
+
+
+    });
+    thread.start();
+
+  }
+
+
+}
