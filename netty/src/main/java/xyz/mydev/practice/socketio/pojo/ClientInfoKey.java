@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.pojo;
+package xyz.mydev.practice.socketio.pojo;
 
 interface ClientInfoKey {
   String ROOM_KEY = "roomKey";

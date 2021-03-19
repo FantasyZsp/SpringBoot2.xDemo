@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.pojo;
+package xyz.mydev.practice.socketio.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

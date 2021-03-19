@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.server;
+package xyz.mydev.practice.socketio.server;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import static xyz.mydev.socketio.MessageHubConstants.ROOM_KEY;
+import static xyz.mydev.practice.socketio.MessageHubConstants.ROOM_KEY;
 
 /**
  * @author ZSP  2019/3/26 16:33

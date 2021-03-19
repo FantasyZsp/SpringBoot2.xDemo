@@ -1,4 +1,4 @@
-package xyz.mydev.netty.practise.example;
+package xyz.mydev.practice.netty.example.httpserver;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,7 +8,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 /**
  * @author ZSP
  */
-public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
+public class MyHttpServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
   @Override

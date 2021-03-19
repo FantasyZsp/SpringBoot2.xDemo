@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.pojo;
+package xyz.mydev.practice.socketio.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

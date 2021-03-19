@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.server;
+package xyz.mydev.practice.socketio.server;
 
 import com.corundumstudio.socketio.SocketIOServer;
 import org.springframework.beans.factory.annotation.Autowired;

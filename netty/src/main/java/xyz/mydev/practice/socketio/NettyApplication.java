@@ -1,4 +1,4 @@
-package xyz.mydev.socketio;
+package xyz.mydev.practice.socketio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

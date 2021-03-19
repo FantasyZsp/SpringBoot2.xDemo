@@ -1,4 +1,4 @@
-package xyz.mydev.socketio.server;
+package xyz.mydev.practice.socketio.server;
 
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.HandshakeData;
@@ -15,16 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xyz.mydev.common.beans.vo.ResultVO;
 import xyz.mydev.common.utils.ParamCheckException;
-import xyz.mydev.socketio.EventPublisher;
-import xyz.mydev.socketio.pojo.ClientSimpleMessage;
-import xyz.mydev.socketio.pojo.InfoChangeResultVO;
-import xyz.mydev.socketio.pojo.LoginInfo;
+import xyz.mydev.practice.socketio.EventPublisher;
+import xyz.mydev.practice.socketio.pojo.ClientSimpleMessage;
+import xyz.mydev.practice.socketio.pojo.InfoChangeResultVO;
+import xyz.mydev.practice.socketio.pojo.LoginInfo;
 
 import static xyz.mydev.common.utils.BeanValidatorUtil.checkValid;
-import static xyz.mydev.socketio.MessageHubConstants.EventName.EVENT_JOIN_ROOM;
-import static xyz.mydev.socketio.MessageHubConstants.EventName.EVENT_LEAVE_ROOM;
-import static xyz.mydev.socketio.MessageHubConstants.EventName.EVENT_ONE;
-import static xyz.mydev.socketio.MessageHubConstants.ROOM_KEY;
+import static xyz.mydev.practice.socketio.MessageHubConstants.EventName.EVENT_JOIN_ROOM;
+import static xyz.mydev.practice.socketio.MessageHubConstants.EventName.EVENT_LEAVE_ROOM;
+import static xyz.mydev.practice.socketio.MessageHubConstants.EventName.EVENT_ONE;
+import static xyz.mydev.practice.socketio.MessageHubConstants.ROOM_KEY;
 
 /**
  * 定义事件处理

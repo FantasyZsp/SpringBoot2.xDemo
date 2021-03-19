@@ -1,38 +1,22 @@
-package xyz.mydev.netty.practise.example;
+package xyz.mydev.practice.netty.example.socketcs;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.FullHttpResponse;
-import io.netty.handler.codec.http.HttpHeaderNames;
-import io.netty.handler.codec.http.HttpObject;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
-import io.netty.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.UUID;
 
 /**
  * @author ZSP
  */
-public class MyHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+@Slf4j
+public class MySocketServerHandler extends SimpleChannelInboundHandler<String> {
   @Override
-  protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
+  protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 
-    System.out.println(msg.getClass());
-    System.out.println(msg);
-
-    if (msg instanceof HttpRequest) {
-      System.out.println("do sth when channelRead0");
-
-      ByteBuf content = Unpooled.copiedBuffer("Hello World", CharsetUtil.UTF_8);
-      FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
-      response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
-      // 不给长度就会一直阻塞
-      response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
-      ctx.writeAndFlush(response);
-    }
+    log.info("server receive remote {}  info : {}", ctx.channel().remoteAddress(), msg);
+    UUID uuid = UUID.randomUUID();
+    ctx.channel().writeAndFlush("from server: " + uuid.toString());
 
   }
 
@@ -74,13 +58,37 @@ public class MyHttpServerHandler extends SimpleChannelInboundHandler<HttpObject>
 
   @Override
   public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
-    System.out.println("channelWritabilityChanged");
+    log.info("channelWritabilityChanged");
     super.channelWritabilityChanged(ctx);
   }
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-    System.out.println("exceptionCaught");
+    log.info("exceptionCaught");
     super.exceptionCaught(ctx, cause);
+  }
+
+  @Override
+  protected void ensureNotSharable() {
+    log.info("ensureNotSharable");
+    super.ensureNotSharable();
+  }
+
+  @Override
+  public boolean isSharable() {
+    log.info("isSharable");
+    return super.isSharable();
+  }
+
+  @Override
+  public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    log.info("handlerAdded");
+    super.handlerAdded(ctx);
+  }
+
+  @Override
+  public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+    log.info("handlerRemoved");
+    super.handlerRemoved(ctx);
   }
 }

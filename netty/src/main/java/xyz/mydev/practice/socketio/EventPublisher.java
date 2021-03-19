@@ -1,4 +1,4 @@
-package xyz.mydev.socketio;
+package xyz.mydev.practice.socketio;
 
 /**
  * @author ZSP  2019/03/27 16:29
