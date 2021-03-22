@@ -57,6 +57,8 @@ public class NioServer {
             NioUtil.receiveAndBroadcast(client, CLIENT_MAP.get(client), new ArrayList<>(CLIENT_MAP.keySet()));
           }
         }
+
+        // IM: 当处理完对应key事件后，必须要移除。
         iterator.remove();
       }
     }

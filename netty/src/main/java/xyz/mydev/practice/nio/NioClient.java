@@ -81,6 +81,7 @@ public class NioClient {
 
         }
       }
+      // IM: 当处理完对应key事件后，必须要移除。
       iterator.remove();
     }
   }
