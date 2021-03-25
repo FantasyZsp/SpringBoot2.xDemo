@@ -58,5 +58,13 @@ public class CollectionGeneric {
 
   }
 
+  interface Container<T> {
+
+    void add(T t);
+
+    T get();
+
+  }
+
 
 }
