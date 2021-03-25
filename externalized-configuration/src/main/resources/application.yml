@@ -3,6 +3,10 @@ person:
   name: zsp
   address: zz
   age: 18
+student:
+  id: id
+  name: xiaoming
+  score: 100
 delay-queue:
   rocketmq:
     name-server: nama-server-address
