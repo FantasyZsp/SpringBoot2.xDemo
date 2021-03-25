@@ -5,11 +5,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import xyz.mydev.jdk.genericity.complex.msg.DelayMessage;
+import xyz.mydev.jdk.genericity.complex.msg.BaseMessage;
 import xyz.mydev.jdk.genericity.complex.msg.SerializableMessage;
 import xyz.mydev.jdk.genericity.complex.msg.StringMessage;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -32,6 +33,11 @@ public class GenericPorterTest {
   @Autowired
   private Map<String, Porter<? super SerializableMessage<? extends Serializable>>> suSerializablePorterMap;
 
+  @Autowired
+  private Map<String, Porter<BaseMessage<?>>> basePortMap;
+  @Autowired
+  private Collection<Porter<BaseMessage<?>>> basePortCollection;
+
 
   @Test
   public void test() {
@@ -40,8 +46,8 @@ public class GenericPorterTest {
     System.out.println(serializablePorterMap.size());
     System.out.println(exSerializablePorterMap.size());
     System.out.println(suSerializablePorterMap.size());
-    Porter<StringMessage> porter = stringPorterMap.get("1");
-    porter.port(new DelayMessage());
+    System.out.println(basePortMap.size());
+    System.out.println(basePortCollection.size());
 
   }
 

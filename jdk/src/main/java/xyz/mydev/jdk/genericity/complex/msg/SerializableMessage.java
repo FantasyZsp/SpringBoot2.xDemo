@@ -1,7 +1,5 @@
 package xyz.mydev.jdk.genericity.complex.msg;
 
-import xyz.mydev.jdk.genericity.complex.msg.BaseMessage;
-
 import java.io.Serializable;
 
 /**

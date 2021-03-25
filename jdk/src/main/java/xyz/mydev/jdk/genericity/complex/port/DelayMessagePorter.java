@@ -1,6 +1,7 @@
 package xyz.mydev.jdk.genericity.complex.port;
 
-public class DelayMessagePorter extends DefaultPorter {
+import xyz.mydev.jdk.genericity.complex.msg.DelayMessage;
 
+public class DelayMessagePorter extends AbstractPorter<DelayMessage> {
 
 }
