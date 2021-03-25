@@ -15,9 +15,4 @@ public interface PorterRouter extends Router<String, Porter<? super Serializable
     Porter<? super SerializableMessage<? extends Serializable>> porter = resolveByMessage(msg);
     porter.transfer(msg);
   }
-
-  @Override
-  default Porter<? super SerializableMessage<? extends Serializable>> get(String key) {
-    return null;
-  }
 }

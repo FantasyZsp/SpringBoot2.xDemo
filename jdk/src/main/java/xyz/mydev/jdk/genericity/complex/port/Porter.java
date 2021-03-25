@@ -10,4 +10,8 @@ public interface Porter<E> {
 
   default void port(E e) {
   }
+
+  default E fetch(E e) {
+    return e;
+  }
 }

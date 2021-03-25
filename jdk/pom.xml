@@ -29,6 +29,12 @@
     </dependency>
 
 
+    <!--    test dependencies-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.skywalking/apm-toolkit-logback-1.x -->
     <dependency>
       <groupId>org.apache.skywalking</groupId>

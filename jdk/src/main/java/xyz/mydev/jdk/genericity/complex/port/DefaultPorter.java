@@ -15,11 +15,11 @@ public class DefaultPorter extends AbstractPorter<SerializableMessage<? extends 
 
   @Override
   public void transfer(SerializableMessage<? extends Serializable> serializableMessage) {
-
+    super.transfer(serializableMessage);
   }
 
   @Override
   public void port(SerializableMessage<? extends Serializable> serializableMessage) {
-
+    super.port(serializableMessage);
   }
 }
