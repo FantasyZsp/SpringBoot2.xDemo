@@ -23,13 +23,11 @@ public class DefaultPorterV2<E extends SerializableMessage<? extends Serializabl
   private ExecutorService portExecutor;
   private ExecutorService transferExecutor;
 
-  private final TransferTaskFactory<E> transferTaskFactory;
-  private final PortTaskFactory<E> portTaskFactory;
+  private TransferTaskFactory<E> transferTaskFactory;
+  private PortTaskFactory<E> portTaskFactory;
 
-  public DefaultPorterV2(TransferTaskFactory<E> transferTaskFactory,
-                         PortTaskFactory<E> portTaskFactory) {
-    this.transferTaskFactory = transferTaskFactory;
-    this.portTaskFactory = portTaskFactory;
+  public DefaultPorterV2() {
+
   }
 
 

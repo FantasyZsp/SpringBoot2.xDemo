@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.mydev.jdk.genericity.complex.msg.BaseMessage;
+import xyz.mydev.jdk.genericity.complex.msg.DelayMessage;
 import xyz.mydev.jdk.genericity.complex.msg.SerializableMessage;
 import xyz.mydev.jdk.genericity.complex.msg.StringMessage;
 
@@ -38,6 +39,17 @@ public class GenericPorterTest {
   @Autowired
   private Collection<Porter<BaseMessage<?>>> basePortCollection;
 
+  @Autowired
+  private Collection<DefaultPorterV2<?>> defaultV2;
+
+  @Autowired
+  private Collection<DefaultPorterV2<SerializableMessage<? extends Serializable>>> serializableDefaultPort;
+
+  @Autowired
+  private Collection<DefaultPorter> defaultPorters;
+  @Autowired
+  private Map<String, AbstractPorter<?>> abstractPorters;
+
 
   @Test
   public void test() {
@@ -48,6 +60,19 @@ public class GenericPorterTest {
     System.out.println(suSerializablePorterMap.size());
     System.out.println(basePortMap.size());
     System.out.println(basePortCollection.size());
+    System.out.println(defaultV2.size());
+    System.out.println(abstractPorters.size());
+
+    for (DefaultPorter defaultPorter : defaultPorters) {
+      defaultPorter.port(new DelayMessage());
+
+    }
+
+    for (DefaultPorterV2<SerializableMessage<? extends Serializable>> defaultPorterV2 : serializableDefaultPort) {
+      defaultPorterV2.port(new DelayMessage());
+
+    }
+
 
   }
 
