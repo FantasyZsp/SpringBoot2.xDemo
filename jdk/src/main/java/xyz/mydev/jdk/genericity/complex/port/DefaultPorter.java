@@ -38,7 +38,7 @@ public class DefaultPorter extends AbstractPorter<SerializableMessage<? extends 
 
 
   public static void main(String[] args) {
-    xyz.mydev.jdk.genericity.complex.port.DefaultPorter defaultPorter = new xyz.mydev.jdk.genericity.complex.port.DefaultPorter();
+    DefaultPorter defaultPorter = new DefaultPorter();
     defaultPorter.port(new DefaultPorter.PojoMessage());
     defaultPorter.port(new DelayMessage());
     defaultPorter.port(new TxMessage());

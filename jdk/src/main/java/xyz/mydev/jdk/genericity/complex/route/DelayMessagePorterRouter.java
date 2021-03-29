@@ -48,6 +48,7 @@ public class DelayMessagePorterRouter implements PorterRouter {
     defaultPorter.port(new DelayMessage());
     defaultPorter.port(new TxMessage());
     defaultPorter.port(new PersonMessage());
+    defaultPorter.transfer(new TxMessage());
 
 
     // 指针 extends

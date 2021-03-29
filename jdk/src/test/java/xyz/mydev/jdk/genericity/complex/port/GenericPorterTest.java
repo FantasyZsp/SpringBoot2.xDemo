@@ -9,6 +9,7 @@ import xyz.mydev.jdk.genericity.complex.msg.BaseMessage;
 import xyz.mydev.jdk.genericity.complex.msg.DelayMessage;
 import xyz.mydev.jdk.genericity.complex.msg.SerializableMessage;
 import xyz.mydev.jdk.genericity.complex.msg.StringMessage;
+import xyz.mydev.jdk.genericity.complex.msg.TxMessage;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -63,8 +64,12 @@ public class GenericPorterTest {
     System.out.println(defaultV2.size());
     System.out.println(abstractPorters.size());
 
+    abstractPorters.put("1", (DefaultPorter) null);
+
     for (DefaultPorter defaultPorter : defaultPorters) {
       defaultPorter.port(new DelayMessage());
+      defaultPorter.port(new TxMessage());
+      defaultPorter.port((StringMessage) null);
 
     }
 
@@ -72,7 +77,6 @@ public class GenericPorterTest {
       defaultPorterV2.port(new DelayMessage());
 
     }
-
 
   }
 
