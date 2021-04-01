@@ -23,4 +23,10 @@ public class GirlServiceTest extends RootTest {
     girlService.fetchById2(1);
 
   }
+
+  @Test
+  public void testRedisLockAspect() {
+    Girl girl = girlService.fetchById(1);
+
+  }
 }

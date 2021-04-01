@@ -1,5 +1,6 @@
 package xyz.mydev.transaction.service;
 
+import com.sishu.redis.lock.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -146,6 +147,7 @@ public class GirlService {
   }
 
   @Transactional
+  @RedisLock(key = "'id'")
   public Girl fetchById(Integer id) {
     return girlRepository.selectById(id);
   }

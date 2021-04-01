@@ -19,6 +19,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.sishu</groupId>
+      <artifactId>redis-lock-starter</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-jdk8</artifactId>
       <version>${org.mapstruct.version}</version>
@@ -110,6 +116,12 @@
       <groupId>org.zalando</groupId>
       <artifactId>logbook-spring-boot-starter</artifactId>
       <version>2.0.0-RC.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sishu</groupId>
+      <artifactId>redis-lock-starter</artifactId>
+      <version>1.2.0</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
