@@ -6,3 +6,16 @@ spring:
     url: jdbc:h2:mem:test
     username: root
     password: test
+logging:
+  level:
+    root: info
+    xyz.mydev.orm.mybatisplus.example.mapper: debug
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: NONE
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false

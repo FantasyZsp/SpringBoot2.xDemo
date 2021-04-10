@@ -8,4 +8,6 @@ import xyz.mydev.orm.mybatisplus.example.domain.User;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+  User find(Long id, String name);
+
 }
