@@ -43,4 +43,18 @@ public class TestJsonDe {
       this.BankDeposit = bankDeposit;
     }
   }
+
+
+  @Test
+  public void testJsonDe2() {
+    String json = "{\"cardNumber\": \"XXXXX\", \"newField\": \"newField\"}";
+
+
+    Bank bank = JsonUtil.string2Obj(json, Bank.class);
+
+    System.out.println(bank);
+    System.out.println("xx");
+    System.out.println(JsonUtil.obj2String(bank));
+
+  }
 }

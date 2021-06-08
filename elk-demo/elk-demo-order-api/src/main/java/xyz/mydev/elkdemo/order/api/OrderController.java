@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * @author ZSP
  */
 @RestController
-@RequestMapping("/order")
+@RequestMapping(value = "/order")
 @Slf4j
 public class OrderController {
 
