@@ -28,6 +28,7 @@
     <module>spring-practice</module>
     <module>elk-demo</module>
     <module>orm</module>
+    <module>test</module>
   </modules>
   <packaging>pom</packaging>
 
