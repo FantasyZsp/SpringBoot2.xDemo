@@ -1,6 +1,6 @@
 package xyz.mydev.spring.annotation;
 
-import com.sishu.redis.lock.annotation.RedisLock;
+import xyz.mydev.redis.lock.annotation.RedisLock;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,6 +1,5 @@
 package xyz.mydev.transaction.service;
 
-import com.sishu.redis.lock.annotation.RedisLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import xyz.mydev.redis.lock.annotation.RedisLock;
 import xyz.mydev.transaction.domain.Girl;
 import xyz.mydev.transaction.repository.GirlRepository;
 

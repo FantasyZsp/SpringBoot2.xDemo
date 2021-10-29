@@ -2,7 +2,7 @@ package xyz.mydev.transaction.service;
 
 //import jdk.internal.reflect.Reflection;
 
-import com.sishu.redis.lock.annotation.RedissonClientAutoConfig;
+import xyz.mydev.redis.lock.annotation.RedissonClientAutoConfig;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

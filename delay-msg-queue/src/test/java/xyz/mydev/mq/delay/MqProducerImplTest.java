@@ -1,6 +1,5 @@
 package xyz.mydev.mq.delay;
 
-import com.sishu.redis.lock.util.ThreadUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.mydev.common.utils.JsonUtil;
 import xyz.mydev.common.utils.PrefixNameThreadFactory;
+import xyz.mydev.common.utils.ThreadUtils;
 import xyz.mydev.mq.MqApplication;
 import xyz.mydev.mq.delay.constant.MqPlatform;
 import xyz.mydev.mq.delay.dto.SimpleDelayTagMessage;

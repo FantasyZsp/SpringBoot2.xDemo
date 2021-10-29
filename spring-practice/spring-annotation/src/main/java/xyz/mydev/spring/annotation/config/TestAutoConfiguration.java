@@ -1,10 +1,10 @@
 package xyz.mydev.spring.annotation.config;
 
-import com.sishu.redis.lock.annotation.RedissonClientAutoConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import xyz.mydev.redis.lock.annotation.RedissonClientAutoConfig;
 
 /**
  * @author ZSP

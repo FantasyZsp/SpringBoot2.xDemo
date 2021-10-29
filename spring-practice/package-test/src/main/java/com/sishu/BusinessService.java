@@ -1,6 +1,6 @@
 package com.sishu;
 
-import com.sishu.redis.lock.annotation.RedisLock;
+import xyz.mydev.redis.lock.annotation.RedisLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
