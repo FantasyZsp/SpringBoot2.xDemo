@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import xyz.mydev.common.utils.JsonUtil;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -37,6 +40,33 @@ public class LocalDateTimeDemo {
     System.out.println(localDateTime);
     LocalDateTime localDateTime2 = objectMapper.readValue(timeText, LocalDateTime.class);
     System.out.println(localDateTime2);
+
+  }
+
+  @Test
+  public void toInstant() throws Exception {
+
+//    LocalDateTime localDateTime = LocalDateTime.now();
+//    System.out.println(localDateTime);
+//    System.out.println(localDateTime.toInstant(ZoneOffset.UTC));
+//    System.out.println(localDateTime.toInstant(ZoneOffset.of("+8")));
+//    System.out.println(localDateTime.atZone(ZoneOffset.UTC));
+//    System.out.println(localDateTime.atZone(ZoneOffset.of("+8")));
+//    Instant x = Instant.ofEpochMilli(1529476623000L);
+//    System.out.println(x);
+
+
+    Instant instant = Instant.now();
+    System.out.println(instant);
+    long toEpochMilli = instant.toEpochMilli();
+    System.out.println(toEpochMilli);
+    System.out.println(Instant.ofEpochMilli(toEpochMilli));
+
+    System.out.println(LocalDateTime.ofInstant(instant, ZoneOffset.UTC));
+    System.out.println(LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(8)));
+    System.out.println(instant.atZone(ZoneOffset.UTC));
+    System.out.println(instant.atZone(ZoneId.of("America/Los_Angeles")));
+
 
   }
 }

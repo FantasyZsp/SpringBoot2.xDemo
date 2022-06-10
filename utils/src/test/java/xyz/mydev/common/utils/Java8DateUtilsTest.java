@@ -15,4 +15,9 @@ public class Java8DateUtilsTest {
     System.out.println(Java8DateUtils.getBetweenDays(LocalDate.now(), LocalDate.now().plusDays(1L)));
     System.out.println(LocalDateTime.MAX);
   }
+  @Test
+  public void Timestamp() {
+    System.out.println(Java8DateUtils.getBetweenDays(LocalDate.now(), LocalDate.now().plusDays(1L)));
+    System.out.println(LocalDateTime.MAX);
+  }
 }

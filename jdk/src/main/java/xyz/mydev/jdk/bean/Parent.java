@@ -9,6 +9,8 @@ public class Parent {
   public static final Integer FINAL_NUMBER = 1;
   public static Integer NUMBER = 1;
 
+  protected Integer mark = 1;
+
   static {
     System.out.println("Parent static invoke");
   }
