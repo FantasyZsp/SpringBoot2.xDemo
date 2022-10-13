@@ -1,20 +1,36 @@
 package xyz.mydev.common.utils;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import xyz.mydev.common.beans.vo.MarkedSerializedTypeStudentVO;
 import xyz.mydev.common.beans.vo.NumberVO;
 import xyz.mydev.common.beans.vo.StudentVO;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ZSP
  */
 public class JsonUtilTest {
+
+  StudentVO studentVO = null;
+
+  @Before
+  public void init() {
+    studentVO = new StudentVO();
+
+    studentVO.setStudentAddress("地址");
+    studentVO.setStudentGrade("年级");
+    studentVO.setStudentName("学员姓名");
+    studentVO.setTimestamp(1000L);
+  }
+
+
   @Test
   public void test() {
     System.out.println(JsonUtil.obj2String(NumberVO.of(1)));
@@ -26,12 +42,6 @@ public class JsonUtilTest {
 
   @Test
   public void serialization() throws Exception {
-    StudentVO studentVO = new StudentVO();
-
-    studentVO.setStudentAddress("地址");
-    studentVO.setStudentGrade("年级");
-    studentVO.setStudentName("学员姓名");
-    studentVO.setTimestamp(1000L);
 
     System.out.println(DEFAULT_OBJECT_MAPPER.writeValueAsString(studentVO));
     System.out.println(UPPER_CAMEL_CASE_OBJECT_MAPPER.writeValueAsString(studentVO));
@@ -477,6 +487,16 @@ public class JsonUtilTest {
       }
     }
     System.out.println(result.toString());
+  }
+
+
+  @Test
+  public void testObjToMap() {
+
+    Map<String, Object> map = DEFAULT_OBJECT_MAPPER.convertValue(studentVO, new TypeReference<Map<String, Object>>() {
+    });
+
+    System.out.println(JsonUtil.obj2String(map));
   }
 
 }
